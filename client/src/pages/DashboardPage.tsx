@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { getOuSalesPerformanceApi } from '@/api/axiosClient'
 import { Card } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { getSales, type SalesRecord } from '@/api/salesApi'
+import { useEffect, useState } from 'react'
 
 interface OperatingUnitData {
   unit: string;
@@ -168,10 +168,7 @@ export default function Dashboard() {
       setIsLoading(true)
       setError(null)
 
-      const response = await getSales({
-        fromDate: '2025-04-01',
-        limit: 100,
-      })
+      const response = await getOuSalesPerformanceApi()
 
       if (!response.success || !response.data?.length) {
         throw new Error('No sales data returned from the backend')

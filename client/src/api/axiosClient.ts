@@ -9,3 +9,21 @@ export const axiosClient = axios.create({
   },
   timeout: 10000,
 })
+
+axiosClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
+})
+
+export const loginApi = async (loginData: { email: string; password: string;}) => {
+  const response = await axiosClient.post('/api/Auth/login', loginData)
+  return response.data
+}
+
+export const getOuSalesPerformanceApi = async () => {
+  const response = await axiosClient.get('/api/OuSales/performance')
+  return response.data
+}
