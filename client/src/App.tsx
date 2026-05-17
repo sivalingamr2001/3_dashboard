@@ -1,11 +1,7 @@
-import { Button } from "@/components/ui/button"
+import DashboardPage from "@/pages/DashboardPage"
 
 export function App() {
-  //add switch case for use login page and dashboard page
-  
-  return (
-
-  )
+  return <DashboardPage />
 }
 
 export default App

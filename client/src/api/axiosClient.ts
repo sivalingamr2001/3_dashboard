@@ -19,11 +19,11 @@ axiosClient.interceptors.request.use((config) => {
 })
 
 export const loginApi = async (loginData: { email: string; password: string;}) => {
-  const response = await axiosClient.post('/api/Auth/login', loginData)
+  const response = await axiosClient.post('/Auth/login', loginData)
   return response.data
 }
 
 export const getOuSalesPerformanceApi = async () => {
-  const response = await axiosClient.get('/api/OuSales/performance')
+  const response = await axiosClient.get('/OuSales/performance')
   return response.data
 }
