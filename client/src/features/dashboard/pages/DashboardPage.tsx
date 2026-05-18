@@ -1,35 +1,29 @@
-import { useEffect, useState } from "react"; // 1. Import useEffect
-import { useSales } from "@/features/dashboard/hooks/useSales";
+import { useEffect, useState } from "react";
+import { useSales } from "@/context/SalesContext";
 import { DashboardHeader } from "../components/DashboardHeader";
 import { KpiCards } from "../components/KpiCards";
 import { OperatingUnitsTable } from "../components/OperatingUnitsTable";
 import { PageLoader } from "@/shared/components/LoadingSpinner/LoadingSpinner";
-
-const EMPTY_TOTALS = {
-  to_fy27_date: "0.00",
-  to_fy27_month: "0.00",
-  to_fy26_date: "0.00",
-  to_fy26_month: "0.00",
-  trend: "0",
-  po_date: "0.00",
-  po_month: "0.00",
-  inv: "0.00",
-}
+import type { TotalsRow } from "@/features/dashboard/types/dashboard.types";
 
 export const DashboardPage = () => {
-  const [inclIntraSales, setInclIntraSales] = useState(true); // Default to 'Y' (true)
-  const stkTfrFlg = inclIntraSales ? "Y" : "N";
-  const { data: salesResponse, isLoading, refetch } = useSales({ limit: 100, stkTfrFlg });
+  const {
+    rows,
+    totals,
+    loading,
+    sales,
+    fetchSales,
+    inclIntraSales,
+    toggleIntraSales,
+  } = useSales();
+  const [selectedTotals, setSelectedTotals] = useState<TotalsRow | null>(null);
 
-  const handleToggleIntraSales = () => {
-    setInclIntraSales((prev) => !prev);
-  }
+  const isOverlayLoading = sales.length > 0 && loading;
+  const displayedTotals = selectedTotals ?? totals;
 
-  const units = salesResponse?.rows ?? []
-  const totals = salesResponse?.totals ?? EMPTY_TOTALS
-
-  // 2. Control body overflow based on overlay loading state
-  const isOverlayLoading = !!(salesResponse && isLoading);
+  useEffect(() => {
+    setSelectedTotals(null);
+  }, [totals]);
 
   useEffect(() => {
     if (isOverlayLoading) {
@@ -44,8 +38,7 @@ export const DashboardPage = () => {
     };
   }, [isOverlayLoading]);
 
-  // Initial Full Page Loader
-  if (!salesResponse && isLoading) {
+  if (sales.length === 0 && loading) {
     return (
       <main className="h-screen bg-[#f8fafc] p-6 md:p-8">
         <div className="mx-auto max-w-8xl flex items-center justify-center h-full">
@@ -58,13 +51,19 @@ export const DashboardPage = () => {
   return (
     <main className="relative min-h-screen bg-[#f8fafc] p-6 md:p-8">
       <div className={`mx-auto max-w-7xl ${isOverlayLoading ? "opacity-70" : ""}`}>
-        <DashboardHeader onRefresh={refetch} isRefreshing={isLoading} inclIntraSales={inclIntraSales}
-          onToggleIntraSales={handleToggleIntraSales} />
-        <KpiCards totals={totals} />
-        <OperatingUnitsTable rows={units} />
+        <DashboardHeader
+          onRefresh={fetchSales}
+          isRefreshing={loading}
+          inclIntraSales={inclIntraSales}
+          onToggleIntraSales={toggleIntraSales}
+        />
+        <KpiCards totals={displayedTotals} />
+        <OperatingUnitsTable
+          rows={rows}
+          onSelectionTotalsChange={setSelectedTotals}
+        />
       </div>
 
-      {/* 3. Background Overlay Loader */}
       {isOverlayLoading ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/30 backdrop-blur-sm">
           <PageLoader />

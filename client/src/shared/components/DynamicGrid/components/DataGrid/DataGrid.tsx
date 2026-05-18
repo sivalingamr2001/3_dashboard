@@ -143,7 +143,17 @@ function DataGridInner<TData extends Record<string, unknown>>(
     const selectedNodes = event.api.getSelectedNodes()
     
     if (selectedNodes.length === 0) {
-      setSelectedTotals(null)
+      setSelectedTotals({
+        unit: "TOTAL (0 SELECTED)",
+        to_fy27_date: 0,
+        to_fy27_month: 0,
+        to_fy26_date: 0,
+        to_fy26_month: 0,
+        trend: 0,
+        po_date: 0,
+        po_month: 0,
+        inv: 0,
+      })
       return
     }
 
@@ -165,7 +175,7 @@ function DataGridInner<TData extends Record<string, unknown>>(
     const computedTrend = t2526AsOn !== 0 ? ((t2627AsOn - t2526AsOn) / t2526AsOn) * 100 : 0
 
     setSelectedTotals({
-      OU_NAME: `TOTAL (${selectedNodes.length} SELECTED)`,
+      unit: `TOTAL (${selectedNodes.length} SELECTED)`,
       to_fy27_date: t2627AsOn,
       to_fy27_month: t2627Mnth,
       to_fy26_date: t2526AsOn,
@@ -439,6 +449,48 @@ function DataGridInner<TData extends Record<string, unknown>>(
         width: 100% !important;
       }
 
+      .ag-checkbox-input-wrapper {
+        width: 18px !important;
+        height: 18px !important;
+        border: 2px solid #dc2626 !important;
+        border-radius: 4px !important;
+        background: #fef2f2 !important;
+        position: relative !important;
+        box-shadow: none !important;
+      }
+
+      .ag-checkbox-input-wrapper::after {
+        content: "x";
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #dc2626;
+        font-size: 11px;
+        font-weight: 800;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .ag-checkbox-input-wrapper.ag-checked,
+      .ag-checkbox-input-wrapper.ag-indeterminate {
+        border-color: #16a34a !important;
+        background: #dcfce7 !important;
+      }
+
+      .ag-checkbox-input-wrapper.ag-checked::after {
+        content: "✓";
+        color: #15803d;
+        font-size: 12px;
+      }
+
+      .ag-checkbox-input-wrapper.ag-indeterminate::after {
+        content: "−";
+        color: #15803d;
+        font-size: 14px;
+      }
+
       .header-group-level1 {
         background-color: #0b1426 !important;
         color: #ffffff !important;
@@ -501,7 +553,7 @@ function DataGridInner<TData extends Record<string, unknown>>(
         display: flex;
         align-items: center;
       }
-      .ag-row-pinned-bottom .ag-cell[col-id="OU_NAME"] {
+      .ag-row-pinned-bottom .ag-cell[col-id="unit"] {
         color: #1e3a8a !important;
       }
       `}</style>

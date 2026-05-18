@@ -1,6 +1,7 @@
 import { AppLayout } from "@/layouts/AppLayout";
 import { AuthLayout } from "@/layouts/AuthLayout";
 import { BlankLayout } from "@/layouts/BlankLayout/BlankLayout";
+import { SalesProvider } from "@/context/SalesContext";
 import { PageLoader } from "@/shared/components/LoadingSpinner/LoadingSpinner";
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
@@ -29,6 +30,10 @@ const withSuspense = (Component: React.ComponentType) => (
   </Suspense>
 );
 
+const withSalesProvider = (Component: React.ComponentType) => (
+  <SalesProvider>{withSuspense(Component)}</SalesProvider>
+);
+
 const router = createBrowserRouter(
   [
     {
@@ -45,7 +50,7 @@ const router = createBrowserRouter(
       errorElement: <RouteErrorBoundary />,
       children: [
         { index: true, element: <Navigate to="/dashboard" replace /> },
-        { path: "/dashboard", element: withSuspense(DashboardPage) },
+        { path: "/dashboard", element: withSalesProvider(DashboardPage) },
       ],
     },
     {

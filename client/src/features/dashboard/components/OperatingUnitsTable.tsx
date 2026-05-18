@@ -1,10 +1,77 @@
 import React, { useMemo } from "react";
 import type { ColDef } from "ag-grid-community";
 import { DataGrid } from "@/shared/components/DynamicGrid/components/DataGrid";
+import type {
+  OperatingUnit,
+  TotalsRow,
+} from "@/features/dashboard/types/dashboard.types";
 
 interface OperatingUnitsTableProps {
-  rows: any[];
+  rows: OperatingUnit[];
+  onSelectionTotalsChange?: (totals: TotalsRow) => void;
 }
+
+const EMPTY_TOTALS: TotalsRow = {
+  to_fy27_date: "0.00",
+  to_fy27_month: "0.00",
+  to_fy26_date: "0.00",
+  to_fy26_month: "0.00",
+  trend: "0.00",
+  po_date: "0.00",
+  po_month: "0.00",
+  inv: "0.00",
+};
+
+const formatMoney = (value: number) => value.toFixed(2);
+
+const buildSelectionTotals = (selectedRows: OperatingUnit[]): TotalsRow => {
+  if (selectedRows.length === 0) {
+    return EMPTY_TOTALS;
+  }
+
+  const totals = selectedRows.reduce(
+    (acc, row) => {
+      acc.to_fy27_date += Number(row.to_fy27_date || 0);
+      acc.to_fy27_month += Number(row.to_fy27_month || 0);
+      acc.to_fy26_date += Number(row.to_fy26_date || 0);
+      acc.to_fy26_month += Number(row.to_fy26_month || 0);
+      acc.po_date += Number(row.po_date || 0);
+      acc.po_month += Number(row.po_month || 0);
+      acc.inv += Number(row.inv || 0);
+      return acc;
+    },
+    {
+      to_fy27_date: 0,
+      to_fy27_month: 0,
+      to_fy26_date: 0,
+      to_fy26_month: 0,
+      po_date: 0,
+      po_month: 0,
+      inv: 0,
+    }
+  );
+
+  const trend =
+    totals.to_fy26_date === 0
+      ? totals.to_fy27_date === 0
+        ? "0.00"
+        : "100.00"
+      : (
+          ((totals.to_fy27_date - totals.to_fy26_date) / totals.to_fy26_date) *
+          100
+        ).toFixed(2);
+
+  return {
+    to_fy27_date: formatMoney(totals.to_fy27_date),
+    to_fy27_month: formatMoney(totals.to_fy27_month),
+    to_fy26_date: formatMoney(totals.to_fy26_date),
+    to_fy26_month: formatMoney(totals.to_fy26_month),
+    trend,
+    po_date: formatMoney(totals.po_date),
+    po_month: formatMoney(totals.po_month),
+    inv: formatMoney(totals.inv),
+  };
+};
 
 // Simple currency formatter helper matching your image structure
 const currencyFormatter = (params: any) => {
@@ -39,12 +106,15 @@ const trendRenderer = (params: any) => {
   );
 };
 
-export const OperatingUnitsTable: React.FC<OperatingUnitsTableProps> = ({ rows }) => {
+export const OperatingUnitsTable: React.FC<OperatingUnitsTableProps> = ({
+  rows,
+  onSelectionTotalsChange,
+}) => {
 
   const columns = useMemo<ColDef[]>(() => [
     {
       headerName: "Operating Unit",
-      field: "OU_NAME", // Ensure this matches your row object key (e.g., 'Dubai Operating Unit')
+      field: "unit",
       pinned: "left",
       minWidth: 240,
       cellStyle: (params) => ({
@@ -108,6 +178,11 @@ export const OperatingUnitsTable: React.FC<OperatingUnitsTableProps> = ({ rows }
         gridId="ou-performance-grid"
         rowData={rows}
         columnDefs={columns}
+        onSelectionChanged={(selectedRows) =>
+          onSelectionTotalsChange?.(
+            buildSelectionTotals(selectedRows as OperatingUnit[])
+          )
+        }
         gridHeight="540px"
         showSearch={true}
         fallbackTotals={undefined} />
