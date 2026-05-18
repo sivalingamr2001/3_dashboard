@@ -1,7 +1,7 @@
 import { Card } from "@/shared/components/ui/card"
-import { IndianRupee, Package, Warehouse, TrendingUp } from "lucide-react"
+import { IndianRupee, Package, Warehouse, TrendingUp, TrendingDown } from "lucide-react"
 import type { TotalsRow } from "@/features/dashboard/types/dashboard.types"
-import { AS_ON_DATE } from "@/features/dashboard/api/dashboardApi"
+import { AS_ON_DATE } from "@/lib/utils"
 
 type Props = {
   totals: TotalsRow
@@ -37,7 +37,7 @@ export const KpiCards = ({ totals }: Props) => {
         </div>
         <div className="mt-5 flex justify-center">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-[#00c853] px-4 py-1.5 text-xs font-bold text-white shadow-sm">
-            <TrendingUp className="h-3.5 w-3.5" />
+            <TrendingUp className="h-3.5 w-3.5" /> <TrendingDown className="h-3.5 w-3.5" />
             +{totals.trend}% Growth
           </span>
         </div>

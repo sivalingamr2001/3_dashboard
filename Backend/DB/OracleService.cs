@@ -1,6 +1,7 @@
 ﻿using ConnectionDll;
 using Dapper;
 using Oracle.ManagedDataAccess.Client;
+using System.Data;
 
 namespace Backend.DB;
 
@@ -38,7 +39,15 @@ public class OracleService : IOracleService
         try
         {
             using var connection = CreateConnection();
-            var command = new CommandDefinition(sql, parameters, cancellationToken: ct);
+
+            // Added commandTimeout: 30 to enforce the maximum execution limit
+            var command = new CommandDefinition(
+                sql,
+                parameters,
+                commandTimeout: 60,
+                cancellationToken: ct
+            );
+
             return await connection.QueryAsync<T>(command);
         }
         catch (OracleException ex)
@@ -52,4 +61,13 @@ public class OracleService : IOracleService
             throw;
         }
     }
+
+    public async Task<IEnumerable<T>> QueryAsyncV2<T>(string sql, object param = null, CommandType? commandType = null)
+    {
+        using (var connection = new OracleConnection(_connectionString))
+        {
+            return await connection.QueryAsync<T>(sql, param, commandType: commandType);
+        }
+    }
+
 }

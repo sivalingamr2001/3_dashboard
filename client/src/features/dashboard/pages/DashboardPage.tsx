@@ -1,31 +1,29 @@
 import { useSales } from "@/features/dashboard/hooks/useSales";
-import { transformSalesToOperatingUnits } from "@/features/dashboard/api/dashboardTransform";
-import { TOTALS_ROW, OPERATING_UNITS_DATA } from "@/features/dashboard/api/dashboardApi";
-import { useDashboard } from "@/features/dashboard/hooks/useDashboard";
 import { DashboardHeader } from "../components/DashboardHeader";
 import { KpiCards } from "../components/KpiCards";
 import { OperatingUnitsTable } from "../components/OperatingUnitsTable";
-import { useErrorHandler } from "@/shared/hooks/useErrorHandler";
-import { PageLoader } from "@/shared/components/LoadingSpinner";
+import { PageLoader } from "@/shared/components/LoadingSpinner/LoadingSpinner";
+
+const EMPTY_TOTALS = {
+  to_fy27_date: "0.00",
+  to_fy27_month: "0.00",
+  to_fy26_date: "0.00",
+  to_fy26_month: "0.00",
+  trend: "0",
+  po_date: "0.00",
+  po_month: "0.00",
+  inv: "0.00",
+}
 
 export const DashboardPage = () => {
-  const { inclIntraSales, handleToggleIntraSales } = useDashboard();
-  const { data: salesResponse, isLoading, error } = useSales({ limit: 100 });
-  const { handleError } = useErrorHandler();
+  const { data: salesResponse, isLoading } = useSales({ limit: 100 });
 
-  // Handle errors
-  if (error) {
-    handleError(error);
-  }
-
-  // Transform data from server or use mock data as fallback
-  const { units, totals } = salesResponse?.data
-    ? transformSalesToOperatingUnits(salesResponse.data)
-    : { units: OPERATING_UNITS_DATA, totals: TOTALS_ROW };
+  const units = salesResponse?.rows ?? []
+  const totals = salesResponse?.totals ?? EMPTY_TOTALS
 
   if (isLoading) {
     return (
-      <main className="min-h-screen bg-[#f8fafc] p-6 md:p-8">
+      <main className="h-screen bg-[#f8fafc] p-6 md:p-8">
         <div className="mx-auto max-w-8xl flex items-center justify-center h-96">
           <PageLoader />
         </div>
@@ -36,10 +34,7 @@ export const DashboardPage = () => {
   return (
     <main className="min-h-screen bg-[#f8fafc] p-6 md:p-8">
       <div className="mx-auto max-w-7xl">
-        <DashboardHeader
-          inclIntraSales={inclIntraSales}
-          onToggleIntraSales={handleToggleIntraSales}
-        />
+        <DashboardHeader />
         <KpiCards totals={totals} />
         <OperatingUnitsTable rows={units} totals={totals} />
       </div>

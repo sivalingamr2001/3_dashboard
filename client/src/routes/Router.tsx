@@ -1,4 +1,3 @@
-import { RouteErrorBoundary } from "@/core/error/RouteErrorBoundary";
 import { AppLayout } from "@/layouts/AppLayout";
 import { AuthLayout } from "@/layouts/AuthLayout";
 import { BlankLayout } from "@/layouts/BlankLayout/BlankLayout";
@@ -6,8 +5,8 @@ import { PageLoader } from "@/shared/components/LoadingSpinner/LoadingSpinner";
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
+import { RouteErrorBoundary } from "@/shared/components/RouteErrorBoundary";
 
-// Lazy-loaded feature pages
 const LoginPage = lazy(() =>
   import("@/features/auth/pages/LoginPage").then((m) => ({
     default: m.LoginPage,

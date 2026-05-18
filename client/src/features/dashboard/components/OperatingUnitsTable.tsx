@@ -3,7 +3,7 @@ import type { OperatingUnit, TotalsRow } from "@/features/dashboard/types/dashbo
 import { OperatingUnitsTableHeader } from "./OperatingUnitsTableHeader"
 import { OperatingUnitRow } from "./OperatingUnitRow"
 import { OperatingUnitsTotalsRow } from "./OperatingUnitsTotalsRow"
-import { AS_ON_DATE } from "@/features/dashboard/api/dashboardApi"
+import { AS_ON_DATE } from "@/lib/utils"
 
 type Props = {
   rows: OperatingUnit[]

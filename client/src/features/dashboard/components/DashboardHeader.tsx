@@ -1,12 +1,14 @@
+import { AS_ON_DATE } from "@/lib/utils"
 import { Button } from "@/shared/components/ui/button"
-import { AS_ON_DATE } from "@/features/dashboard/api/dashboardApi"
+import { useSales } from "../hooks/useSales"
 
-type Props = {
-  inclIntraSales: boolean
-  onToggleIntraSales: () => void
-}
+export const DashboardHeader = () => {
+  const { refetch } = useSales({ limit: 100 });
 
-export const DashboardHeader = ({ inclIntraSales, onToggleIntraSales }: Props) => {
+  const handleRefresh = () => {
+    refetch();
+  }
+
   return (
     <div className="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
       <div>
@@ -20,13 +22,11 @@ export const DashboardHeader = ({ inclIntraSales, onToggleIntraSales }: Props) =
           * As on date: {AS_ON_DATE} | All values in Indian Rupees (₹ Crores)
         </p>
       </div>
-      <Button
-        onClick={onToggleIntraSales}
-        variant={inclIntraSales ? "outline" : "default"}
-        className="whitespace-nowrap border-slate-300 text-slate-700 h-10 px-4 text-sm font-semibold shadow-sm"
-      >
-        {inclIntraSales ? "✓ " : ""}Incl Intra Sales
-      </Button>
+      <div>
+        <Button variant="outline" size="sm" onClick={handleRefresh}>
+          Refresh Data
+        </Button>
+      </div>
     </div>
   )
 }

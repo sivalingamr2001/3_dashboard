@@ -17,28 +17,69 @@ public class OuSalesRepository : IOuSalesRepository
     public async Task<IEnumerable<OuSalesPerformanceDto>> GetSalesPerformanceAsync()
     {
         const string query = @"
-                SELECT 
-                    OU_NAME AS OuName,
-                    TO_CHAR(COALESCE(TRX_DATE, ORDERED_DATE), 'YYYY') AS Yr,
-                    ROUND(SUM(CASE 
-                        WHEN SOURCE_NAME = 'SALES' AND TRX_DATE >= TO_DATE('2025-04-01', 'YYYY-MM-DD') 
-                        THEN QUANTITY_INVOICED * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate 
-                        ELSE 0 
-                    END) / 10000000, 2) AS SaleVal,
-                    ROUND(SUM(CASE 
-                        WHEN SOURCE_NAME = 'ORDER' AND ORDERED_DATE >= TO_DATE('2025-04-01', 'YYYY-MM-DD') 
-                        THEN PEND_QUANTITY * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate 
-                        ELSE 0 
-                    END) / 10000000, 2) AS PendOrdVal
-                FROM JAN_ALL_OU_ORD_SALES_V 
-                WHERE 
-                    ORD_EMPT_STATUS = 'N'
-                    AND SOURCE_NAME IN ('SALES', 'ORDER')
-                    AND (TRX_DATE >= TO_DATE('2025-04-01', 'YYYY-MM-DD') OR ORDERED_DATE >= TO_DATE('2025-04-01', 'YYYY-MM-DD'))
-                GROUP BY 
-                    OU_NAME, 
-                    TO_CHAR(COALESCE(TRX_DATE, ORDERED_DATE), 'YYYY')";
+WITH DateParameters AS (
+    SELECT 
+        TRUNC(SYSDATE, 'MM') AS CurrentMonthStart,
+        ADD_MONTHS(TRUNC(SYSDATE, 'MM'), 1) AS NextMonthStart,
+        ADD_MONTHS(TRUNC(SYSDATE, 'MM'), -12) AS LastYearMonthStart,
+        ADD_MONTHS(TRUNC(SYSDATE, 'MM'), -11) AS LastYearNextMonthStart
+    FROM DUAL
+)
+SELECT 
+    OU_NAME,
+    
+    -- FY 25-26 Sales (01-APR-2025 to 31-MAR-2026)
+    NVL(ROUND(SUM(CASE WHEN SOURCE_NAME='SALES' AND TRX_DATE >= TO_DATE('01-APR-2025','DD-MON-YYYY') AND TRX_DATE < TO_DATE('01-APR-2026','DD-MON-YYYY') THEN (QUANTITY_INVOICED * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate) END) / 10000000, 2), 0) AS SaleAsOn2526,
+    
+    -- FY 25-26 Sales Current Month (Last Year's Same Month)
+    NVL(ROUND(SUM(CASE WHEN SOURCE_NAME='SALES' AND TRX_DATE >= p.LastYearMonthStart AND TRX_DATE < p.LastYearNextMonthStart THEN (QUANTITY_INVOICED * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate) END) / 10000000, 2), 0) AS SaleCm2526,
+    
+    -- FY 26-27 Sales (01-APR-2026 to 31-MAR-2027)
+    NVL(ROUND(SUM(CASE WHEN SOURCE_NAME='SALES' AND TRX_DATE >= TO_DATE('01-APR-2026','DD-MON-YYYY') AND TRX_DATE < TO_DATE('01-APR-2027','DD-MON-YYYY') THEN (QUANTITY_INVOICED * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate) END) / 10000000, 2), 0) AS SaleAsOn2627,
+    
+    -- FY 26-27 Sales Current Month (Current Month)
+    NVL(ROUND(SUM(CASE WHEN SOURCE_NAME='SALES' AND TRX_DATE >= p.CurrentMonthStart AND TRX_DATE < p.NextMonthStart THEN (QUANTITY_INVOICED * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate) END) / 10000000, 2), 0) AS SaleCm2627,
+    
+    -- FY 25-26 Pending Orders
+    NVL(ROUND(SUM(CASE WHEN SOURCE_NAME='ORDER' AND ORDERED_DATE >= TO_DATE('01-APR-2025','DD-MON-YYYY') AND ORDERED_DATE < TO_DATE('01-APR-2026','DD-MON-YYYY') THEN (PEND_QUANTITY * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate) END) / 10000000, 2), 0) AS PendAsOn2526,
+    
+    -- FY 25-26 Pending Current Month (Last Year's Same Month)
+    NVL(ROUND(SUM(CASE WHEN SOURCE_NAME='ORDER' AND ORDERED_DATE >= p.LastYearMonthStart AND ORDERED_DATE < p.LastYearNextMonthStart THEN (PEND_QUANTITY * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate) END) / 10000000, 2), 0) AS PendCm2526,
+    
+    -- FY 26-27 Pending Orders
+    NVL(ROUND(SUM(CASE WHEN SOURCE_NAME='ORDER' AND ORDERED_DATE >= TO_DATE('01-APR-2026','DD-MON-YYYY') AND ORDERED_DATE < TO_DATE('01-APR-2027','DD-MON-YYYY') THEN (PEND_QUANTITY * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate) END) / 10000000, 2), 0) AS PendAsOn2627,
+    
+    -- FY 26-27 Pending Current Month (Current Month)
+    NVL(ROUND(SUM(CASE WHEN SOURCE_NAME='ORDER' AND ORDERED_DATE >= p.CurrentMonthStart AND ORDERED_DATE < p.NextMonthStart THEN (PEND_QUANTITY * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate) END) / 10000000, 2), 0) AS PendCm2627
 
-        return await _oracleService.QueryAsync<OuSalesPerformanceDto>(query);
+FROM JAN_ALL_OU_ORD_SALES_V 
+CROSS JOIN DateParameters p
+WHERE (TRX_DATE >= TO_DATE('01-APR-2025','DD-MON-YYYY') OR ORDERED_DATE >= TO_DATE('01-APR-2025','DD-MON-YYYY'))   
+  AND ORD_EMPT_STATUS = 'N' 
+  AND BILL_TO_CUST_NAME NOT IN ('JANATICS INDIA PVT. LTD - UNIT V','JANATICS INDIA PVT. LTD - UNIT VI') 
+GROUP BY OU_NAME
+ORDER BY OU_NAME DESC";
+
+        var flatRows = await _oracleService.QueryAsync<dynamic>(query);
+
+        return flatRows.Select(row => new OuSalesPerformanceDto
+        {
+            OuName = row.OU_NAME,
+            MetricsFy2526 = new YearData
+            {
+                SalesAsOnDate = (decimal)row.SALEASON2526,
+                SalesCurrentMonth = (decimal)row.SALECM2526,
+                PendingAsOnDate = (decimal)row.PENDASON2526,
+                PendingCurrentMonth = (decimal)row.PENDCM2526
+            },
+            MetricsFy2627 = new YearData
+            {
+                SalesAsOnDate = (decimal)row.SALEASON2627,
+                SalesCurrentMonth = (decimal)row.SALECM2627,
+                PendingAsOnDate = (decimal)row.PENDASON2627,
+                PendingCurrentMonth = (decimal)row.PENDCM2627
+            }
+        });
     }
+
 }

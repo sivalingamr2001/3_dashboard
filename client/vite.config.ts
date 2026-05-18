@@ -31,7 +31,6 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           vendor: ["react", "react-dom"],
           router: ["react-router-dom"],
-          query: ["@tanstack/react-query"],
           ui: ["@radix-ui/react-dialog", "@radix-ui/react-select"],
         },
       },

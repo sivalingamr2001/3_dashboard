@@ -6,53 +6,67 @@ import {
 
 export const OperatingUnitsTableHeader = () => {
   return (
-    <TableHeader>
-      {/* Level 1 — segment group labels */}
-      <TableRow className="border-none bg-[#243143] hover:bg-[#243143]">
-        <TableHead className="flex justify-center mt-10 min-w-70 lg:min-w-[320px] border-r border-slate-700 text-left text-lg font-bold text-white px-4">
+    <TableHeader className="select-none border-none">
+      
+      {/* LEVEL 1 — Macro Categories */}
+      <TableRow className="border-none bg-[#1e293b] hover:bg-[#1e293b]">
+        {/* Forces this block down through all three header rows */}
+        <TableHead rowSpan={3} className="min-w-[320px] text-left text-xs font-bold text-white px-4 align-middle border-r border-slate-700/30">
           Operating Unit
         </TableHead>
-        <TableHead colSpan={5} className="border-r border-slate-700 text-center text-lg font-bold text-white px-2">
+        
+        <TableHead colSpan={4} className="text-center text-xs font-semibold text-white py-1.5 border-r border-slate-700/30">
           Turnover (₹ Cr)
         </TableHead>
-        <TableHead colSpan={2} className="border-r border-slate-700 text-center text-lg font-bold text-white px-2">
+
+        {/* Level 1 Empty Header Slot for Trend (Row 2 will populate this column) */}
+        <TableHead className="bg-[#1e293b] p-0 m-0 border-r border-slate-700/30"></TableHead>
+
+        <TableHead colSpan={2} className="text-center text-xs font-semibold text-white py-1.5 border-r border-slate-700/30">
           Pending Orders (₹ Cr)
         </TableHead>
-        <TableHead className="flex justify-center mt-10 flex-col text-center text-lg font-bold text-white px-4">
-          Inventory *<br /><span className="text-xs font-normal text-slate-400">(₹ Cr)</span>
+
+        {/* Forces Inventory down through all three header rows */}
+        <TableHead rowSpan={3} className="min-w-[120px] text-center text-xs font-semibold text-white px-4 align-middle bg-[#1e293b]">
+          Inventory * <br /><span className="text-[10px] font-normal lowercase opacity-80">(₹ cr)</span>
         </TableHead>
       </TableRow>
 
-      {/* Level 2 — individual column labels */}
-      <TableRow className="border-b border-slate-200 bg-[#2c3b50] hover:bg-[#2c3b50] text-sm font-semibold text-slate-200">
-        <TableHead className="bg-[#243143] border-r border-slate-700 px-4 py-4" />
-
-        <TableHead className="border-r border-slate-700/50 bg-[#2575fc] text-center px-3 py-3 text-white font-bold text-xs lg:text-sm whitespace-nowrap">
-          FY 2026-27<br /><span className="text-[10px] font-normal text-blue-100">As on Date *</span>
+      {/* LEVEL 2 — Fiscal Year Grouping & Trend Banners */}
+      <TableRow className="border-none bg-[#1e293b] hover:bg-[#1e293b]">
+        {/* Turnover Sub-categories */}
+        <TableHead colSpan={2} className="bg-[#2563eb] text-center text-[11px] font-medium text-white py-1 border-r border-blue-400/20">
+          FY 2026-27
         </TableHead>
-        <TableHead className="border-r border-slate-700/50 bg-[#1a66ff] text-center px-3 py-3 text-white font-bold text-xs lg:text-sm whitespace-nowrap">
-          FY 2026-27<br /><span className="text-[10px] font-normal text-blue-100">Current Month</span>
-        </TableHead>
-        <TableHead className="border-r border-slate-700/50 bg-[#4b5563] text-center px-3 py-3 text-slate-100 font-bold text-xs lg:text-sm whitespace-nowrap">
-          FY 2025-26<br /><span className="text-[10px] font-normal text-slate-300">As on Date *</span>
-        </TableHead>
-        <TableHead className="border-r border-slate-700 bg-[#374151] text-center px-3 py-3 text-slate-100 font-bold text-xs lg:text-sm whitespace-nowrap">
-          FY 2025-26<br /><span className="text-[10px] font-normal text-slate-300">Current Month</span>
+        <TableHead colSpan={2} className="bg-[#475569] text-center text-[11px] font-medium text-white py-1 border-r border-slate-600/30">
+          FY 2025-26
         </TableHead>
 
-        <TableHead className="border-r border-slate-700 bg-[#10b981] text-center px-3 py-3 text-white font-bold text-xs lg:text-sm whitespace-nowrap">
-          Trend<br /><span className="text-[10px] font-normal text-emerald-100">YoY %</span>
+        {/* Trend Banner sitting on Level 2 (Spans down to Level 3) */}
+        <TableHead rowSpan={2} className="bg-[#10b981] text-center text-xs font-semibold text-white px-4 align-middle border-r border-emerald-600/30 min-w-[90px]">
+          <span className="block font-medium text-[11px]">Trend</span>
+          <span className="block text-[10px] font-normal text-emerald-100 uppercase tracking-normal mt-0.5">YoY %</span>
         </TableHead>
 
-        <TableHead className="border-r border-slate-700/50 bg-[#f39c12] text-center px-3 py-3 text-white font-bold text-xs lg:text-sm whitespace-nowrap">
-          FY 2026-27<br /><span className="text-[10px] font-normal text-amber-100">As on Date *</span>
+        {/* Pending Orders Sub-category */}
+        <TableHead colSpan={2} className="bg-[#2563eb] text-center text-[11px] font-medium text-white py-1">
+          FY 2026-27
         </TableHead>
-        <TableHead className="border-r border-slate-700 bg-[#d35400] text-center px-3 py-3 text-white font-bold text-xs lg:text-sm whitespace-nowrap">
-          FY 2026-27<br /><span className="text-[10px] font-normal text-amber-100">Current Month</span>
-        </TableHead>
-
-        <TableHead className="px-4 py-4 bg-[#243143]" />
       </TableRow>
+
+      {/* LEVEL 3 — Micro Sub-Headers */}
+      <TableRow className="border-none bg-[#3b82f6] text-[10px] font-medium text-white">
+        {/* 4 Turnover columns */}
+        <TableHead className="bg-[#3b82f6] text-center py-1 border-r border-blue-400/20">As on Date *</TableHead>
+        <TableHead className="bg-[#3b82f6] text-center py-1 border-r border-blue-500">Current Month</TableHead>
+        <TableHead className="bg-[#64748b] text-center py-1 border-r border-slate-500/30">As on Date *</TableHead>
+        <TableHead className="bg-[#64748b] text-center py-1 border-r border-slate-600">Current Month</TableHead>
+
+        {/* 2 Pending Orders columns */}
+        <TableHead className="bg-[#3b82f6] text-center py-1 border-r border-blue-400/20">As on Date *</TableHead>
+        <TableHead className="bg-[#3b82f6] text-center py-1">Current Month</TableHead>
+      </TableRow>
+
     </TableHeader>
   )
 }

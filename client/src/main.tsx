@@ -3,15 +3,14 @@ import { createRoot } from "react-dom/client";
 
 import "./index.css";
 import App from "./App.tsx";
-import { AppProviders } from "./providers";
-import { TooltipProvider } from "./shared/components/ui/tooltip.tsx";
+import { AuthProvider } from "./context/AuthContext.tsx";
+import { Toaster } from "@/shared/components/ui/sonner.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AppProviders>
-      <TooltipProvider>
+      <Toaster position="top-right" richColors/>
+      <AuthProvider>
         <App />
-      </TooltipProvider>
-    </AppProviders>
+      </AuthProvider>
   </StrictMode>,
 );
