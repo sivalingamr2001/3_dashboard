@@ -15,11 +15,11 @@ public class OuSalesController : ControllerBase
     }
 
     [HttpGet("performance")]
-    public async Task<IActionResult> GetPerformance()
+    public async Task<IActionResult> GetPerformance([FromQuery] string? stkTfrFlg = "Y")
     {
         try
         {
-            var data = await _repository.GetSalesPerformanceAsync();
+            var data = await _repository.GetSalesPerformanceAsync(stkTfrFlg);
             return Ok(data);
         }
         catch (Exception ex)

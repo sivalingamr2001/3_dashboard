@@ -4,5 +4,5 @@ namespace Backend.Interfaces;
 
 public interface IOuSalesRepository
 {
-    Task<IEnumerable<OuSalesPerformanceDto>> GetSalesPerformanceAsync();
+    Task<IEnumerable<OuSalesPerformanceDto>> GetSalesPerformanceAsync(string? stkTfrFlg = "Y");
 }

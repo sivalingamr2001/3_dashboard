@@ -1,6 +1,9 @@
 ﻿using Backend.DB;
 using Backend.Interfaces;
 using Backend.Models;
+using System.Data;
+using Dapper;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Backend.Services;
 
@@ -8,78 +11,97 @@ public class OuSalesRepository : IOuSalesRepository
 {
     private readonly IOracleService _oracleService;
 
-    // Fixed: Connection string is now encapsulated inside OracleService
     public OuSalesRepository(IOracleService oracleService)
     {
         _oracleService = oracleService ?? throw new ArgumentNullException(nameof(oracleService));
     }
 
-    public async Task<IEnumerable<OuSalesPerformanceDto>> GetSalesPerformanceAsync()
+    private class OracleDynamicParameters : SqlMapper.IDynamicParameters
     {
-        const string query = @"
-WITH DateParameters AS (
-    SELECT 
-        TRUNC(SYSDATE, 'MM') AS CurrentMonthStart,
-        ADD_MONTHS(TRUNC(SYSDATE, 'MM'), 1) AS NextMonthStart,
-        ADD_MONTHS(TRUNC(SYSDATE, 'MM'), -12) AS LastYearMonthStart,
-        ADD_MONTHS(TRUNC(SYSDATE, 'MM'), -11) AS LastYearNextMonthStart
-    FROM DUAL
-)
-SELECT 
-    OU_NAME,
-    
-    -- FY 25-26 Sales (01-APR-2025 to 31-MAR-2026)
-    NVL(ROUND(SUM(CASE WHEN SOURCE_NAME='SALES' AND TRX_DATE >= TO_DATE('01-APR-2025','DD-MON-YYYY') AND TRX_DATE < TO_DATE('01-APR-2026','DD-MON-YYYY') THEN (QUANTITY_INVOICED * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate) END) / 10000000, 2), 0) AS SaleAsOn2526,
-    
-    -- FY 25-26 Sales Current Month (Last Year's Same Month)
-    NVL(ROUND(SUM(CASE WHEN SOURCE_NAME='SALES' AND TRX_DATE >= p.LastYearMonthStart AND TRX_DATE < p.LastYearNextMonthStart THEN (QUANTITY_INVOICED * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate) END) / 10000000, 2), 0) AS SaleCm2526,
-    
-    -- FY 26-27 Sales (01-APR-2026 to 31-MAR-2027)
-    NVL(ROUND(SUM(CASE WHEN SOURCE_NAME='SALES' AND TRX_DATE >= TO_DATE('01-APR-2026','DD-MON-YYYY') AND TRX_DATE < TO_DATE('01-APR-2027','DD-MON-YYYY') THEN (QUANTITY_INVOICED * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate) END) / 10000000, 2), 0) AS SaleAsOn2627,
-    
-    -- FY 26-27 Sales Current Month (Current Month)
-    NVL(ROUND(SUM(CASE WHEN SOURCE_NAME='SALES' AND TRX_DATE >= p.CurrentMonthStart AND TRX_DATE < p.NextMonthStart THEN (QUANTITY_INVOICED * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate) END) / 10000000, 2), 0) AS SaleCm2627,
-    
-    -- FY 25-26 Pending Orders
-    NVL(ROUND(SUM(CASE WHEN SOURCE_NAME='ORDER' AND ORDERED_DATE >= TO_DATE('01-APR-2025','DD-MON-YYYY') AND ORDERED_DATE < TO_DATE('01-APR-2026','DD-MON-YYYY') THEN (PEND_QUANTITY * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate) END) / 10000000, 2), 0) AS PendAsOn2526,
-    
-    -- FY 25-26 Pending Current Month (Last Year's Same Month)
-    NVL(ROUND(SUM(CASE WHEN SOURCE_NAME='ORDER' AND ORDERED_DATE >= p.LastYearMonthStart AND ORDERED_DATE < p.LastYearNextMonthStart THEN (PEND_QUANTITY * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate) END) / 10000000, 2), 0) AS PendCm2526,
-    
-    -- FY 26-27 Pending Orders
-    NVL(ROUND(SUM(CASE WHEN SOURCE_NAME='ORDER' AND ORDERED_DATE >= TO_DATE('01-APR-2026','DD-MON-YYYY') AND ORDERED_DATE < TO_DATE('01-APR-2027','DD-MON-YYYY') THEN (PEND_QUANTITY * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate) END) / 10000000, 2), 0) AS PendAsOn2627,
-    
-    -- FY 26-27 Pending Current Month (Current Month)
-    NVL(ROUND(SUM(CASE WHEN SOURCE_NAME='ORDER' AND ORDERED_DATE >= p.CurrentMonthStart AND ORDERED_DATE < p.NextMonthStart THEN (PEND_QUANTITY * UNIT_SELLING_PRICE * Ou_Currency_Conv_Rate) END) / 10000000, 2), 0) AS PendCm2627
+        private readonly List<OracleParameter> _oracleParameters = new();
 
-FROM JAN_ALL_OU_ORD_SALES_V 
-CROSS JOIN DateParameters p
-WHERE (TRX_DATE >= TO_DATE('01-APR-2025','DD-MON-YYYY') OR ORDERED_DATE >= TO_DATE('01-APR-2025','DD-MON-YYYY'))   
-  AND ORD_EMPT_STATUS = 'N' 
-  AND BILL_TO_CUST_NAME NOT IN ('JANATICS INDIA PVT. LTD - UNIT V','JANATICS INDIA PVT. LTD - UNIT VI') 
-GROUP BY OU_NAME
-ORDER BY OU_NAME DESC";
+        public void Add(string name, OracleDbType oracleDbType, ParameterDirection direction, object? value = null, int? size = null)
+        {
+            var param = new OracleParameter(name, oracleDbType, value, direction);
+            if (size.HasValue) param.Size = size.Value;
+            _oracleParameters.Add(param);
+        }
 
-        var flatRows = await _oracleService.QueryAsync<dynamic>(query);
+        public void AddParameters(IDbCommand command, SqlMapper.Identity identity)
+        {
+            if (command is OracleCommand oracleCommand)
+            {
+                oracleCommand.CommandType = CommandType.StoredProcedure;
+                oracleCommand.Parameters.AddRange(_oracleParameters.ToArray());
+            }
+        }
+    }
+
+    public async Task<IEnumerable<OuSalesPerformanceDto>> GetSalesPerformanceAsync(string? stkTfrFlg = "Y")
+    {
+        const string procedureName = "GET_OU_SALES_PERFORMANCE";
+
+        // Default to 'Y' if null or empty
+        var flagValue = string.IsNullOrWhiteSpace(stkTfrFlg) ? "Y" : stkTfrFlg;
+
+        var parameters = new OracleDynamicParameters();
+
+        // Add input parameter for stock transfer flag
+        parameters.Add("p_stk_tfr_flg", OracleDbType.Varchar2, ParameterDirection.Input, flagValue, 1);
+        parameters.Add("p_cursor", oracleDbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+
+        var flatRows = await _oracleService.QueryAsync<dynamic>(
+            procedureName,
+            parameters
+        );
 
         return flatRows.Select(row => new OuSalesPerformanceDto
         {
             OuName = row.OU_NAME,
             MetricsFy2526 = new YearData
             {
-                SalesAsOnDate = (decimal)row.SALEASON2526,
-                SalesCurrentMonth = (decimal)row.SALECM2526,
-                PendingAsOnDate = (decimal)row.PENDASON2526,
-                PendingCurrentMonth = (decimal)row.PENDCM2526
+                SalesAsOnDate = ToDecimal(row.FY_25_26_SALE_AS_ON),
+                SalesCurrentMonth = ToDecimal(row.FY_25_26_SALE_CURRNT_MNTH),
+                PendingAsOnDate = ToDecimal(row.FY_25_26_PEND_AS_ON),
+                PendingCurrentMonth = ToDecimal(row.FY_25_26_PEND_CURRNT_MNTH)
             },
             MetricsFy2627 = new YearData
             {
-                SalesAsOnDate = (decimal)row.SALEASON2627,
-                SalesCurrentMonth = (decimal)row.SALECM2627,
-                PendingAsOnDate = (decimal)row.PENDASON2627,
-                PendingCurrentMonth = (decimal)row.PENDCM2627
+                SalesAsOnDate = ToDecimal(row.FY_26_27_SALE_AS_ON),
+                SalesCurrentMonth = ToDecimal(row.FY_26_27_SALE_CURRNT_MNTH),
+                PendingAsOnDate = ToDecimal(row.FY_26_27_PEND_AS_ON),
+                PendingCurrentMonth = ToDecimal(row.FY_26_27_PEND_CURRNT_MNTH)
             }
         });
     }
 
+    private static decimal ToDecimal(object? value)
+    {
+        if (value is decimal decimalValue)
+        {
+            return decimalValue;
+        }
+
+        if (value is double doubleValue)
+        {
+            return Convert.ToDecimal(doubleValue);
+        }
+
+        if (value is float floatValue)
+        {
+            return Convert.ToDecimal(floatValue);
+        }
+
+        if (value is int intValue)
+        {
+            return intValue;
+        }
+
+        if (value is string stringValue && decimal.TryParse(stringValue, out var parsedValue))
+        {
+            return parsedValue;
+        }
+
+        return 0m;
+    }
 }

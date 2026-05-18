@@ -19,4 +19,22 @@ export const getCurrentDate = () => {
   return `${yyyy}-${mm}-${dd}`;
 };
 
+const getFinancialYearStart = (date: Date) => {
+  const month = date.getMonth() + 1
+  const year = date.getFullYear()
+  return month >= 4 ? year : year - 1
+}
+
+const formatFinancialYear = (startYear: number) => {
+  return `${startYear}-${String(startYear + 1).slice(-2)}`
+}
+
+export const getCurrentFinancialYear = (date = new Date()) => {
+  return formatFinancialYear(getFinancialYearStart(date))
+}
+
+export const getPreviousFinancialYear = (date = new Date()) => {
+  return formatFinancialYear(getFinancialYearStart(date) - 1)
+}
+
 export const AS_ON_DATE = getCurrentDate();

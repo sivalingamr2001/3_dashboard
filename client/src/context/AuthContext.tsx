@@ -1,48 +1,52 @@
 import { loginApi } from '@/features/dashboard/api/axiosClient';
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 interface AuthData {
   message: string;
   isAuthenticated: boolean;
+  token?: string;
 }
 
 interface AuthContextType {
   auth: AuthData | null;
-  // 1. Updated signature to take login credentials
-  login: (email: string, password: string) => Promise<void>; 
+  login: (email: string, password: string) => Promise<void>;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const loadSavedAuth = (): AuthData | null => {
+  const savedMessage = localStorage.getItem('auth_message');
+  const savedIsAuthenticated = localStorage.getItem('auth_isAuthenticated');
+  const savedToken = localStorage.getItem('token');
+
+  if (savedMessage && savedIsAuthenticated === 'true') {
+    return {
+      message: savedMessage,
+      isAuthenticated: true,
+      token: savedToken ?? undefined,
+    };
+  }
+
+  return null;
+};
+
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [auth, setAuth] = useState<AuthData | null>(null);
+  const [auth, setAuth] = useState<AuthData | null>(loadSavedAuth);
 
-  useEffect(() => {
-    const savedMessage = localStorage.getItem('auth_message');
-    const savedIsAuthenticated = localStorage.getItem('auth_isAuthenticated');
-
-    if (savedMessage && savedIsAuthenticated === 'true') {
-      setAuth({
-        message: savedMessage,
-        isAuthenticated: true,
-      });
-    }
-  }, []);
-
-  // 2. Marked function as async and pass email/password parameters
   const login = async (email: string, password: string) => {
     try {
-      // 3. Await the API response. Assumes loginApi returns AxiosResponse or data directly.
-      // If loginApi returns the full response object, use: const response = await loginApi(...)
       const apiData: AuthData = await loginApi({ email, password });
-      
       setAuth(apiData);
+
       localStorage.setItem('auth_message', apiData.message);
       localStorage.setItem('auth_isAuthenticated', String(apiData.isAuthenticated));
+      if (apiData.token) {
+        localStorage.setItem('token', apiData.token);
+      }
     } catch (error) {
-      console.error("Login failed:", error);
-      throw error; // Rethrow to handle error feedback in your UI component
+      console.error('Login failed:', error);
+      throw error;
     }
   };
 
@@ -50,6 +54,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setAuth(null);
     localStorage.removeItem('auth_message');
     localStorage.removeItem('auth_isAuthenticated');
+    localStorage.removeItem('token');
   };
 
   return (

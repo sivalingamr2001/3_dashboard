@@ -9,16 +9,18 @@ import type {
 
 export type SalesQueryParams = {
   limit?: number;
+  stkTfrFlg?: string;
 };
 
 const formatMoney = (value: number) => value.toFixed(2);
 
 const formatTrend = (current: number, previous: number) => {
   if (previous === 0) {
-    return current === 0 ? "0" : "100";
+    return current === 0 ? "0.00" : "100.00";
   }
+
   const trend = ((current - previous) / previous) * 100;
-  return Math.round(trend).toString();
+  return trend.toFixed(2);
 };
 
 const buildTotals = (rows: OperatingUnit[]): TotalsRow => {
@@ -86,8 +88,9 @@ const normalizePerformanceData = (
   };
 };
 
-const fetchSalesData = async (_params: SalesQueryParams): Promise<SalesResponse> => {
-  const response = await getOuSalesPerformanceApi();
+const fetchSalesData = async (params: SalesQueryParams): Promise<SalesResponse> => {
+  const stkTfrFlg = params.stkTfrFlg ?? "Y";
+  const response = await getOuSalesPerformanceApi(stkTfrFlg);
   return normalizePerformanceData(response);
 };
 
@@ -118,7 +121,7 @@ export const useSales = (params: SalesQueryParams = {}) => {
     return () => {
       active = false;
     };
-  }, [params.limit]);
+  }, [params.limit, params.stkTfrFlg]);
 
   const handleRefetch = () => {
     setIsLoading(true);

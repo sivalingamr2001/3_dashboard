@@ -14,14 +14,23 @@ import {
 import { Input } from "@/shared/components/ui/input"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/context/AuthContext"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 
 export function LoginPage() {
-    const { login } = useAuth()
+    const { login, auth } = useAuth()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = (location.state as { from?: { pathname: string } })?.from?.pathname || "/dashboard"
 
-    // 1. Turned this into an async function to wait for the API call
+    useEffect(() => {
+        if (auth?.isAuthenticated) {
+            navigate(from, { replace: true })
+        }
+    }, [auth, from, navigate])
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         setError(null)
@@ -33,6 +42,7 @@ export function LoginPage() {
 
         try {
             await login(email, password)
+            navigate(from, { replace: true })
         } catch (err) {
             setError("Invalid credentials or server connection error.")
         } finally {
@@ -67,20 +77,14 @@ export function LoginPage() {
                             <Field>
                                 <div className="flex items-center">
                                     <FieldLabel htmlFor="password">Password</FieldLabel>
-                                    <a
-                                        href="#"
-                                        className="ml-auto text-sm underline-offset-4 hover:underline"
-                                    >
-                                        Forgot your password?
-                                    </a>
                                 </div>
                                 {/* 5. Added name="password" attribute */}
                                 <Input id="password" name="password" type="password" required />
                             </Field>
                         </FieldGroup>
-                        
+
                         {error && <p className="text-sm text-red-500 font-medium">{error}</p>}
-                        
+
                         {/* 6. Button handles submission cleanly and manages dynamic loading states */}
                         <Button type="submit" className="w-full" disabled={loading}>
                             {loading ? "Signing in..." : "Sign in"}

@@ -36,7 +36,6 @@ const router = createBrowserRouter(
       errorElement: <RouteErrorBoundary />,
       children: [{ path: "/login", element: withSuspense(LoginPage) }],
     },
-    // Protected routes — require authentication
     {
       element: (
         <ProtectedRoute>

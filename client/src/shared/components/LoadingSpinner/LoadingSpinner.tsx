@@ -2,7 +2,7 @@
 
 export const PageLoader = () => {
   return (
-    <div className="bg-background flex min-h-50 items-center justify-center px-4 py-16">
+    <div className="flex items-center justify-center px-4 py-16">
       <motion.div
         initial={{ opacity: 0, y: 20, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}

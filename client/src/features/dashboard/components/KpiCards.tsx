@@ -1,17 +1,44 @@
 import { Card } from "@/shared/components/ui/card"
 import { IndianRupee, Package, Warehouse, TrendingUp, TrendingDown } from "lucide-react"
 import type { TotalsRow } from "@/features/dashboard/types/dashboard.types"
-import { AS_ON_DATE } from "@/lib/utils"
+import { AS_ON_DATE, getCurrentFinancialYear } from "@/lib/utils"
 
 type Props = {
   totals: TotalsRow
 }
 
+const getTrendBadge = (trend: string) => {
+  const value = Number(trend)
+  if (value > 0) {
+    return {
+      icon: <TrendingUp className="h-3.5 w-3.5" />,
+      label: `+${trend}% Growth`,
+      badgeClass: "bg-emerald-700 text-white",
+    }
+  }
+
+  if (value < 0) {
+    return {
+      icon: <TrendingDown className="h-3.5 w-3.5" />,
+      label: `${trend}% Growth`,
+      badgeClass: "bg-rose-600 text-white",
+    }
+  }
+
+  return {
+    icon: <span className="inline-flex h-3.5 w-3.5 items-center justify-center text-xs">=</span>,
+    label: `0.00% Growth`,
+    badgeClass: "bg-yellow-400 text-slate-900",
+  }
+}
+
 export const KpiCards = ({ totals }: Props) => {
+  const currentFY = getCurrentFinancialYear()
+  const trendBadge = getTrendBadge(totals.trend)
   return (
     <div className="mb-8 grid gap-6 md:grid-cols-3">
       {/* Group Turnover */}
-      <Card className="border border-blue-100 bg-white p-6 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] flex flex-col justify-between">
+      <Card className="border-2 border-blue-400 bg-white p-6 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] flex flex-col justify-between">
         <div>
           <div className="flex items-center gap-3">
             <div className="rounded-full bg-blue-50 p-3 flex items-center justify-center border border-blue-100">
@@ -36,15 +63,14 @@ export const KpiCards = ({ totals }: Props) => {
           </div>
         </div>
         <div className="mt-5 flex justify-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#00c853] px-4 py-1.5 text-xs font-bold text-white shadow-sm">
-            <TrendingUp className="h-3.5 w-3.5" /> <TrendingDown className="h-3.5 w-3.5" />
-            +{totals.trend}% Growth
+          <span className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-bold shadow-sm ${trendBadge.badgeClass}`}>
+            {trendBadge.icon} {trendBadge.label}
           </span>
         </div>
       </Card>
 
       {/* Pending Orders */}
-      <Card className="border border-amber-100 bg-white p-6 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+      <Card className="border-2 border-amber-400 bg-white p-6 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
         <div className="flex items-center gap-3 mb-4">
           <div className="rounded-full bg-amber-50 p-3 flex items-center justify-center border border-amber-100">
             <Package className="h-5 w-5 text-amber-500" />
@@ -55,14 +81,14 @@ export const KpiCards = ({ totals }: Props) => {
           </div>
         </div>
         <div className="bg-[#fff9f2] border border-amber-200/70 rounded-xl p-5 flex flex-col items-center justify-center text-center h-[130px]">
-          <p className="text-xs font-bold text-amber-700/80 uppercase tracking-wider">Current FY 2026-27</p>
+          <p className="text-xs font-bold text-amber-700/80 uppercase tracking-wider">Current FY {currentFY}</p>
           <p className="text-4xl font-black text-[#e67e22] mt-1.5">₹{totals.po_date}</p>
           <p className="text-xs font-bold text-amber-600/70 mt-1">Crores (INR)</p>
         </div>
       </Card>
 
       {/* Inventory Value */}
-      <Card className="border border-emerald-100 bg-white p-6 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+      <Card className="border-2 border-emerald-400 bg-white p-6 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
         <div className="flex items-center gap-3 mb-4">
           <div className="rounded-full bg-emerald-50 p-3 flex items-center justify-center border border-emerald-100">
             <Warehouse className="h-5 w-5 text-emerald-500" />

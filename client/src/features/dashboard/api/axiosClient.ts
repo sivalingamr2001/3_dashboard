@@ -10,21 +10,17 @@ export const axiosClient = axios.create({
   timeout: 60000,
 });
 
-axiosClient.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
-
 export const loginApi = async (loginData: { email: string; password: string }) => {
   const response = await axiosClient.post("/Auth/login", loginData);
   return response.data;
 };
 
-export const getOuSalesPerformanceApi = async () => {
-  const response = await axiosClient.get("/OuSales/performance");
+export const getOuSalesPerformanceApi = async (stkTfrFlg: string = "Y") => {
+  const response = await axiosClient.get("/OuSales/performance", {
+    params: {
+      stkTfrFlg
+    }
+  });
   console.log(response.data);
   return response.data;
 };

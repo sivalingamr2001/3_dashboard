@@ -6,7 +6,30 @@ type Props = {
   row: OperatingUnit
 }
 
+const getRowTrendBadge = (trend: string) => {
+  const value = Number(trend)
+  if (value > 0) {
+    return {
+      icon: <TrendingUp className="h-3.5 w-3.5 mr-0.5 shrink-0" />,
+      badgeClass: "bg-[#d1fae5] text-emerald-700",
+    }
+  }
+
+  if (value < 0) {
+    return {
+      icon: <TrendingDown className="h-3.5 w-3.5 mr-0.5 shrink-0" />,
+      badgeClass: "bg-[#fee2e2] text-rose-700",
+    }
+  }
+
+  return {
+    icon: <span className="inline-flex h-3.5 w-3.5 items-center justify-center text-xs">=</span>,
+    badgeClass: "bg-[#fef3c7] text-amber-700",
+  }
+}
+
 export const OperatingUnitRow = ({ row }: Props) => {
+  const trendBadge = getRowTrendBadge(row.trend)
   return (
     <TableRow className="border-b border-slate-100">
       <TableCell className="border-r border-slate-100 bg-white px-4 py-3.5 font-semibold text-slate-800 text-xs lg:text-sm normal-case tracking-tight max-w-[340px] break-words whitespace-normal inline-block md:table-cell">
@@ -26,9 +49,9 @@ export const OperatingUnitRow = ({ row }: Props) => {
         ₹{row.to_fy26_month}
       </TableCell>
 
-      <TableCell className="border-r border-slate-100 bg-[#ecfdf5] px-2 py-3.5 text-center whitespace-nowrap">
-        <span className="inline-flex items-center rounded-full bg-[#d1fae5] px-2.5 py-1 text-[11px] font-bold text-emerald-700">
-          <TrendingUp className="h-3.5 w-3.5 mr-0.5 shrink-0" /> {row.trend}% <TrendingDown className="h-3.5 w-3.5" />
+      <TableCell className="border-r border-slate-100 px-2 py-3.5 text-center whitespace-nowrap">
+        <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-bold ${trendBadge.badgeClass}`}>
+          {trendBadge.icon} {row.trend}%
         </span>
       </TableCell>
 
