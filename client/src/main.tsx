@@ -1,19 +1,17 @@
-import { StrictMode } from "react"
-import { createRoot } from "react-dom/client"
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 
-import "./index.css"
-import App from "./App.tsx"
-import { ThemeProvider } from "@/components/theme-provider.tsx"
-import { Toaster } from "./components/ui/sonner.tsx"
-import { AuthProvider } from "./context/AuthProvider.tsx"
+import "./index.css";
+import App from "./App.tsx";
+import { AppProviders } from "./providers";
+import { TooltipProvider } from "./shared/components/ui/tooltip.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider>
-      <Toaster position="top-right" richColors />
-      <AuthProvider>
+    <AppProviders>
+      <TooltipProvider>
         <App />
-      </AuthProvider>
-    </ThemeProvider>
-  </StrictMode>
-)
+      </TooltipProvider>
+    </AppProviders>
+  </StrictMode>,
+);

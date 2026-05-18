@@ -1,7 +1,5 @@
-import DashboardPage from "@/pages/DashboardPage"
+﻿import { Router } from "@/routes/Router";
 
-export function App() {
-  return <DashboardPage />
+export default function App() {
+  return <Router />;
 }
-
-export default App
