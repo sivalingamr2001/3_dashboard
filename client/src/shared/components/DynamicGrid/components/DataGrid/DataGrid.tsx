@@ -6,6 +6,7 @@ import {
 } from "ag-grid-community"
 import { AgGridReact } from "ag-grid-react"
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { TrendingDown, TrendingUp } from "lucide-react"
 
 import { useTheme } from "next-themes" 
 import { Separator } from "@/shared/components/ui/separator"
@@ -67,28 +68,37 @@ const currencyFormatter = (params: any) => {
   return `₹${Number(val).toFixed(2)}`
 }
 
+const getTrendBadge = (trend: number, isPinned: boolean = false) => {
+  if (trend > 0) {
+    return {
+      icon: <TrendingUp className="h-3 w-3 shrink-0" />,
+      badgeClass: isPinned ? "bg-emerald-600 text-white" : "bg-emerald-100 text-emerald-700",
+    }
+  }
+
+  if (trend < 0) {
+    return {
+      icon: <TrendingDown className="h-3.5 w-3.5" />,
+      badgeClass: isPinned ? "bg-rose-600 text-white" : "bg-rose-100 text-rose-700",
+    }
+  }
+
+  return {
+    icon: <span className="inline-flex h-3.5 w-3.5 items-center justify-center text-xs">=</span>,
+    badgeClass: isPinned ? "bg-amber-600 text-white" : "bg-amber-100 text-amber-700",
+  }
+}
+
 const trendRenderer = (params: any) => {
   const value = parseFloat(params.value)
   if (isNaN(value)) return params.value ?? ""
   
-  const isPinnedBottom = params.node.rowPinned === "bottom"
-  const bg = isPinnedBottom ? "#00c853" : "#e6fcf5"
-  const text = isPinnedBottom ? "#ffffff" : "#099268"
-  const icon = value >= 0 ? "📈" : "📉"
+  const isPinned = params.node.rowPinned === "bottom"
+  const trendBadge = getTrendBadge(value, isPinned)
 
   return (
-    <span style={{
-      backgroundColor: bg,
-      color: text,
-      padding: isPinnedBottom ? "6px 14px" : "4px 10px",
-      borderRadius: isPinnedBottom ? "20px" : "6px",
-      fontWeight: "700",
-      fontSize: isPinnedBottom ? "13px" : "11px",
-      display: "inline-flex",
-      alignItems: "center",
-      gap: "6px"
-    }}>
-      {icon} {value > 0 ? `+${value.toFixed(2)}` : value.toFixed(2)}%
+    <span className={`${trendBadge.badgeClass} inline-flex items-center justify-center gap-0.5 ${isPinned ? 'rounded-full px-3.5 py-1.5' : 'rounded-md px-2.5 py-1'} text-xs font-bold min-w-18`}>
+      {trendBadge.icon} {value > 0 ? `+${value.toFixed(2)}` : value.toFixed(2)}%
     </span>
   )
 }
@@ -215,7 +225,8 @@ function DataGridInner<TData extends Record<string, unknown>>(
       headerName: "Operating Unit",
       field: "unit",
       pinned: "left",
-      minWidth: 240,
+      width: 340,
+      minWidth: 280,
       headerClass: "header-cell-ou",
       cellStyle: (params) => ({
         fontWeight: "600",
@@ -224,7 +235,7 @@ function DataGridInner<TData extends Record<string, unknown>>(
         display: "flex",
         alignItems: "center",
         justifyContent: "flex-start",
-        paddingLeft: "12px"
+        paddingLeft: "16px"
       })
     },
     {
@@ -240,20 +251,24 @@ function DataGridInner<TData extends Record<string, unknown>>(
               headerName: "As on Date *", 
               field: "to_fy27_date", 
               valueFormatter: currencyFormatter, 
+              width: 110,
+              minWidth: 100,
               headerClass: "header-leaf-blue", 
               cellStyle: (params: { node: { rowPinned: string } }) => ({
                 color: "#1d4ed8", fontWeight: "600", textAlign: "center", justifyContent: "center",
-                backgroundColor: params.node.rowPinned === 'bottom' ? '#3b82f6' : '#eff6ff' 
+                backgroundColor: params.node.rowPinned === 'bottom' ? '#dbeafe' : '#eff6ff' 
               })
             },
             { 
               headerName: "Current Month", 
               field: "to_fy27_month", 
               valueFormatter: currencyFormatter, 
+              width: 110,
+              minWidth: 100,
               headerClass: "header-leaf-blue", 
               cellStyle: (params: { node: { rowPinned: string } }) => ({
                 color: "#1d4ed8", fontWeight: "600", textAlign: "center", justifyContent: "center",
-                backgroundColor: params.node.rowPinned === 'bottom' ? '#60a5fa' : '#eff6ff'
+                backgroundColor: params.node.rowPinned === 'bottom' ? '#dbeafe' : '#eff6ff'
               })
             }
           ]
@@ -266,20 +281,24 @@ function DataGridInner<TData extends Record<string, unknown>>(
               headerName: "As on Date *", 
               field: "to_fy26_date", 
               valueFormatter: currencyFormatter, 
+              width: 110,
+              minWidth: 100,
               headerClass: "header-leaf-slate", 
               cellStyle: (params: { node: { rowPinned: string } }) => ({
                 color: "#334155", fontWeight: "600", textAlign: "center", justifyContent: "center",
-                backgroundColor: params.node.rowPinned === 'bottom' ? '#64748b' : '#f8fafc'
+                backgroundColor: params.node.rowPinned === 'bottom' ? '#dbeafe' : '#f8fafc'
               })
             },
             { 
               headerName: "Current Month", 
               field: "to_fy26_month", 
               valueFormatter: currencyFormatter, 
+              width: 110,
+              minWidth: 100,
               headerClass: "header-leaf-slate", 
               cellStyle: (params: { node: { rowPinned: string } }) => ({
                 color: "#475569", fontWeight: "600", textAlign: "center", justifyContent: "center",
-                backgroundColor: params.node.rowPinned === 'bottom' ? '#94a3b8' : '#f8fafc'
+                backgroundColor: params.node.rowPinned === 'bottom' ? '#dbeafe' : '#f8fafc'
               })
             }
           ]
@@ -294,10 +313,16 @@ function DataGridInner<TData extends Record<string, unknown>>(
               cellRenderer: trendRenderer,
               minWidth: 120,
               headerClass: "header-leaf-trend",
-              cellStyle: (params: { node: { rowPinned: string } }) => ({ 
-                display: "flex", alignItems: "center", justifyContent: "center",
-                backgroundColor: params.node.rowPinned === 'bottom' ? '#bbf7d0' : '#f0fdf4'
-              })
+              cellStyle: (params: { node: { rowPinned: string }; value: number }) => {
+                const isPinned = params.node.rowPinned === "bottom"
+                
+                return { 
+                  display: "flex", 
+                  alignItems: "center", 
+                  justifyContent: "center",
+                  backgroundColor: isPinned ? "#dbeafe" : "#f0fdf4"
+                }
+              }
             }
           ]
         }
@@ -316,20 +341,24 @@ function DataGridInner<TData extends Record<string, unknown>>(
               headerName: "As on Date *", 
               field: "po_date", 
               valueFormatter: currencyFormatter, 
+              width: 110,
+              minWidth: 100,
               headerClass: "header-leaf-blue", 
               cellStyle: (params: { node: { rowPinned: string } }) => ({
                 color: "#ea580c", fontWeight: "600", textAlign: "center", justifyContent: "center",
-                backgroundColor: params.node.rowPinned === 'bottom' ? '#f59e0b' : '#fff7ed'
+                backgroundColor: params.node.rowPinned === 'bottom' ? '#dbeafe' : '#fff7ed'
               })
             },
             { 
               headerName: "Current Month", 
               field: "po_month", 
               valueFormatter: currencyFormatter, 
+              width: 110,
+              minWidth: 100,
               headerClass: "header-leaf-blue", 
               cellStyle: (params: { node: { rowPinned: string } }) => ({
                 color: "#ea580c", fontWeight: "600", textAlign: "center", justifyContent: "center",
-                backgroundColor: params.node.rowPinned === 'bottom' ? '#fbbf24' : '#fff7ed'
+                backgroundColor: params.node.rowPinned === 'bottom' ? '#dbeafe' : '#fff7ed'
               })
             }
           ]
@@ -341,10 +370,10 @@ function DataGridInner<TData extends Record<string, unknown>>(
       field: "inv",
       valueFormatter: currencyFormatter,
       headerClass: "header-cell-inventory",
-      minWidth: 120,
+      minWidth: 80,
       cellStyle: (params) => ({ 
         color: "#15803d", fontWeight: "600",
-        backgroundColor: params.node.rowPinned === 'bottom' ? '#86efac' : '#f0fdf4',
+        backgroundColor: params.node.rowPinned === 'bottom' ? '#dbeafe' : '#f0fdf4',
         display: "flex", alignItems: "center", justifyContent: "center"
       })
     }
@@ -399,7 +428,15 @@ function DataGridInner<TData extends Record<string, unknown>>(
         overflow-x: auto;
       }
       .datagrid-scroll-inner {
-        min-width: 1080px;
+        width: 100%;
+        min-width: 100%;
+      }
+
+      .ag-root-wrapper,
+      .ag-root-wrapper .ag-root,
+      .ag-root-wrapper-viewport {
+        width: 100% !important;
+        min-width: 100% !important;
       }
 
       /* Clean scrollbar overrides to remove unnecessary rendering space completely */

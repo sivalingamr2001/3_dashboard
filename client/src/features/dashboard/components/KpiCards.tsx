@@ -12,7 +12,7 @@ const getTrendBadge = (trend: string) => {
   if (value > 0) {
     return {
       icon: <TrendingUp className="h-3.5 w-3.5" />,
-      label: `+${trend}% Growth`,
+      label: `+${trend}%`,
       badgeClass: "bg-emerald-700 text-white",
     }
   }
@@ -20,14 +20,14 @@ const getTrendBadge = (trend: string) => {
   if (value < 0) {
     return {
       icon: <TrendingDown className="h-3.5 w-3.5" />,
-      label: `${trend}% Growth`,
+      label: `${trend}%`,
       badgeClass: "bg-rose-600 text-white",
     }
   }
 
   return {
     icon: <span className="inline-flex h-3.5 w-3.5 items-center justify-center text-xs">=</span>,
-    label: `0.00% Growth`,
+    label: `0.00%`,
     badgeClass: "bg-yellow-400 text-slate-900",
   }
 }
