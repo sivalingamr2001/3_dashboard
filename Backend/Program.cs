@@ -43,14 +43,19 @@ namespace Backend
                 app.UseSwaggerUI();
             }
 
-            // 2. Enable CORS in the HTTP pipeline (Must be placed before UseAuthorization)
             app.UseCors("AllowViteApp");
-
             app.UseHttpsRedirection();
 
+            // 3. Static Files (Serves your built frontend)
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            // 4. Auth and Routing (Always after CORS and static files)
             app.UseAuthorization();
 
+            // 5. Endpoints
             app.MapControllers();
+            app.MapFallbackToFile("index.html");
 
             app.Run();
         }
