@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
 import { useSales } from "@/context/SalesContext";
+import type { TotalsRow } from "@/features/dashboard/types/dashboard.types";
+import { PageLoader } from "@/shared/components/LoadingSpinner/LoadingSpinner";
+import { useEffect, useState } from "react";
 import { DashboardHeader } from "../components/DashboardHeader";
 import { KpiCards } from "../components/KpiCards";
 import { OperatingUnitsTable } from "../components/OperatingUnitsTable";
-import { PageLoader } from "@/shared/components/LoadingSpinner/LoadingSpinner";
-import type { TotalsRow } from "@/features/dashboard/types/dashboard.types";
 
 export const DashboardPage = () => {
   const {
@@ -12,7 +12,6 @@ export const DashboardPage = () => {
     totals,
     loading,
     sales,
-    fetchSales,
     inclIntraSales,
     toggleIntraSales,
   } = useSales();
