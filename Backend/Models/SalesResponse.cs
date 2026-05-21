@@ -2,31 +2,32 @@
 
 namespace Backend.Models;
 
-// Main structure returned to your frontend
 public class OuSalesPerformanceDto
 {
     [JsonPropertyName("operatingUnit")]
     public string OuName { get; set; } = string.Empty;
 
-    [JsonPropertyName("financialYear2526")]
-    public YearData MetricsFy2526 { get; set; } = new();
+    [JsonPropertyName("lastYear")]
+    public FinancialYearData LastYearMetrics { get; set; } = new();
 
-    [JsonPropertyName("financialYear2627")]
-    public YearData MetricsFy2627 { get; set; } = new();
+    [JsonPropertyName("thisYear")]
+    public FinancialYearData ThisYearMetrics { get; set; } = new();
+
+    [JsonPropertyName("inventoryAssetValue")]
+    public decimal InventoryAssetValue { get; set; }
 }
 
-// Sub-model to break down data logically inside each year
-public class YearData
+public class FinancialYearData
 {
-    [JsonPropertyName("salesAsOnDate")]
-    public decimal SalesAsOnDate { get; set; }
+    [JsonPropertyName("salesYtd")]
+    public decimal SalesYtd { get; set; }
 
-    [JsonPropertyName("salesCurrentMonth")]
-    public decimal SalesCurrentMonth { get; set; }
+    [JsonPropertyName("salesThisMonth")]
+    public decimal SalesThisMonth { get; set; }
 
-    [JsonPropertyName("pendingAsOnDate")]
-    public decimal PendingAsOnDate { get; set; }
+    [JsonPropertyName("pendingOrdersYtd")]
+    public decimal PendingOrdersYtd { get; set; }
 
-    [JsonPropertyName("pendingCurrentMonth")]
-    public decimal PendingCurrentMonth { get; set; }
+    [JsonPropertyName("pendingThisMonth")]
+    public decimal PendingThisMonth { get; set; }
 }

@@ -39,14 +39,11 @@ public class OuSalesRepository : IOuSalesRepository
 
     public async Task<IEnumerable<OuSalesPerformanceDto>> GetSalesPerformanceAsync(string? stkTfrFlg = "Y")
     {
-        const string procedureName = "GET_OU_SALES_PERFORMANCE";
+        const string procedureName = "JAN_GET_OU_SALES_PERFORMANCE";
 
-        // Default to 'Y' if null or empty
         var flagValue = string.IsNullOrWhiteSpace(stkTfrFlg) ? "Y" : stkTfrFlg;
 
         var parameters = new OracleDynamicParameters();
-
-        // Add input parameter for stock transfer flag
         parameters.Add("p_stk_tfr_flg", OracleDbType.Varchar2, ParameterDirection.Input, flagValue, 1);
         parameters.Add("p_cursor", oracleDbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
 
@@ -57,50 +54,33 @@ public class OuSalesRepository : IOuSalesRepository
 
         return flatRows.Select(row => new OuSalesPerformanceDto
         {
-            OuName = row.OU_NAME,
-            MetricsFy2526 = new YearData
+            OuName = row.OPERATING_UNIT,
+            LastYearMetrics = new FinancialYearData
             {
-                SalesAsOnDate = ToDecimal(row.FY_25_26_SALE_AS_ON),
-                SalesCurrentMonth = ToDecimal(row.FY_25_26_SALE_CURRNT_MNTH),
-                PendingAsOnDate = ToDecimal(row.FY_25_26_PEND_AS_ON),
-                PendingCurrentMonth = ToDecimal(row.FY_25_26_PEND_CURRNT_MNTH)
+                SalesYtd = ToDecimal(row.LAST_YEAR_SALES_YTD),
+                SalesThisMonth = ToDecimal(row.LAST_YEAR_SALES_THIS_MONTH),
+                PendingOrdersYtd = ToDecimal(row.LAST_YEAR_PENDING_ORDERS_YTD),
+                PendingThisMonth = ToDecimal(row.LAST_YEAR_PENDING_THIS_MONTH)
             },
-            MetricsFy2627 = new YearData
+            ThisYearMetrics = new FinancialYearData
             {
-                SalesAsOnDate = ToDecimal(row.FY_26_27_SALE_AS_ON),
-                SalesCurrentMonth = ToDecimal(row.FY_26_27_SALE_CURRNT_MNTH),
-                PendingAsOnDate = ToDecimal(row.FY_26_27_PEND_AS_ON),
-                PendingCurrentMonth = ToDecimal(row.FY_26_27_PEND_CURRNT_MNTH)
-            }
+                SalesYtd = ToDecimal(row.THIS_YEAR_SALES_YTD),
+                SalesThisMonth = ToDecimal(row.THIS_YEAR_SALES_THIS_MONTH),
+                PendingOrdersYtd = ToDecimal(row.THIS_YEAR_PENDING_ORDERS_YTD),
+                PendingThisMonth = ToDecimal(row.THIS_YEAR_PENDING_THIS_MONTH)
+            },
+            InventoryAssetValue = ToDecimal(row.INVENTORY_ASSET_VALUE)
         });
     }
 
     private static decimal ToDecimal(object? value)
     {
-        if (value is decimal decimalValue)
-        {
-            return decimalValue;
-        }
-
-        if (value is double doubleValue)
-        {
-            return Convert.ToDecimal(doubleValue);
-        }
-
-        if (value is float floatValue)
-        {
-            return Convert.ToDecimal(floatValue);
-        }
-
-        if (value is int intValue)
-        {
-            return intValue;
-        }
-
-        if (value is string stringValue && decimal.TryParse(stringValue, out var parsedValue))
-        {
-            return parsedValue;
-        }
+        if (value is decimal decimalValue) return decimalValue;
+        if (value is double doubleValue) return Convert.ToDecimal(doubleValue);
+        if (value is float floatValue) return Convert.ToDecimal(floatValue);
+        if (value is int intValue) return intValue;
+        if (value is long longValue) return longValue;
+        if (value is string stringValue && decimal.TryParse(stringValue, out var parsedValue)) return parsedValue;
 
         return 0m;
     }

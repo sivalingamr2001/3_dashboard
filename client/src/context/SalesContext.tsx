@@ -6,16 +6,17 @@ import type {
 } from "@/features/dashboard/types/dashboard.types";
 
 export interface YearData {
-    salesAsOnDate: number;
-    salesCurrentMonth: number;
-    pendingAsOnDate: number;
-    pendingCurrentMonth: number;
+    salesYtd: number;
+    salesThisMonth: number;
+    pendingOrdersYtd: number;
+    pendingThisMonth: number;
 }
 
 export interface SalesItem {
     operatingUnit: string;
-    financialYear2526: YearData;
-    financialYear2627: YearData;
+    lastYear: YearData;
+    thisYear: YearData;
+    inventoryAssetValue: number;
 }
 
 const EMPTY_TOTALS: TotalsRow = {
@@ -102,13 +103,13 @@ export const SalesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     // KPI VALUES
     const totalTurnoverCurrentFy =
-        totalRow?.financialYear2627?.salesAsOnDate || 0;
+        totalRow?.thisYear?.salesYtd || 0;
 
     const totalTurnoverPreviousFy =
-        totalRow?.financialYear2526?.salesAsOnDate || 0;
+        totalRow?.lastYear?.salesYtd || 0;
 
     const totalPendingOrders =
-        totalRow?.financialYear2627?.pendingAsOnDate || 0;
+        totalRow?.thisYear?.pendingOrdersYtd || 0;
 
     const turnoverGrowthPercentage =
         totalTurnoverPreviousFy > 0
@@ -125,14 +126,14 @@ export const SalesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const tableData = sales
         .filter((x) => x.operatingUnit !== "Total")
         .map((item) => {
-            const fy2627Sales = item.financialYear2627.salesAsOnDate;
-            const fy2526Sales = item.financialYear2526.salesAsOnDate;
+            const currentYearSales = item.thisYear.salesYtd;
+            const previousYearSales = item.lastYear.salesYtd;
 
             const trend =
-                fy2526Sales > 0
+                previousYearSales > 0
                     ? Number(
                           (
-                              ((fy2627Sales - fy2526Sales) / fy2526Sales) *
+                              ((currentYearSales - previousYearSales) / previousYearSales) *
                               100
                           ).toFixed(2)
                       )
@@ -142,30 +143,32 @@ export const SalesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                 operatingUnit: item.operatingUnit,
 
                 fy2627SalesAsOn:
-                    item.financialYear2627.salesAsOnDate,
+                    item.thisYear.salesYtd,
 
                 fy2627SalesCurrentMonth:
-                    item.financialYear2627.salesCurrentMonth,
+                    item.thisYear.salesThisMonth,
 
                 fy2526SalesAsOn:
-                    item.financialYear2526.salesAsOnDate,
+                    item.lastYear.salesYtd,
 
                 fy2526SalesCurrentMonth:
-                    item.financialYear2526.salesCurrentMonth,
+                    item.lastYear.salesThisMonth,
 
                 trend,
 
                 fy2627PendingAsOn:
-                    item.financialYear2627.pendingAsOnDate,
+                    item.thisYear.pendingOrdersYtd,
 
                 fy2627PendingCurrentMonth:
-                    item.financialYear2627.pendingCurrentMonth,
+                    item.thisYear.pendingThisMonth,
 
                 fy2526PendingAsOn:
-                    item.financialYear2526.pendingAsOnDate,
+                    item.lastYear.pendingOrdersYtd,
 
                 fy2526PendingCurrentMonth:
-                    item.financialYear2526.pendingCurrentMonth
+                    item.lastYear.pendingThisMonth,
+
+                inventoryAmount: item.inventoryAssetValue
             };
         });
 
@@ -173,45 +176,45 @@ export const SalesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         .filter((item) => item.operatingUnit !== "Total")
         .map((item) => ({
             unit: item.operatingUnit,
-            to_fy27_date: formatMoney(item.financialYear2627.salesAsOnDate),
+            to_fy27_date: formatMoney(item.thisYear.salesYtd),
             to_fy27_month: formatMoney(
-                item.financialYear2627.salesCurrentMonth
+                item.thisYear.salesThisMonth
             ),
-            to_fy26_date: formatMoney(item.financialYear2526.salesAsOnDate),
+            to_fy26_date: formatMoney(item.lastYear.salesYtd),
             to_fy26_month: formatMoney(
-                item.financialYear2526.salesCurrentMonth
+                item.lastYear.salesThisMonth
             ),
             trend: formatTrend(
-                item.financialYear2627.salesAsOnDate,
-                item.financialYear2526.salesAsOnDate
+                item.thisYear.salesYtd,
+                item.lastYear.salesYtd
             ),
-            po_date: formatMoney(item.financialYear2627.pendingAsOnDate),
+            po_date: formatMoney(item.thisYear.pendingOrdersYtd),
             po_month: formatMoney(
-                item.financialYear2627.pendingCurrentMonth
+                item.thisYear.pendingThisMonth
             ),
-            inv: "0.00"
+            inv: formatMoney(item.inventoryAssetValue)
         }))
         .sort((left, right) => left.unit.localeCompare(right.unit));
 
     const totals: TotalsRow = totalRow
         ? {
-              to_fy27_date: formatMoney(totalRow.financialYear2627.salesAsOnDate),
+              to_fy27_date: formatMoney(totalRow.thisYear.salesYtd),
               to_fy27_month: formatMoney(
-                  totalRow.financialYear2627.salesCurrentMonth
+                  totalRow.thisYear.salesThisMonth
               ),
-              to_fy26_date: formatMoney(totalRow.financialYear2526.salesAsOnDate),
+              to_fy26_date: formatMoney(totalRow.lastYear.salesYtd),
               to_fy26_month: formatMoney(
-                  totalRow.financialYear2526.salesCurrentMonth
+                  totalRow.lastYear.salesThisMonth
               ),
               trend: formatTrend(
-                  totalRow.financialYear2627.salesAsOnDate,
-                  totalRow.financialYear2526.salesAsOnDate
+                  totalRow.thisYear.salesYtd,
+                  totalRow.lastYear.salesYtd
               ),
-              po_date: formatMoney(totalRow.financialYear2627.pendingAsOnDate),
+              po_date: formatMoney(totalRow.thisYear.pendingOrdersYtd),
               po_month: formatMoney(
-                  totalRow.financialYear2627.pendingCurrentMonth
+                  totalRow.thisYear.pendingThisMonth
               ),
-              inv: "0.00"
+              inv: formatMoney(totalRow.inventoryAssetValue || 0)
           }
         : EMPTY_TOTALS;
 

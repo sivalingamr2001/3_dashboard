@@ -1,14 +1,15 @@
 export interface YearMetrics {
-  salesAsOnDate: number;
-  salesCurrentMonth: number;
-  pendingAsOnDate: number;
-  pendingCurrentMonth: number;
+  salesYtd: number;
+  salesThisMonth: number;
+  pendingOrdersYtd: number;
+  pendingThisMonth: number;
 }
 
 export interface OuSalesPerformanceApiItem {
   operatingUnit: string;
-  financialYear2526: YearMetrics;
-  financialYear2627: YearMetrics;
+  lastYear: YearMetrics;
+  thisYear: YearMetrics;
+  inventoryAssetValue: number;
 }
 
 export type OuSalesPerformanceApiResponse = OuSalesPerformanceApiItem[];

@@ -4,13 +4,11 @@ import { Button } from "@/shared/components/ui/button"
 import { useNavigate } from "react-router-dom"
 
 type DashboardHeaderProps = {
-  onRefresh: () => void
-  isRefreshing?: boolean
   inclIntraSales: boolean
   onToggleIntraSales: () => void
 }
 
-export const DashboardHeader = ({ onRefresh, isRefreshing = false, inclIntraSales, onToggleIntraSales }: DashboardHeaderProps) => {
+export const DashboardHeader = ({ inclIntraSales, onToggleIntraSales }: DashboardHeaderProps) => {
   const currentFY = getCurrentFinancialYear()
   const previousFY = getPreviousFinancialYear()
   const { logout } = useAuth()
@@ -43,9 +41,6 @@ export const DashboardHeader = ({ onRefresh, isRefreshing = false, inclIntraSale
           className="whitespace-nowrap border-slate-300 text-slate-700 h-10 px-4 text-sm font-semibold shadow-sm"
         >
           {inclIntraSales ? "✓ " : ""}Incl Intra Sales
-        </Button>
-        <Button variant="default" onClick={onRefresh} disabled={isRefreshing} className="whitespace-nowrap border-slate-300 text-slate-700 h-10 px-4 text-sm font-semibold shadow-sm">
-          {isRefreshing ? "Refreshing..." : "Refresh Data"}
         </Button>
         <Button variant="destructive" className="whitespace-nowrap h-10 px-4" onClick={handleLogout}>
           Logout

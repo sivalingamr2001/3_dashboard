@@ -52,8 +52,6 @@ export const DashboardPage = () => {
     <main className="relative min-h-screen bg-[#f8fafc] p-6 md:p-8">
       <div className={`mx-auto max-w-[90rem] ${isOverlayLoading ? "opacity-70" : ""}`}>
         <DashboardHeader
-          onRefresh={fetchSales}
-          isRefreshing={loading}
           inclIntraSales={inclIntraSales}
           onToggleIntraSales={toggleIntraSales}
         />
