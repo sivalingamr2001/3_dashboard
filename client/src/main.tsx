@@ -7,9 +7,9 @@ import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <>
-      <Toaster position="top-right" richColors/>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-  </>
+    <Toaster position="top-right" richColors />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </>,
 );

@@ -54,34 +54,49 @@ public class OuSalesRepository : IOuSalesRepository
 
         return flatRows.Select(row => new OuSalesPerformanceDto
         {
-            OuName = row.OPERATING_UNIT,
+            OuName = row.OU_NAME,
+
             LastYearMetrics = new FinancialYearData
             {
-                SalesYtd = ToDecimal(row.LAST_YEAR_SALES_YTD),
-                SalesThisMonth = ToDecimal(row.LAST_YEAR_SALES_THIS_MONTH),
-                PendingOrdersYtd = ToDecimal(row.LAST_YEAR_PENDING_ORDERS_YTD),
-                PendingThisMonth = ToDecimal(row.LAST_YEAR_PENDING_THIS_MONTH)
+                SalesYtd = ToDecimal(row.PREV_FY_SALE_AS_ON),
+
+                SalesThisMonth = ToDecimal(row.PREV_FY_SALE_CURRNT_MNTH),
+
+                PendingOrdersYtd = ToDecimal(row.PREV_FY_PEND_AS_ON),
+
+                PendingThisMonth = ToDecimal(row.PREV_FY_PEND_CURRNT_MNTH)
             },
+
             ThisYearMetrics = new FinancialYearData
             {
-                SalesYtd = ToDecimal(row.THIS_YEAR_SALES_YTD),
-                SalesThisMonth = ToDecimal(row.THIS_YEAR_SALES_THIS_MONTH),
-                PendingOrdersYtd = ToDecimal(row.THIS_YEAR_PENDING_ORDERS_YTD),
-                PendingThisMonth = ToDecimal(row.THIS_YEAR_PENDING_THIS_MONTH)
+                SalesYtd = ToDecimal(row.CURR_FY_SALE_AS_ON),
+
+                SalesThisMonth = ToDecimal(row.CURR_FY_SALE_CURRNT_MNTH),
+
+                PendingOrdersYtd = ToDecimal(row.CURR_FY_PEND_AS_ON),
+
+                PendingThisMonth = ToDecimal(row.CURR_FY_PEND_CURRNT_MNTH)
             },
-            InventoryAssetValue = ToDecimal(row.INVENTORY_ASSET_VALUE)
+
+            InventoryAssetValue = ToDecimal(row.INV_AMT)
         });
     }
 
     private static decimal ToDecimal(object? value)
     {
-        if (value is decimal decimalValue) return decimalValue;
-        if (value is double doubleValue) return Convert.ToDecimal(doubleValue);
-        if (value is float floatValue) return Convert.ToDecimal(floatValue);
-        if (value is int intValue) return intValue;
-        if (value is long longValue) return longValue;
-        if (value is string stringValue && decimal.TryParse(stringValue, out var parsedValue)) return parsedValue;
+        decimal rawValue = 0m;
 
-        return 0m;
+        if (value is decimal decimalValue) rawValue = decimalValue;
+        else if (value is double doubleValue) rawValue = Convert.ToDecimal(doubleValue);
+        else if (value is float floatValue) rawValue = Convert.ToDecimal(floatValue);
+        else if (value is int intValue) rawValue = intValue;
+        else if (value is long longValue) rawValue = longValue;
+        else if (value is string stringValue && decimal.TryParse(stringValue, out var parsedValue)) rawValue = parsedValue;
+
+        // 1 Crore = 10,000,000. Divide to convert raw amount to Crores.
+        decimal valueInCrores = rawValue / 10000000m;
+
+        // Round to 2 decimal places for clean UI display (e.g., 102.71 instead of 1027107502.59)
+        return Math.Round(valueInCrores, 2, MidpointRounding.AwayFromZero);
     }
 }

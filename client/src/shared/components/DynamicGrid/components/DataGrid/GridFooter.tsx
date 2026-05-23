@@ -1,28 +1,28 @@
-import React, { useCallback, useEffect } from "react"
-import type { GridApi } from "ag-grid-community"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import React, { useCallback, useEffect } from "react";
+import type { GridApi } from "ag-grid-community";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { Button } from "@/shared/components/ui/button"
+import { Button } from "@/shared/components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/shared/components/ui/select"
+} from "@/shared/components/ui/select";
 
-import { PageSizeStorage } from "../../utils/gridUtils"
+import { PageSizeStorage } from "../../utils/gridUtils";
 
 interface GridFooterProps {
-  gridApiRef: React.MutableRefObject<GridApi | null>
-  gridId: string
-  pageSize: number
-  pageSizeOptions: number[]
-  currentPage: number
-  totalPages: number
-  selectedCount: number
-  showSelectedCount: boolean
-  onPageSizeChange?: (size: number) => void
+  gridApiRef: React.MutableRefObject<GridApi | null>;
+  gridId: string;
+  pageSize: number;
+  pageSizeOptions: number[];
+  currentPage: number;
+  totalPages: number;
+  selectedCount: number;
+  showSelectedCount: boolean;
+  onPageSizeChange?: (size: number) => void;
 }
 
 export const GridFooter: React.FC<GridFooterProps> = ({
@@ -36,39 +36,39 @@ export const GridFooter: React.FC<GridFooterProps> = ({
   showSelectedCount,
   onPageSizeChange,
 }) => {
-  const [currentSize, setCurrentSize] = React.useState(String(pageSize))
+  const [currentSize, setCurrentSize] = React.useState(String(pageSize));
 
   useEffect(() => {
-    setCurrentSize(String(pageSize))
-  }, [pageSize])
+    setCurrentSize(String(pageSize));
+  }, [pageSize]);
 
   const handlePageSizeChange = useCallback(
     (value: string) => {
-      const size = Number(value)
-      setCurrentSize(value)
+      const size = Number(value);
+      setCurrentSize(value);
 
-      gridApiRef.current?.setGridOption("paginationPageSize", size)
-      PageSizeStorage.set(gridId, size)
+      gridApiRef.current?.setGridOption("paginationPageSize", size);
+      PageSizeStorage.set(gridId, size);
 
-      onPageSizeChange?.(size)
+      onPageSizeChange?.(size);
     },
-    [gridApiRef, gridId, onPageSizeChange]
-  )
+    [gridApiRef, gridId, onPageSizeChange],
+  );
 
   const handlePreviousPage = useCallback(() => {
-    gridApiRef.current?.paginationGoToPreviousPage()
-  }, [gridApiRef])
+    gridApiRef.current?.paginationGoToPreviousPage();
+  }, [gridApiRef]);
 
   const handleNextPage = useCallback(() => {
-    gridApiRef.current?.paginationGoToNextPage()
-  }, [gridApiRef])
+    gridApiRef.current?.paginationGoToNextPage();
+  }, [gridApiRef]);
 
   const handleClearSelection = useCallback(() => {
-    gridApiRef.current?.deselectAll()
-  }, [gridApiRef])
+    gridApiRef.current?.deselectAll();
+  }, [gridApiRef]);
 
   return (
-    <div className="datagrid-footer flex flex-col gap-3 border-t border-border px-4 py-3 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
+    <div className="datagrid-footer border-border text-muted-foreground flex flex-col gap-3 border-t px-4 py-3 text-sm md:flex-row md:items-center md:justify-between">
       {/* Left Section */}
       <div className="flex flex-wrap items-center gap-3">
         <span className="text-xs">Rows per page</span>
@@ -89,7 +89,7 @@ export const GridFooter: React.FC<GridFooterProps> = ({
         {/* Show only when rows selected */}
         {showSelectedCount && selectedCount > 0 && (
           <div className="flex items-center gap-2">
-            <span className="rounded-md bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+            <span className="bg-primary/10 text-primary rounded-md px-2 py-0.5 text-xs font-medium">
               {selectedCount} selected
             </span>
 
@@ -133,5 +133,5 @@ export const GridFooter: React.FC<GridFooterProps> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

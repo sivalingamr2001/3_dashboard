@@ -1,11 +1,11 @@
-import { AS_ON_DATE } from "@/lib/utils"
-import React from "react"
-import type { DataGridState } from "../../types/DataGrid.types"
+import { AS_ON_DATE } from "@/lib/utils";
+import React from "react";
+import type { DataGridState } from "../../types/DataGrid.types";
 
 // ─── Shared button component ─────────────────────────────────────────────────
 
 interface ToolBtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const ToolBtn = React.forwardRef<HTMLButtonElement, ToolBtnProps>(
@@ -36,38 +36,34 @@ const ToolBtn = React.forwardRef<HTMLButtonElement, ToolBtnProps>(
     >
       {children}
     </button>
-  )
-)
-ToolBtn.displayName = "ToolBtn"
+  ),
+);
+ToolBtn.displayName = "ToolBtn";
 
 // ─── Main Toolbar ─────────────────────────────────────────────────────────────
 
 export interface GridToolbarProps {
-  title: string
-  state: DataGridState
-  toolbarRight?: React.ReactNode
+  title: string;
+  state: DataGridState;
+  toolbarRight?: React.ReactNode;
 }
 
-export const GridToolbar: React.FC<GridToolbarProps> = ({
-  title,
-  toolbarRight,
-}) => {
-
+export const GridToolbar: React.FC<GridToolbarProps> = ({ title, toolbarRight }) => {
   return (
     <div role="toolbar" aria-label={`${title} toolbar`}>
       {/* ── main toolbar container matching image style ── */}
       <div
-        className="bg-[#0b1426] rounded-t-sm flex flex-col md:flex-row md:items-center justify-between p-6 gap-4"
+        className="flex flex-col justify-between gap-4 rounded-t-sm bg-[#0b1426] p-6 md:flex-row md:items-center"
         style={{
-          borderBottom: "1px solid rgba(255, 255, 255, 0.1)"
+          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
         }}
       >
         {/* Left Section - Text Information */}
         <div className="flex flex-col items-start">
-          <h1 className="text-2xl font-bold text-white tracking-tight">
+          <h1 className="text-2xl font-bold tracking-tight text-white">
             Operating Units Performance Comparison
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="mt-1 text-xs text-slate-400">
             * As on date: {AS_ON_DATE} | All values in Indian Rupees (₹ Crores)
           </p>
         </div>
@@ -85,5 +81,5 @@ export const GridToolbar: React.FC<GridToolbarProps> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

@@ -1,29 +1,25 @@
-import type { ColDef, GridOptions } from "ag-grid-community"
-import {
-  AllCommunityModule,
-  ModuleRegistry,
-  themeQuartz,
-} from "ag-grid-community"
-import { AgGridReact } from "ag-grid-react"
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { TrendingDown, TrendingUp } from "lucide-react"
+import type { ColDef, GridOptions } from "ag-grid-community";
+import { AllCommunityModule, ModuleRegistry, themeQuartz } from "ag-grid-community";
+import { AgGridReact } from "ag-grid-react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { TrendingDown, TrendingUp } from "lucide-react";
 
-import { useTheme } from "next-themes" 
-import { Separator } from "@/shared/components/ui/separator"
-import { useDataGrid } from "../../hooks/useDataGrid"
-import type { DataGridProps } from "../../types/DataGrid.types"
-import { mergeColDef } from "../../utils/gridUtils"
-import { LoadingOverlay, NoRowsOverlay } from "./GridOverlays"
-import { GridToolbar } from "./GridToolbar"
+import { useTheme } from "next-themes";
+import { Separator } from "@/shared/components/ui/separator";
+import { useDataGrid } from "../../hooks/useDataGrid";
+import type { DataGridProps } from "../../types/DataGrid.types";
+import { mergeColDef } from "../../utils/gridUtils";
+import { LoadingOverlay, NoRowsOverlay } from "./GridOverlays";
+import { GridToolbar } from "./GridToolbar";
 
 // Register all community modules ONCE at module level
-ModuleRegistry.registerModules([AllCommunityModule])
+ModuleRegistry.registerModules([AllCommunityModule]);
 
 // ─── Theme Base Definition ──────────────────────────────────────────────────
 
 const lightTheme = themeQuartz.withParams({
   accentColor: "#3b5bdb",
-  headerBackgroundColor: "#0b1426", 
+  headerBackgroundColor: "#0b1426",
   headerTextColor: "#ffffff",
   borderColor: "#cbd5e1",
   rowBorder: true,
@@ -33,7 +29,7 @@ const lightTheme = themeQuartz.withParams({
   fontSize: 13,
   rowHeight: 60,
   headerHeight: 40,
-})
+});
 
 const darkTheme = themeQuartz.withParams({
   accentColor: "#748ffc",
@@ -49,67 +45,75 @@ const darkTheme = themeQuartz.withParams({
   fontSize: 13,
   rowHeight: 60,
   headerHeight: 40,
-})
+});
 
 const BASE_COL_DEF: ColDef = {
   sortable: true,
-  filter: false, 
+  filter: false,
   resizable: true,
   floatingFilter: false,
   minWidth: 110,
   suppressHeaderMenuButton: true,
-}
+};
 
 // ─── Formatting Value Helpers ────────────────────────────────────────────────
 
 const currencyFormatter = (params: any) => {
-  const val = params.value
-  if (val === undefined || val === null || isNaN(Number(val))) return "₹0.00"
-  return `₹${Number(val).toFixed(2)}`
-}
+  const val = params.value;
+  if (val === undefined || val === null || isNaN(Number(val))) return "₹0.00";
+  return `₹${Number(val).toFixed(2)}`;
+};
 
 const getTrendBadge = (trend: number, isPinned: boolean = false) => {
   if (trend > 0) {
     return {
       icon: <TrendingUp className="h-3 w-3 shrink-0" />,
-      badgeClass: isPinned ? "bg-emerald-600 text-white" : "bg-emerald-100 text-emerald-700",
-    }
+      badgeClass: isPinned
+        ? "bg-emerald-600 text-white"
+        : "bg-emerald-100 text-emerald-700",
+    };
   }
 
   if (trend < 0) {
     return {
       icon: <TrendingDown className="h-3.5 w-3.5" />,
       badgeClass: isPinned ? "bg-rose-600 text-white" : "bg-rose-100 text-rose-700",
-    }
+    };
   }
 
   return {
-    icon: <span className="inline-flex h-3.5 w-3.5 items-center justify-center text-xs">=</span>,
+    icon: (
+      <span className="inline-flex h-3.5 w-3.5 items-center justify-center text-xs">
+        =
+      </span>
+    ),
     badgeClass: isPinned ? "bg-amber-600 text-white" : "bg-amber-100 text-amber-700",
-  }
-}
+  };
+};
 
 const trendRenderer = (params: any) => {
-  const value = parseFloat(params.value)
-  if (isNaN(value)) return params.value ?? ""
-  
-  const isPinned = params.node.rowPinned === "bottom"
-  const trendBadge = getTrendBadge(value, isPinned)
+  const value = parseFloat(params.value);
+  if (isNaN(value)) return params.value ?? "";
+
+  const isPinned = params.node.rowPinned === "bottom";
+  const trendBadge = getTrendBadge(value, isPinned);
 
   return (
-    <span className={`${trendBadge.badgeClass} inline-flex items-center justify-center gap-0.5 ${isPinned ? 'rounded-full px-3.5 py-1.5' : 'rounded-md px-2.5 py-1'} text-xs font-bold min-w-18`}>
+    <span
+      className={`${trendBadge.badgeClass} inline-flex items-center justify-center gap-0.5 ${isPinned ? "rounded-full px-3.5 py-1.5" : "rounded-md px-2.5 py-1"} min-w-18 text-xs font-bold`}
+    >
       {trendBadge.icon} {value > 0 ? `+${value.toFixed(2)}` : value.toFixed(2)}%
     </span>
-  )
-}
+  );
+};
 
 // ─── Main Component ─────────────────────────────────────────────────────────
 
 function DataGridInner<TData extends Record<string, unknown>>(
-  props: DataGridProps<TData> & { fallbackTotals: any; columnDefs: ColDef[] }
+  props: DataGridProps<TData> & { fallbackTotals: any; columnDefs: ColDef[] },
 ) {
   const {
-    rowData: rawRowData, 
+    rowData: rawRowData,
     title = "Data",
     loading = false,
     animateRows = true,
@@ -120,268 +124,313 @@ function DataGridInner<TData extends Record<string, unknown>>(
     theme = "system",
     defaultColDef: defaultColDefProp,
     fallbackTotals,
-  } = props
-  const { theme: appTheme } = useTheme()
+  } = props;
+  const { theme: appTheme } = useTheme();
 
-  const { state, handlers } = useDataGrid(props)
-  const [selectedTotals, setSelectedTotals] = useState<any>(null)
-  const gridApiRef = useRef<any>(null)
+  const { state, handlers } = useDataGrid(props);
+  const [selectedTotals, setSelectedTotals] = useState<any>(null);
+  const gridApiRef = useRef<any>(null);
 
   const resolvedDefaultColDef = useMemo(
     () => mergeColDef(BASE_COL_DEF, defaultColDefProp),
-    [defaultColDefProp]
-  )
+    [defaultColDefProp],
+  );
 
-  const rowSelectionConfig = useMemo(() => ({
-    mode: "multiRow" as const,
-    checkboxes: false,
-    headerCheckbox: false
-  }), [])
+  const rowSelectionConfig = useMemo(
+    () => ({
+      mode: "multiRow" as const,
+      checkboxes: false,
+      headerCheckbox: false,
+    }),
+    [],
+  );
 
   // ─── Pre-select All Rows Automatically On Load ───
-  const onGridReady = useCallback((event: any) => {
-    gridApiRef.current = event.api
-    handlers.onGridReady(event);
-    if (event.api) {
-      event.api.selectAll(); 
-    }
-  }, [handlers])
+  const onGridReady = useCallback(
+    (event: any) => {
+      gridApiRef.current = event.api;
+      handlers.onGridReady(event);
+      if (event.api) {
+        event.api.selectAll();
+      }
+    },
+    [handlers],
+  );
 
   // ─── Dynamic Selection Change Aggregations ───
-  const onSelectionChanged = useCallback((event: any) => {
-    handlers.onSelectionChanged(event)
-    const selectedNodes = event.api.getSelectedNodes()
-    
-    if (selectedNodes.length === 0) {
+  const onSelectionChanged = useCallback(
+    (event: any) => {
+      handlers.onSelectionChanged(event);
+      const selectedNodes = event.api.getSelectedNodes();
+
+      if (selectedNodes.length === 0) {
+        setSelectedTotals({
+          unit: "TOTAL (0 SELECTED)",
+          to_fy27_date: 0,
+          to_fy27_month: 0,
+          to_fy26_date: 0,
+          to_fy26_month: 0,
+          trend: 0,
+          po_date: 0,
+          po_month: 0,
+          inv: 0,
+        });
+        return;
+      }
+
+      let t2627AsOn = 0,
+        t2627Mnth = 0,
+        t2526AsOn = 0,
+        t2526Mnth = 0;
+      let p2627AsOn = 0,
+        p2627Mnth = 0,
+        tInventory = 0;
+
+      selectedNodes.forEach((node: any) => {
+        const data = node.data;
+        if (!data) return;
+        t2627AsOn += Number(data.to_fy27_date || 0);
+        t2627Mnth += Number(data.to_fy27_month || 0);
+        t2526AsOn += Number(data.to_fy26_date || 0);
+        t2526Mnth += Number(data.to_fy26_month || 0);
+        p2627AsOn += Number(data.po_date || 0);
+        p2627Mnth += Number(data.po_month || 0);
+        tInventory += Number(data.inv || 0);
+      });
+
+      const computedTrend =
+        t2526AsOn !== 0 ? ((t2627AsOn - t2526AsOn) / t2526AsOn) * 100 : 0;
+
       setSelectedTotals({
-        unit: "TOTAL (0 SELECTED)",
-        to_fy27_date: 0,
-        to_fy27_month: 0,
-        to_fy26_date: 0,
-        to_fy26_month: 0,
-        trend: 0,
-        po_date: 0,
-        po_month: 0,
-        inv: 0,
-      })
-      return
-    }
-
-    let t2627AsOn = 0, t2627Mnth = 0, t2526AsOn = 0, t2526Mnth = 0
-    let p2627AsOn = 0, p2627Mnth = 0, tInventory = 0
-
-    selectedNodes.forEach((node: any) => {
-      const data = node.data
-      if (!data) return
-      t2627AsOn += Number(data.to_fy27_date || 0)
-      t2627Mnth += Number(data.to_fy27_month || 0)
-      t2526AsOn += Number(data.to_fy26_date || 0)
-      t2526Mnth += Number(data.to_fy26_month || 0)
-      p2627AsOn += Number(data.po_date || 0)
-      p2627Mnth += Number(data.po_month || 0)
-      tInventory += Number(data.inv || 0)
-    })
-
-    const computedTrend = t2526AsOn !== 0 ? ((t2627AsOn - t2526AsOn) / t2526AsOn) * 100 : 0
-
-    setSelectedTotals({
-      unit: `TOTAL (${selectedNodes.length} SELECTED)`,
-      to_fy27_date: t2627AsOn,
-      to_fy27_month: t2627Mnth,
-      to_fy26_date: t2526AsOn,
-      to_fy26_month: t2526Mnth,
-      trend: computedTrend,
-      po_date: p2627AsOn,
-      po_month: p2627Mnth,
-      inv: tInventory
-    })
-  }, [handlers])
+        unit: `TOTAL (${selectedNodes.length} SELECTED)`,
+        to_fy27_date: t2627AsOn,
+        to_fy27_month: t2627Mnth,
+        to_fy26_date: t2526AsOn,
+        to_fy26_month: t2526Mnth,
+        trend: computedTrend,
+        po_date: p2627AsOn,
+        po_month: p2627Mnth,
+        inv: tInventory,
+      });
+    },
+    [handlers],
+  );
 
   const currentPinnedRows = useMemo(() => {
-    if (selectedTotals) return [selectedTotals]
-    return [fallbackTotals]
-  }, [selectedTotals, fallbackTotals])
+    if (selectedTotals) return [selectedTotals];
+    return [fallbackTotals];
+  }, [selectedTotals, fallbackTotals]);
 
   // ─── Multi-Level Column Layout Definition ──────────────────────────────────
-  const hierarchicalColumnDefs = useMemo<ColDef[]>(() => [
-    {
-      headerName: "",
-      pinned: "left",
-      width: 50,
-      minWidth: 50,
-      maxWidth: 50,
-      checkboxSelection: true,         
-      headerCheckboxSelection: true,   
-      headerClass: "header-cell-ou align-checkbox-center",
-      suppressMovable: true,
-      cellStyle: (params) => ({
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: params.node.rowPinned === 'bottom' ? '#dbeafe' : '#ffffff'
-      })
-    },
-    {
-      headerName: "Operating Unit",
-      field: "unit",
-      pinned: "left",
-      width: 340,
-      minWidth: 280,
-      headerClass: "header-cell-ou",
-      cellStyle: (params) => ({
-        fontWeight: "600",
-        color: "#0b1426",
-        backgroundColor: params.node.rowPinned === 'bottom' ? '#dbeafe' : '#ffffff',
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        paddingLeft: "16px"
-      })
-    },
-    {
-      headerName: "Turnover (₹ Cr)",
-      marryChildren: true,
-      headerClass: "header-group-level1",
-      children: [
-        {
-          headerName: "FY 2026-27",
-          headerClass: "header-group-level2 fy-26-27-bg",
-          children: [
-            { 
-              headerName: "As on Date *", 
-              field: "to_fy27_date", 
-              valueFormatter: currencyFormatter, 
-              width: 110,
-              minWidth: 100,
-              headerClass: "header-leaf-blue", 
-              cellStyle: (params: { node: { rowPinned: string } }) => ({
-                color: "#1d4ed8", fontWeight: "600", textAlign: "center", justifyContent: "center",
-                backgroundColor: params.node.rowPinned === 'bottom' ? '#dbeafe' : '#eff6ff' 
-              })
-            },
-            { 
-              headerName: "Current Month", 
-              field: "to_fy27_month", 
-              valueFormatter: currencyFormatter, 
-              width: 110,
-              minWidth: 100,
-              headerClass: "header-leaf-blue", 
-              cellStyle: (params: { node: { rowPinned: string } }) => ({
-                color: "#1d4ed8", fontWeight: "600", textAlign: "center", justifyContent: "center",
-                backgroundColor: params.node.rowPinned === 'bottom' ? '#dbeafe' : '#eff6ff'
-              })
-            }
-          ]
-        },
-        {
-          headerName: "FY 2025-26",
-          headerClass: "header-group-level2 fy-25-26-bg",
-          children: [
-            { 
-              headerName: "As on Date *", 
-              field: "to_fy26_date", 
-              valueFormatter: currencyFormatter, 
-              width: 110,
-              minWidth: 100,
-              headerClass: "header-leaf-slate", 
-              cellStyle: (params: { node: { rowPinned: string } }) => ({
-                color: "#334155", fontWeight: "600", textAlign: "center", justifyContent: "center",
-                backgroundColor: params.node.rowPinned === 'bottom' ? '#dbeafe' : '#f8fafc'
-              })
-            },
-            { 
-              headerName: "Current Month", 
-              field: "to_fy26_month", 
-              valueFormatter: currencyFormatter, 
-              width: 110,
-              minWidth: 100,
-              headerClass: "header-leaf-slate", 
-              cellStyle: (params: { node: { rowPinned: string } }) => ({
-                color: "#475569", fontWeight: "600", textAlign: "center", justifyContent: "center",
-                backgroundColor: params.node.rowPinned === 'bottom' ? '#dbeafe' : '#f8fafc'
-              })
-            }
-          ]
-        },
-        {
-          headerName: "Trend",
-          headerClass: "header-group-trend-parent",
-          children: [
-            {
-              headerName: "YoY %",
-              field: "trend",
-              cellRenderer: trendRenderer,
-              minWidth: 120,
-              headerClass: "header-leaf-trend",
-              cellStyle: (params: { node: { rowPinned: string }; value: number }) => {
-                const isPinned = params.node.rowPinned === "bottom"
-                
-                return { 
-                  display: "flex", 
-                  alignItems: "center", 
+  const hierarchicalColumnDefs = useMemo<ColDef[]>(
+    () => [
+      {
+        headerName: "",
+        pinned: "left",
+        width: 50,
+        minWidth: 50,
+        maxWidth: 50,
+        checkboxSelection: true,
+        headerCheckboxSelection: true,
+        headerClass: "header-cell-ou align-checkbox-center",
+        suppressMovable: true,
+        cellStyle: (params) => ({
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: params.node.rowPinned === "bottom" ? "#dbeafe" : "#ffffff",
+        }),
+      },
+      {
+        headerName: "Operating Unit",
+        field: "unit",
+        pinned: "left",
+        width: 340,
+        minWidth: 280,
+        headerClass: "header-cell-ou",
+        cellStyle: (params) => ({
+          fontWeight: "600",
+          color: "#0b1426",
+          backgroundColor: params.node.rowPinned === "bottom" ? "#dbeafe" : "#ffffff",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          paddingLeft: "16px",
+        }),
+      },
+      {
+        headerName: "Turnover (₹ Cr)",
+        marryChildren: true,
+        headerClass: "header-group-level1",
+        children: [
+          {
+            headerName: "FY 2026-27",
+            headerClass: "header-group-level2 fy-26-27-bg",
+            children: [
+              {
+                headerName: "As on Date *",
+                field: "to_fy27_date",
+                valueFormatter: currencyFormatter,
+                width: 110,
+                minWidth: 100,
+                headerClass: "header-leaf-blue",
+                cellStyle: (params: { node: { rowPinned: string } }) => ({
+                  color: "#1d4ed8",
+                  fontWeight: "600",
+                  textAlign: "center",
                   justifyContent: "center",
-                  backgroundColor: isPinned ? "#dbeafe" : "#f0fdf4"
-                }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      headerName: "Pending Orders (₹ Cr)",
-      marryChildren: true,
-      headerClass: "header-group-level1",
-      children: [
-        {
-          headerName: "FY 2026-27",
-          headerClass: "header-group-level2 fy-26-27-bg",
-          children: [
-            { 
-              headerName: "As on Date *", 
-              field: "po_date", 
-              valueFormatter: currencyFormatter, 
-              width: 110,
-              minWidth: 100,
-              headerClass: "header-leaf-blue", 
-              cellStyle: (params: { node: { rowPinned: string } }) => ({
-                color: "#ea580c", fontWeight: "600", textAlign: "center", justifyContent: "center",
-                backgroundColor: params.node.rowPinned === 'bottom' ? '#dbeafe' : '#fff7ed'
-              })
-            },
-            { 
-              headerName: "Current Month", 
-              field: "po_month", 
-              valueFormatter: currencyFormatter, 
-              width: 110,
-              minWidth: 100,
-              headerClass: "header-leaf-blue", 
-              cellStyle: (params: { node: { rowPinned: string } }) => ({
-                color: "#ea580c", fontWeight: "600", textAlign: "center", justifyContent: "center",
-                backgroundColor: params.node.rowPinned === 'bottom' ? '#dbeafe' : '#fff7ed'
-              })
-            }
-          ]
-        }
-      ]
-    },
-    {
-      headerName: "Inventory * (₹ Cr)",
-      field: "inv",
-      valueFormatter: currencyFormatter,
-      headerClass: "header-cell-inventory",
-      minWidth: 80,
-      cellStyle: (params) => ({ 
-        color: "#15803d", fontWeight: "600",
-        backgroundColor: params.node.rowPinned === 'bottom' ? '#dbeafe' : '#f0fdf4',
-        display: "flex", alignItems: "center", justifyContent: "center"
-      })
-    }
-  ], [])
+                  backgroundColor:
+                    params.node.rowPinned === "bottom" ? "#dbeafe" : "#eff6ff",
+                }),
+              },
+              {
+                headerName: "Current Month",
+                field: "to_fy27_month",
+                valueFormatter: currencyFormatter,
+                width: 110,
+                minWidth: 100,
+                headerClass: "header-leaf-blue",
+                cellStyle: (params: { node: { rowPinned: string } }) => ({
+                  color: "#1d4ed8",
+                  fontWeight: "600",
+                  textAlign: "center",
+                  justifyContent: "center",
+                  backgroundColor:
+                    params.node.rowPinned === "bottom" ? "#dbeafe" : "#eff6ff",
+                }),
+              },
+            ],
+          },
+          {
+            headerName: "FY 2025-26",
+            headerClass: "header-group-level2 fy-25-26-bg",
+            children: [
+              {
+                headerName: "As on Date *",
+                field: "to_fy26_date",
+                valueFormatter: currencyFormatter,
+                width: 110,
+                minWidth: 100,
+                headerClass: "header-leaf-slate",
+                cellStyle: (params: { node: { rowPinned: string } }) => ({
+                  color: "#334155",
+                  fontWeight: "600",
+                  textAlign: "center",
+                  justifyContent: "center",
+                  backgroundColor:
+                    params.node.rowPinned === "bottom" ? "#dbeafe" : "#f8fafc",
+                }),
+              },
+              {
+                headerName: "Current Month",
+                field: "to_fy26_month",
+                valueFormatter: currencyFormatter,
+                width: 110,
+                minWidth: 100,
+                headerClass: "header-leaf-slate",
+                cellStyle: (params: { node: { rowPinned: string } }) => ({
+                  color: "#475569",
+                  fontWeight: "600",
+                  textAlign: "center",
+                  justifyContent: "center",
+                  backgroundColor:
+                    params.node.rowPinned === "bottom" ? "#dbeafe" : "#f8fafc",
+                }),
+              },
+            ],
+          },
+          {
+            headerName: "Trend",
+            headerClass: "header-group-trend-parent",
+            children: [
+              {
+                headerName: "YoY %",
+                field: "trend",
+                cellRenderer: trendRenderer,
+                minWidth: 120,
+                headerClass: "header-leaf-trend",
+                cellStyle: (params: { node: { rowPinned: string }; value: number }) => {
+                  const isPinned = params.node.rowPinned === "bottom";
+
+                  return {
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: isPinned ? "#dbeafe" : "#f0fdf4",
+                  };
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        headerName: "Pending Orders (₹ Cr)",
+        marryChildren: true,
+        headerClass: "header-group-level1",
+        children: [
+          {
+            headerName: "FY 2026-27",
+            headerClass: "header-group-level2 fy-26-27-bg",
+            children: [
+              {
+                headerName: "As on Date *",
+                field: "po_date",
+                valueFormatter: currencyFormatter,
+                width: 110,
+                minWidth: 100,
+                headerClass: "header-leaf-blue",
+                cellStyle: (params: { node: { rowPinned: string } }) => ({
+                  color: "#ea580c",
+                  fontWeight: "600",
+                  textAlign: "center",
+                  justifyContent: "center",
+                  backgroundColor:
+                    params.node.rowPinned === "bottom" ? "#dbeafe" : "#fff7ed",
+                }),
+              },
+              {
+                headerName: "Current Month",
+                field: "po_month",
+                valueFormatter: currencyFormatter,
+                width: 110,
+                minWidth: 100,
+                headerClass: "header-leaf-blue",
+                cellStyle: (params: { node: { rowPinned: string } }) => ({
+                  color: "#ea580c",
+                  fontWeight: "600",
+                  textAlign: "center",
+                  justifyContent: "center",
+                  backgroundColor:
+                    params.node.rowPinned === "bottom" ? "#dbeafe" : "#fff7ed",
+                }),
+              },
+            ],
+          },
+        ],
+      },
+      {
+        headerName: "Inventory * (₹ Cr)",
+        field: "inv",
+        valueFormatter: currencyFormatter,
+        headerClass: "header-cell-inventory",
+        minWidth: 80,
+        cellStyle: (params) => ({
+          color: "#15803d",
+          fontWeight: "600",
+          backgroundColor: params.node.rowPinned === "bottom" ? "#dbeafe" : "#f0fdf4",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }),
+      },
+    ],
+    [],
+  );
 
   const gridOptions = useMemo<GridOptions<TData>>(
     () => ({
-      pagination: false, 
+      pagination: false,
       domLayout: "autoHeight", // 🌟 Key fix: Instructs AG Grid to auto-adjust height to accommodate all data rows edge-to-edge
       animateRows,
       enableCellTextSelection: true,
@@ -395,28 +444,39 @@ function DataGridInner<TData extends Record<string, unknown>>(
       suppressScrollOnNewData: true, // Prevents layout flickering when swapping dynamic arrays
       ...(compact ? { rowHeight: 38 } : {}),
     }),
-    [animateRows, rowSelectionConfig, resolvedDefaultColDef, compact, noRowsMessage, loadingMessage]
-  )
+    [
+      animateRows,
+      rowSelectionConfig,
+      resolvedDefaultColDef,
+      compact,
+      noRowsMessage,
+      loadingMessage,
+    ],
+  );
 
   const resolvedTheme = useMemo(() => {
-    if (theme === "light" || theme === "dark") return theme
-    if (appTheme === "light" || appTheme === "dark") return appTheme
-    return typeof document !== "undefined" && document.documentElement.classList.contains("dark") ? "dark" : "light"
-  }, [theme, appTheme])
+    if (theme === "light" || theme === "dark") return theme;
+    if (appTheme === "light" || appTheme === "dark") return appTheme;
+    return typeof document !== "undefined" &&
+      document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+  }, [theme, appTheme]);
 
-  const selectedTheme = resolvedTheme === "dark" ? darkTheme : lightTheme
-  const finalRowData = (state as any).rows ?? (state as any).filteredRowData ?? rawRowData;
+  const selectedTheme = resolvedTheme === "dark" ? darkTheme : lightTheme;
+  const finalRowData =
+    (state as any).rows ?? (state as any).filteredRowData ?? rawRowData;
 
   // ─── Auto-select All Rows When Data Changes ──────────────────────────────
   useEffect(() => {
     if (gridApiRef.current && finalRowData && finalRowData.length > 0) {
       // Small delay to ensure grid is ready after data update
       const timer = setTimeout(() => {
-        gridApiRef.current?.selectAll()
-      }, 50)
-      return () => clearTimeout(timer)
+        gridApiRef.current?.selectAll();
+      }, 50);
+      return () => clearTimeout(timer);
     }
-  }, [finalRowData, gridApiRef])
+  }, [finalRowData, gridApiRef]);
 
   return (
     <>
@@ -594,24 +654,20 @@ function DataGridInner<TData extends Record<string, unknown>>(
         color: #1e3a8a !important;
       }
       `}</style>
-      
+
       <div
         style={{
           fontFamily: "'Figtree', system-ui, sans-serif",
           background: "var(--color-background-primary)",
           border: "1px solid var(--color-border-tertiary)",
-          borderRadius: 0, 
+          borderRadius: 0,
           overflow: "hidden",
           width: "100%",
           boxSizing: "border-box",
         }}
         role="region"
       >
-        <GridToolbar
-          title={title}
-          state={state}
-
-        />
+        <GridToolbar title={title} state={state} />
 
         <Separator className="m-0 p-0" />
 
@@ -620,13 +676,13 @@ function DataGridInner<TData extends Record<string, unknown>>(
             {/* 🌟 Removed the fixed height styling constraint from this container wrapper to allow row data expansion */}
             <div style={{ width: "100%", position: "relative" }}>
               <AgGridReact<TData>
-                rowData={finalRowData} 
+                rowData={finalRowData}
                 columnDefs={hierarchicalColumnDefs}
                 theme={selectedTheme}
                 loading={loading}
-                pinnedBottomRowData={currentPinnedRows} 
-                onGridReady={onGridReady} 
-                onSelectionChanged={onSelectionChanged} 
+                pinnedBottomRowData={currentPinnedRows}
+                onGridReady={onGridReady}
+                onSelectionChanged={onSelectionChanged}
                 onFilterChanged={handlers.onFilterChanged}
                 onSortChanged={handlers.onSortChanged}
                 onPaginationChanged={handlers.onPaginationChanged}
@@ -638,26 +694,29 @@ function DataGridInner<TData extends Record<string, unknown>>(
         </div>
       </div>
     </>
-  )
+  );
 }
 
 // ─── External Wrapper Interface ─────────────────────────────────────────────
 
 interface OperatingUnitsTableProps {
-  rows: any[]
+  rows: any[];
   totals: {
-    to_fy27_date: string | number
-    to_fy27_month: string | number
-    to_fy26_date: string | number
-    to_fy26_month: string | number
-    trend: string | number
-    po_date: string | number
-    po_month: string | number
-    inv: string | number
-  }
+    to_fy27_date: string | number;
+    to_fy27_month: string | number;
+    to_fy26_date: string | number;
+    to_fy26_month: string | number;
+    trend: string | number;
+    po_date: string | number;
+    po_month: string | number;
+    inv: string | number;
+  };
 }
 
-export const OperatingUnitsTable: React.FC<OperatingUnitsTableProps> = ({ rows, totals }) => {
+export const OperatingUnitsTable: React.FC<OperatingUnitsTableProps> = ({
+  rows,
+  totals,
+}) => {
   const defaultTotalsRow = useMemo(() => {
     return {
       OU_NAME: "TOTAL",
@@ -668,29 +727,33 @@ export const OperatingUnitsTable: React.FC<OperatingUnitsTableProps> = ({ rows, 
       trend: typeof totals.trend === "string" ? parseFloat(totals.trend) : totals.trend,
       po_date: totals.po_date,
       po_month: totals.po_month,
-      inv: totals.inv
-    }
-  }, [totals])
+      inv: totals.inv,
+    };
+  }, [totals]);
 
   return (
-    <div className="w-full m-0 p-0"> 
+    <div className="m-0 w-full p-0">
       <DataGridInner
         title="Operating Units Performance Comparison"
         gridId="ou-performance-grid"
         rowData={rows}
-        columnDefs={[]} 
+        columnDefs={[]}
         fallbackTotals={defaultTotalsRow}
         showSearch={true}
         showExportCsvButton={true}
       />
     </div>
-  )
-}
+  );
+};
 
 export const DataGrid = React.forwardRef(DataGridInner) as <
   TData extends Record<string, unknown> = Record<string, unknown>,
 >(
-  props: DataGridProps<TData> & { fallbackTotals: any; columnDefs?: ColDef[]; ref?: React.ForwardedRef<unknown> }
-) => React.ReactElement
+  props: DataGridProps<TData> & {
+    fallbackTotals: any;
+    columnDefs?: ColDef[];
+    ref?: React.ForwardedRef<unknown>;
+  },
+) => React.ReactElement;
 
 export default DataGrid;

@@ -1,2 +1,2 @@
-export { DataGrid } from "./DataGrid"
-export type { DataGridProps } from "../../types/DataGrid.types"
+export { DataGrid } from "./DataGrid";
+export type { DataGridProps } from "../../types/DataGrid.types";

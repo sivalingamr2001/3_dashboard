@@ -18,8 +18,8 @@ export const loginApi = async (loginData: { email: string; password: string }) =
 export const getOuSalesPerformanceApi = async (stkTfrFlg: string = "Y") => {
   const response = await axiosClient.get("/OuSales/performance", {
     params: {
-      stkTfrFlg
-    }
+      stkTfrFlg,
+    },
   });
   console.log(response.data);
   return response.data;

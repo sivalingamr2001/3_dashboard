@@ -7,14 +7,7 @@ import { KpiCards } from "../components/KpiCards";
 import { OperatingUnitsTable } from "../components/OperatingUnitsTable";
 
 export const DashboardPage = () => {
-  const {
-    rows,
-    totals,
-    loading,
-    sales,
-    inclIntraSales,
-    toggleIntraSales,
-  } = useSales();
+  const { rows, totals, loading, sales, inclIntraSales, toggleIntraSales } = useSales();
   const [selectedTotals, setSelectedTotals] = useState<TotalsRow | null>(null);
 
   const isOverlayLoading = sales.length > 0 && loading;
@@ -39,8 +32,8 @@ export const DashboardPage = () => {
 
   if (sales.length === 0 && loading) {
     return (
-      <main className="h-screen bg-[#f8fafc] p-6 md:p-8">
-        <div className="mx-auto max-w-8xl flex items-center justify-center h-full">
+      <main className="h-screen bg-transparent p-6 backdrop-blur-sm md:p-8">
+        <div className="max-w-8xl mx-auto flex h-full items-center justify-center">
           <PageLoader />
         </div>
       </main>
@@ -55,10 +48,7 @@ export const DashboardPage = () => {
           onToggleIntraSales={toggleIntraSales}
         />
         <KpiCards totals={displayedTotals} />
-        <OperatingUnitsTable
-          rows={rows}
-          onSelectionTotalsChange={setSelectedTotals}
-        />
+        <OperatingUnitsTable rows={rows} onSelectionTotalsChange={setSelectedTotals} />
       </div>
 
       {isOverlayLoading ? (
