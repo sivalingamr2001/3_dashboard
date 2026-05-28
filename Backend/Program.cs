@@ -1,6 +1,11 @@
 using Backend.DB;
 using Backend.Interfaces;
 using Backend.Services;
+using Backend.OuDashboard.Configuration;
+using Backend.OuDashboard.Data;
+using Backend.OuDashboard.Services;
+using Backend.OuDashboard.Workers;
+using Serilog;
 
 namespace Backend
 {
@@ -16,6 +21,11 @@ namespace Backend
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // ── Serilog logging from appsettings.json
+            builder.Services.AddSerilog((services, lc) => lc
+                .ReadFrom.Configuration(builder.Configuration)
+                .ReadFrom.Services(services));
 
             // 1. Define and add the CORS policy
             builder.Services.AddCors(options =>
@@ -33,6 +43,20 @@ namespace Backend
 
             // Register the domain repository service
             builder.Services.AddScoped<IOuSalesRepository, OuSalesRepository>();
+
+            // ── OU Dashboard Migration Configuration
+            builder.Services.Configure<MigrationSettings>(
+                builder.Configuration.GetSection("MigrationSettings"));
+
+            // ── OU Dashboard Data Factories (Singleton — stateless)
+            builder.Services.AddSingleton<OracleConnectionFactory>();
+            builder.Services.AddSingleton<SqlServerConnectionFactory>();
+
+            // ── OU Dashboard Migration Service (Scoped — fresh per request)
+            builder.Services.AddScoped<IMigrationService, OuDashboardMigrationService>();
+
+            // ── OU Dashboard Background Worker (runs daily at scheduled time)
+            builder.Services.AddHostedService<OuDashboardWorker>();
 
             var app = builder.Build();
 

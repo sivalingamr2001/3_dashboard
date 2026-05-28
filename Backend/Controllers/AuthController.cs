@@ -15,7 +15,7 @@ namespace backend.Controllers
                 return BadRequest("Invalid client request");
             }
 
-            if (loginRequest.Email == "jan@admin.com" && loginRequest.Password == "jan@123")
+            if (loginRequest.Email == "jan@janatics.co.in" && loginRequest.Password == "Jan@123")
             {
                 var successResponse = new
                 {

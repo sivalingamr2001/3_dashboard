@@ -73,14 +73,12 @@ const buildSelectionTotals = (selectedRows: OperatingUnit[]): TotalsRow => {
   };
 };
 
-// Simple currency formatter helper matching your image structure
 const currencyFormatter = (params: any) => {
   const val = params.value;
   if (val === undefined || val === null) return "₹0.00";
   return `₹${Number(val).toFixed(2)}`;
 };
 
-// Custom cell renderer for the trend percentage badge
 const trendRenderer = (params: any) => {
   const value = parseFloat(params.value);
   if (isNaN(value)) return params.value ?? "";
@@ -122,6 +120,11 @@ export const OperatingUnitsTable: React.FC<OperatingUnitsTableProps> = ({
   rows,
   onSelectionTotalsChange,
 }) => {
+  // Added defaultColDef globally to strip away resizable actions and handle lines
+  const defaultColDef = useMemo<ColDef>(() => ({
+    resizable: false,
+  }), []);
+
   const columns = useMemo<ColDef[]>(
     () => [
       {
@@ -226,6 +229,7 @@ export const OperatingUnitsTable: React.FC<OperatingUnitsTableProps> = ({
         gridId="ou-performance-grid"
         rowData={rows}
         columnDefs={columns}
+        defaultColDef={defaultColDef} /* Passed defaultColDef to your wrapper instance */
         onSelectionChanged={(selectedRows) =>
           onSelectionTotalsChange?.(buildSelectionTotals(selectedRows as OperatingUnit[]))
         }
