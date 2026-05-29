@@ -1,16 +1,13 @@
+using Backend.DB;
 using Oracle.ManagedDataAccess.Client;
+using System;
 
 namespace Backend.OuDashboard.Data;
 
-public class OracleConnectionFactory
+public class OracleConnectionFactory(IOracleService oracleService)
 {
-    private readonly string _connectionString;
+    private readonly string _cs = oracleService.GetConnectionString()
+                                  ?? throw new InvalidOperationException("Oracle connection string is missing from the database service.");
 
-    public OracleConnectionFactory(IConfiguration configuration)
-    {
-        _connectionString = configuration.GetConnectionString("OracleERP")
-            ?? throw new InvalidOperationException("OracleERP connection string is missing from appsettings.json");
-    }
-
-    public OracleConnection Create() => new(_connectionString);
+    public OracleConnection Create() => new(_cs);
 }

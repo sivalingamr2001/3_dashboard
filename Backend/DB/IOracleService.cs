@@ -7,6 +7,7 @@ namespace Backend.DB;
 /// </summary>
 public interface IOracleService
 {
+    string GetConnectionString();
 
     Task<IEnumerable<T>> QueryAsync<T>(string sql, object? parameters = null, CancellationToken ct = default);
 

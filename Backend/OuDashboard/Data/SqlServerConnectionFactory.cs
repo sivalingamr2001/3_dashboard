@@ -1,16 +1,13 @@
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace Backend.OuDashboard.Data;
 
-public class SqlServerConnectionFactory
+public class SqlServerConnectionFactory(IConfiguration configuration)
 {
-    private readonly string _connectionString;
-
-    public SqlServerConnectionFactory(IConfiguration configuration)
-    {
-        _connectionString = configuration.GetConnectionString("SqlServer")
-            ?? throw new InvalidOperationException("SqlServer connection string is missing from appsettings.json");
-    }
-
-    public SqlConnection Create() => new(_connectionString);
+    // 1. Extract the connection string and validate it immediately during initialization
+    private readonly string _cs = configuration.GetConnectionString("SqlServerConnection")
+                                  ?? configuration.GetConnectionString("SqlServer")
+                                  ?? throw new InvalidOperationException("SQL Server connection string is missing in configuration.");
+    public SqlConnection Create() => new(_cs);
 }

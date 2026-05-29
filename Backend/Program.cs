@@ -53,7 +53,7 @@ namespace Backend
             builder.Services.AddSingleton<SqlServerConnectionFactory>();
 
             // ── OU Dashboard Migration Service (Scoped — fresh per request)
-            builder.Services.AddScoped<IMigrationService, OuDashboardMigrationService>();
+            builder.Services.AddScoped<IMigrationService, DashboardMigrationService>();
 
             // ── OU Dashboard Background Worker (runs daily at scheduled time)
             builder.Services.AddHostedService<OuDashboardWorker>();

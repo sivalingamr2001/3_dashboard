@@ -9,18 +9,20 @@ public class OracleService : IOracleService
 {
     private readonly ILogger<OracleService> _logger;
     private readonly string _connectionString;
+    private readonly Class1 _oracleProvider;
 
     public OracleService(ILogger<OracleService> logger)
     {
         _logger = logger;
 
         // 1. Get connection string from DLL
-        var provider = new Class1();
-        _connectionString = provider.oracon_prod_new.ConnectionString;
+        _oracleProvider = new Class1();
+        _connectionString = _oracleProvider.oracon_prod_new?.ConnectionString;
 
         if (string.IsNullOrWhiteSpace(_connectionString))
         {
             _logger.LogCritical("Oracle connection string is missing in ConnectionDll.");
+            throw new InvalidOperationException("Failed to initialize Oracle service: Connection string is blank.");
         }
     }
 
@@ -32,6 +34,11 @@ public class OracleService : IOracleService
         return new OracleConnection(_connectionString);
     }
 
+    public string GetConnectionString()
+    {
+        return _connectionString;
+    }
+
     public async Task<IEnumerable<T>> QueryAsync<T>(string sql, object? parameters = null, CancellationToken ct = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(sql);
@@ -40,7 +47,6 @@ public class OracleService : IOracleService
         {
             using var connection = CreateConnection();
 
-            // Added commandTimeout: 30 to enforce the maximum execution limit
             var command = new CommandDefinition(
                 sql,
                 parameters,
@@ -62,12 +68,9 @@ public class OracleService : IOracleService
         }
     }
 
-    public async Task<IEnumerable<T>> QueryAsyncV2<T>(string sql, object param = null, CommandType? commandType = null)
+    public async Task<IEnumerable<T>> QueryAsyncV2<T>(string sql, object? param = null, CommandType? commandType = null)
     {
-        using (var connection = new OracleConnection(_connectionString))
-        {
-            return await connection.QueryAsync<T>(sql, param, commandType: commandType);
-        }
+        using var connection = CreateConnection();
+        return await connection.QueryAsync<T>(sql, param, commandType: commandType);
     }
-
 }

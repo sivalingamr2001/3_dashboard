@@ -1,3 +1,4 @@
+// Workers/DashboardMigrationWorker.cs
 using Backend.OuDashboard.Configuration;
 using Backend.OuDashboard.Services;
 using Microsoft.Extensions.Options;
@@ -6,8 +7,8 @@ namespace Backend.OuDashboard.Workers;
 
 public class OuDashboardWorker : BackgroundService
 {
-    private readonly IServiceScopeFactory _scope;
-    private readonly MigrationSettings _cfg;
+    private readonly IServiceScopeFactory              _scope;
+    private readonly MigrationSettings                 _cfg;
     private readonly ILogger<OuDashboardWorker> _log;
 
     public OuDashboardWorker(
@@ -16,28 +17,22 @@ public class OuDashboardWorker : BackgroundService
         ILogger<OuDashboardWorker> log)
     {
         _scope = scopeFactory;
-        _cfg = opts.Value;
-        _log = log;
+        _cfg   = opts.Value;
+        _log   = log;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        if (!_cfg.Enabled)
-        {
-            _log.LogInformation("OU Dashboard migration worker is disabled. Exiting.");
-            return;
-        }
-
         _log.LogInformation(
-            "OU Dashboard Worker started. Scheduled daily at {H:D2}:{M:D2}.",
-            _cfg.ScheduleHour, _cfg.ScheduleMinute);
+            "OU Dashboard Worker started. Scheduled daily at {H:D2}:{M:D2}. Flag='{Flag}'.",
+            _cfg.ScheduleHour, _cfg.ScheduleMinute, _cfg.StockTransferFlag);
 
         while (!stoppingToken.IsCancellationRequested)
         {
             var delay = GetDelayUntilNextRun();
 
             _log.LogInformation(
-                "Next migration run in {H}h {M}m → at {At:yyyy-MM-dd HH:mm}",
+                "Next run in {H}h {M}m → at {At:yyyy-MM-dd HH:mm}",
                 (int)delay.TotalHours, delay.Minutes, DateTime.Now.Add(delay));
 
             try
@@ -56,30 +51,31 @@ public class OuDashboardWorker : BackgroundService
         _log.LogInformation("OU Dashboard Worker stopped.");
     }
 
-    // ── Calculate exact delay to the next scheduled run ─────────────────────
+    // ── Next 6:00:00 AM ──────────────────────────────────────────────────────
     private TimeSpan GetDelayUntilNextRun()
     {
-        var now = DateTime.Now;
+        var now     = DateTime.Now;
         var nextRun = new DateTime(
             now.Year, now.Month, now.Day,
             _cfg.ScheduleHour, _cfg.ScheduleMinute, 0);
 
-        // Already past scheduled time today → target tomorrow
         if (now >= nextRun)
             nextRun = nextRun.AddDays(1);
 
         return nextRun - now;
     }
 
-    // ── Retry wrapper ────────────────────────────────────────────────────────
+    // ── Retry loop ───────────────────────────────────────────────────────────
     private async Task RunWithRetryAsync(CancellationToken ct)
     {
         for (int attempt = 1; attempt <= _cfg.RetryCount; attempt++)
         {
-            _log.LogInformation("Attempt {A} of {Max}", attempt, _cfg.RetryCount);
+            _log.LogInformation(
+                "Attempt {A}/{Max} — {Time}", attempt, _cfg.RetryCount, DateTime.Now);
 
             try
             {
+                // Scoped service: new Oracle + SQL Server connections per run
                 await using var scope = _scope.CreateAsyncScope();
                 var svc = scope.ServiceProvider
                                .GetRequiredService<IMigrationService>();
@@ -91,34 +87,29 @@ public class OuDashboardWorker : BackgroundService
                     _log.LogInformation(
                         "Success on attempt {A}. Rows migrated: {Count}.",
                         attempt, result.RecordsMigrated);
-                    return;
+                    return; // done — wait for next 6 AM
                 }
 
                 _log.LogWarning(
-                    "Service returned failure on attempt {A}: {Err}",
-                    attempt, result.ErrorMessage);
+                    "Service reported failure on attempt {A}: {Err}",
+                    attempt, result.Error);
             }
             catch (Exception ex)
             {
                 _log.LogError(ex, "Unhandled exception on attempt {A}.", attempt);
             }
 
-            // Don't retry forever — wait before next attempt
             if (attempt < _cfg.RetryCount)
             {
-                _log.LogInformation("Waiting {S} seconds before retry...", _cfg.RetryDelaySeconds);
-                try
-                {
-                    await Task.Delay(TimeSpan.FromSeconds(_cfg.RetryDelaySeconds), ct);
-                }
-                catch (OperationCanceledException)
-                {
-                    _log.LogWarning("Retry delay cancelled.");
-                    break;
-                }
+                _log.LogInformation(
+                    "Waiting {Sec}s before retry...", _cfg.RetryDelaySeconds);
+                await Task.Delay(
+                    TimeSpan.FromSeconds(_cfg.RetryDelaySeconds), ct);
             }
         }
 
-        _log.LogError("Migration failed after {Count} attempts.", _cfg.RetryCount);
+        _log.LogError(
+            "All {Max} retry attempts failed. Will retry at next scheduled 6 AM run.",
+            _cfg.RetryCount);
     }
 }

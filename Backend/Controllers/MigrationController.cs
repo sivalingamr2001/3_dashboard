@@ -56,13 +56,13 @@ public class MigrationController : ControllerBase
             }
             else
             {
-                _log.LogWarning("Manual migration failed: {Error}", result.ErrorMessage);
+                _log.LogWarning("Manual migration failed: {Error}", result.Error);
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new MigrationResponse
                     {
                         Success = false,
                         RecordsMigrated = 0,
-                        ErrorMessage = result.ErrorMessage,
+                        ErrorMessage = result.Error,
                         Timestamp = DateTime.UtcNow
                     });
             }

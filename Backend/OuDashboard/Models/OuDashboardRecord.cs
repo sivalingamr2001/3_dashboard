@@ -1,32 +1,36 @@
 namespace Backend.OuDashboard.Models;
 
 /// <summary>
-/// One row per Operating Unit — mirrors Jan_MIS_SalesData table columns.
-/// All monetary values are in INR (converted by Ou_Currency_Conv_Rate in Oracle).
+/// One row per Operating Unit.
+/// Column names match dbo.OuDashboardSummary exactly.
+/// Monetary values already converted to INR by Ou_Currency_Conv_Rate inside Oracle.
 /// </summary>
 public class OuDashboardRecord
 {
-    public string OperatingUnit { get; set; } = string.Empty;
+    // ── Identity ─────────────────────────────────────────────────────────────
+    public string  OuName                { get; set; } = string.Empty;
 
-    // Previous FY Sales (Apr prev-yr → Mar curr-yr)
-    public decimal LastYearSalesYtd { get; set; }
-    public decimal LastYearSalesThisMonth { get; set; }
+    // ── Previous FY Sales ────────────────────────────────────────────────────
+    public decimal PrevFySaleAsOn        { get; set; }   // PREV_FY_SALE_AS_ON
+    public decimal PrevFySaleCurrntMnth  { get; set; }   // PREV_FY_SALE_CURRNT_MNTH
 
-    // Current FY Sales (Apr curr-yr → Yesterday)
-    public decimal ThisYearSalesYtd { get; set; }
-    public decimal ThisYearSalesThisMonth { get; set; }
+    // ── Current FY Sales ─────────────────────────────────────────────────────
+    public decimal CurrFySaleAsOn        { get; set; }   // CURR_FY_SALE_AS_ON
+    public decimal CurrFySaleCurrntMnth  { get; set; }   // CURR_FY_SALE_CURRNT_MNTH
 
-    // Previous FY Pending Orders
-    public decimal LastYearPendingOrdersYtd { get; set; }
-    public decimal LastYearPendingThisMonth { get; set; }
+    // ── Previous FY Pending Orders ───────────────────────────────────────────
+    public decimal PrevFyPendAsOn        { get; set; }   // PREV_FY_PEND_AS_ON
+    public decimal PrevFyPendCurrntMnth  { get; set; }   // PREV_FY_PEND_CURRNT_MNTH
 
-    // Current FY Pending Orders
-    public decimal ThisYearPendingOrdersYtd { get; set; }
-    public decimal ThisYearPendingThisMonth { get; set; }
+    // ── Current FY Pending Orders ────────────────────────────────────────────
+    public decimal CurrFyPendAsOn        { get; set; }   // CURR_FY_PEND_AS_ON
+    public decimal CurrFyPendCurrntMnth  { get; set; }   // CURR_FY_PEND_CURRNT_MNTH
 
-    // Inventory (Planning Asset Sub-Inventories)
-    public decimal InventoryAssetValue { get; set; }
+    // ── Inventory ────────────────────────────────────────────────────────────
+    public decimal InvAmt                { get; set; }   // INV_AMT
 
-    // Stock Transfer Flag
-    public char StkTfrFlg { get; set; }
+    // ── Set by .NET before insert ────────────────────────────────────────────
+    public string  StockTransferFlag     { get; set; } = "Y";
+    public DateTime MigratedAt           { get; set; } = DateTime.Now;
+    public DateTime SnapshotDate         { get; set; } = DateTime.Today;
 }
