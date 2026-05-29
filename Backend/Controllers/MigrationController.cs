@@ -1,5 +1,6 @@
 using Backend.OuDashboard.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace Backend.Controllers;
 
@@ -80,6 +81,58 @@ public class MigrationController : ControllerBase
                 });
         }
     }
+
+    [HttpGet("logs")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public ActionResult GetMigrationLogs()
+    {
+        try
+        {
+            // 1. Get the direct application deployment content root
+            var contentRoot = AppDomain.CurrentDomain.BaseDirectory;
+
+            // 2. Check the true location where Serilog creates relative logs on the server
+            var logDirectory = Path.Combine(contentRoot, "bin", "logs", "MigrationLogs");
+
+            // Fallback for custom host runner paths if the above directory layout is missing
+            if (!Directory.Exists(logDirectory))
+            {
+                logDirectory = Path.Combine(Directory.GetCurrentDirectory(), "bin", "logs", "MigrationLogs");
+            }
+
+            if (!Directory.Exists(logDirectory))
+            {
+                return Ok(new { logs = $"Directory structure not found. Expected deployment path: {logDirectory}" });
+            }
+
+            var logFiles = Directory.GetFiles(logDirectory, "migration-*.log");
+            if (logFiles.Length == 0)
+            {
+                return Ok(new { logs = $"Directory is empty. No files written in: {logDirectory}" });
+            }
+
+            Array.Sort(logFiles);
+            var combinedContent = new StringBuilder();
+            foreach (var file in logFiles)
+            {
+                combinedContent.AppendLine($"=== File: {Path.GetFileName(file)} ===");
+                using (var stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using (var reader = new StreamReader(stream))
+                {
+                    combinedContent.AppendLine(reader.ReadToEnd());
+                }
+                combinedContent.AppendLine();
+            }
+
+            return Ok(new { logs = combinedContent.ToString() });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
+        }
+    }
+
 }
 
 /// <summary>

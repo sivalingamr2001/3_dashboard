@@ -24,3 +24,13 @@ export const getOuSalesPerformanceApi = async (stkTfrFlg: string = "Y") => {
   console.log(response.data);
   return response.data;
 };
+
+export const manualRunMigrationApi = async () => {
+  const response = await axiosClient.post("/Migration/run");
+  return response.data;
+};
+
+export const getLogs = async () => {
+  const response = await axiosClient.get("/Migration/logs");
+  return response.data;
+};

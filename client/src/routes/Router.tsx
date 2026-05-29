@@ -51,6 +51,7 @@ const router = createBrowserRouter(
       children: [
         { index: true, element: <Navigate to="/dashboard" replace /> },
         { path: "/dashboard", element: withSalesProvider(DashboardPage) },
+        {path: "/migrations", element: withSuspense(lazy(() => import("@/features/Migrations/MigrationsPage").then(m => ({ default: m.MigrationsPage }))))}
       ],
     },
     {
