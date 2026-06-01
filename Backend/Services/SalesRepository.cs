@@ -13,7 +13,7 @@ public class OuSalesRepository(IOracleService oracleService, IConfiguration conf
     private readonly IOracleService _oracleService = oracleService ?? throw new ArgumentNullException(nameof(oracleService));
     private readonly string _sqlServerConnectionString = configuration.GetConnectionString("SqlServerConnection") ?? string.Empty;
     private readonly string _currentProvider = configuration["Database:Provider"] ?? "Oracle";
-    private readonly ILogger<OuSalesRepository> _logger = logger ?? throw new ArgumentNullException(nameof(logger)); // Added logger
+    private readonly ILogger<OuSalesRepository> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
     private class OracleDynamicParameters : SqlMapper.IDynamicParameters
     {
@@ -45,24 +45,50 @@ public class OuSalesRepository(IOracleService oracleService, IConfiguration conf
         {
             try
             {
-                return await GetSqlServerSalesPerformanceAsync(flagValue);
+                var result = await GetSqlServerSalesPerformanceAsync(flagValue);
+                _logger.LogInformation("Successfully fetched sales performance data from SQL Server.");
+                return result;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Primary SQL Server fetch failed. Falling back to Oracle infrastructure.");
-                return await GetOracleSalesPerformanceAsync(flagValue);
+                _logger.LogError(ex, "Primary SQL Server fetch failed. Trying fallback to Oracle infrastructure.");
+
+                try
+                {
+                    var fallbackResult = await GetOracleSalesPerformanceAsync(flagValue);
+                    _logger.LogInformation("Successfully fetched sales performance data from Oracle infrastructure (Fallback).");
+                    return fallbackResult;
+                }
+                catch (Exception fallbackEx)
+                {
+                    _logger.LogCritical(fallbackEx, "Both SQL Server and Oracle infrastructure fetches failed. Returning empty dataset.");
+                    return Enumerable.Empty<OuSalesPerformanceDto>();
+                }
             }
         }
         else
         {
             try
             {
-                return await GetOracleSalesPerformanceAsync(flagValue);
+                var result = await GetOracleSalesPerformanceAsync(flagValue);
+                _logger.LogInformation("Successfully fetched sales performance data from Oracle Infrastructure.");
+                return result;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Primary Oracle fetch failed. Falling back to SQL Server infrastructure.");
-                return await GetSqlServerSalesPerformanceAsync(flagValue);
+                _logger.LogError(ex, "Primary Oracle fetch failed. Trying fallback to SQL Server infrastructure.");
+
+                try
+                {
+                    var fallbackResult = await GetSqlServerSalesPerformanceAsync(flagValue);
+                    _logger.LogInformation("Successfully fetched sales performance data from SQL Server (Fallback).");
+                    return fallbackResult;
+                }
+                catch (Exception fallbackEx)
+                {
+                    _logger.LogCritical(fallbackEx, "Both Oracle and SQL Server infrastructure fetches failed. Returning empty dataset.");
+                    return Enumerable.Empty<OuSalesPerformanceDto>();
+                }
             }
         }
     }

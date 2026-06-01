@@ -1,10 +1,10 @@
 using Backend.DB;
 using Backend.Interfaces;
-using Backend.Services;
 using Backend.OuDashboard.Configuration;
 using Backend.OuDashboard.Data;
 using Backend.OuDashboard.Services;
 using Backend.OuDashboard.Workers;
+using Backend.Services;
 using Serilog;
 
 namespace Backend
@@ -24,6 +24,7 @@ namespace Backend
 
             // ── Serilog logging from appsettings.json
             builder.Services.AddSerilog((services, lc) => lc
+                .Enrich.WithMachineName()
                 .ReadFrom.Configuration(builder.Configuration)
                 .ReadFrom.Services(services));
 
@@ -61,11 +62,8 @@ namespace Backend
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseCors("AllowViteApp");
             app.UseHttpsRedirection();
@@ -73,9 +71,6 @@ namespace Backend
             // 3. Static Files (Serves your built frontend)
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
-            // 4. Auth and Routing (Always after CORS and static files)
-            app.UseAuthorization();
 
             // 5. Endpoints
             app.MapControllers();

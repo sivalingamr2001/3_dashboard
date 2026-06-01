@@ -59,7 +59,7 @@ const router = createBrowserRouter(
       children: [{ path: "*", element: withSuspense(NotFoundPage) }],
     },
   ],
-  { basename: "/portal" },
+  { basename: "/mobile_dashboard" },
 );
 
 export const Router = () => <RouterProvider router={router} />;

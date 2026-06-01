@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "homepage": "/portal",
+  "homepage": "/mobile_dashboard",
   "scripts": {
     "dev": "vite --mode development",
     "build": "tsc -b && vite build --mode production",
