@@ -2,7 +2,6 @@ namespace Backend.OuDashboard.Models;
 
 /// <summary>
 /// One row per Operating Unit.
-/// Column names match dbo.OuDashboardSummary exactly.
 /// Monetary values already converted to INR by Ou_Currency_Conv_Rate inside Oracle.
 /// </summary>
 public class OuDashboardRecord
@@ -30,7 +29,7 @@ public class OuDashboardRecord
     public decimal InvAmt                { get; set; }   // INV_AMT
 
     // ── Sorting ───────────────────────────────────────────────────────────────
-    public int? sortbyorder { get; set; }   // SORT_BY
+    public int? SORT_BY { get; set; }   // SORT_BY
 
     // ── Set by .NET before insert ────────────────────────────────────────────
     public string  StockTransferFlag     { get; set; } = "Y";

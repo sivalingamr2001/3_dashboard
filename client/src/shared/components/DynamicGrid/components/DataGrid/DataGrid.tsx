@@ -245,8 +245,8 @@ function DataGridInner<TData extends Record<string, unknown>>(
       {
         headerName: "Operating Unit",
         field: "unit",
-        width: 340,
-        minWidth: 280,
+        width: 180,
+        minWidth: 140,
         headerClass: "header-cell-ou",
         cellStyle: (params) => ({
           fontWeight: "600",

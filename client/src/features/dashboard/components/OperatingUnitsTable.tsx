@@ -120,7 +120,6 @@ export const OperatingUnitsTable: React.FC<OperatingUnitsTableProps> = ({
   rows,
   onSelectionTotalsChange,
 }) => {
-  // Added defaultColDef globally to strip away resizable actions and handle lines
   const defaultColDef = useMemo<ColDef>(() => ({
     resizable: false,
   }), []);
@@ -131,7 +130,6 @@ export const OperatingUnitsTable: React.FC<OperatingUnitsTableProps> = ({
         headerName: "Operating Unit",
         field: "unit",
         pinned: "left",
-        minWidth: 240,
         cellStyle: (params) => ({
           fontWeight: params.node.rowPinned === "bottom" ? "bold" : "500",
         }),
