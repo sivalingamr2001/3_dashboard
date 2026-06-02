@@ -4,12 +4,11 @@ import React, { createContext, useContext, useState } from "react";
 interface AuthData {
   message: string;
   isAuthenticated: boolean;
-  token?: string;
 }
 
 interface AuthContextType {
   auth: AuthData | null;
-  login: (email: string, password: string) => Promise<void>;
+  login: (cardNo: number) => Promise<void>;
   logout: () => void;
 }
 
@@ -18,13 +17,11 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const loadSavedAuth = (): AuthData | null => {
   const savedMessage = localStorage.getItem("auth_message");
   const savedIsAuthenticated = localStorage.getItem("auth_isAuthenticated");
-  const savedToken = localStorage.getItem("token");
 
   if (savedMessage && savedIsAuthenticated === "true") {
     return {
       message: savedMessage,
       isAuthenticated: true,
-      token: savedToken ?? undefined,
     };
   }
 
@@ -34,16 +31,14 @@ const loadSavedAuth = (): AuthData | null => {
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [auth, setAuth] = useState<AuthData | null>(loadSavedAuth);
 
-  const login = async (email: string, password: string) => {
+  const login = async (cardNo: number) => {
     try {
-      const apiData: AuthData = await loginApi({ email, password });
+      const apiData: AuthData = await loginApi(cardNo);
       setAuth(apiData);
 
       localStorage.setItem("auth_message", apiData.message);
       localStorage.setItem("auth_isAuthenticated", String(apiData.isAuthenticated));
-      if (apiData.token) {
-        localStorage.setItem("token", apiData.token);
-      }
+
     } catch (error) {
       console.error("Login failed:", error);
       throw error;

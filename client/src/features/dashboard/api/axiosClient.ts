@@ -9,8 +9,8 @@ export const axiosClient = axios.create({
   },
 });
 
-export const loginApi = async (loginData: { email: string; password: string }) => {
-  const response = await axiosClient.post("/Auth/login", loginData);
+export const loginApi = async (cardNo: number) => {
+  const response = await axiosClient.get(`/Auth/validate-card?cardNo=${cardNo}`);
   return response.data;
 };
 
