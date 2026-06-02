@@ -84,6 +84,9 @@ CREATE TABLE dbo.OuDashboardSummary
     -- Inventory
     InventoryAssetValue         DECIMAL(20, 2)  NOT NULL DEFAULT 0,
 
+    -- Sorting
+    SortByOrder                 INT             NULL,
+
     -- Audit
     MigratedAt                  DATETIME2       NOT NULL DEFAULT GETDATE(),
     SnapshotDate                DATE            NOT NULL DEFAULT CAST(GETDATE() AS DATE),
@@ -167,7 +170,8 @@ CREATE OR REPLACE PACKAGE BODY PKG_OU_DASHBOARD AS
             SUM(FY_PREV_PEND_CURR_MNTH)     AS LAST_YEAR_PENDING_THIS_MONTH,
             SUM(FY_CURR_PEND_AS_ON)         AS THIS_YEAR_PENDING_ORDERS_YTD,
             SUM(FY_CURR_PEND_CURR_MNTH)     AS THIS_YEAR_PENDING_THIS_MONTH,
-            SUM(INV_AMT)                    AS INVENTORY_ASSET_VALUE
+            SUM(INV_AMT)                    AS INVENTORY_ASSET_VALUE,
+            MAX(SORT_BY)                    AS SORT_BY
         FROM (
 
             -- ── BLOCK 1: Sales & Pending Orders (All OU, oa_flag = 'Y') ─────
@@ -181,7 +185,8 @@ CREATE OR REPLACE PACKAGE BODY PKG_OU_DASHBOARD AS
                 SUM(FY_PREV_PEND_CURR_MNTH) AS FY_PREV_PEND_CURR_MNTH,
                 SUM(FY_CURR_PEND_AS_ON)     AS FY_CURR_PEND_AS_ON,
                 SUM(FY_CURR_PEND_CURR_MNTH) AS FY_CURR_PEND_CURR_MNTH,
-                0                           AS INV_AMT
+                0                           AS INV_AMT,
+                MAX(SORT_BY)                AS SORT_BY
             FROM (
                 SELECT
                     OU_NAME,
@@ -254,7 +259,8 @@ CREATE OR REPLACE PACKAGE BODY PKG_OU_DASHBOARD AS
                               OR BILL_TO_CUST_NAME = 'JANATICS INDIA PVT. LTD - UNIT VI')
                         THEN 'N'
                         ELSE 'Y'
-                    END AS OA_FLAG
+                    END AS OA_FLAG,
+                    SORT_BY
 
                 FROM JAN_ALL_OU_ORD_SALES_V
                 WHERE (
@@ -265,7 +271,8 @@ CREATE OR REPLACE PACKAGE BODY PKG_OU_DASHBOARD AS
                     OU_NAME,
                     ORD_EMPT_STATUS,
                     BILL_TO_CUST_NAME,
-                    ORG_ID
+                    ORG_ID,
+                    SORT_BY
             )
             WHERE OA_FLAG = 'Y'
             GROUP BY OU_NAME
@@ -277,7 +284,8 @@ CREATE OR REPLACE PACKAGE BODY PKG_OU_DASHBOARD AS
                 OU_NAME,
                 0, 0, 0, 0,
                 0, 0, 0, 0,
-                SUM(INV_AMT) AS INV_AMT
+                SUM(INV_AMT) AS INV_AMT,
+                NULL            AS SORT_BY
             FROM (
                 SELECT
                     (

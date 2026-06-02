@@ -17,10 +17,11 @@ export function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   const hasAttemptedLogin = useRef(false);
 
-  const from = (location.state as { from?: { pathname: string } })?.from?.pathname || "/dashboard";
+  const from =
+    (location.state as { from?: { pathname: string } })?.from?.pathname || "/dashboard";
   const searchParams = new URLSearchParams(location.search);
   const cardNoParam = searchParams.get("cardno");
   const cardNo = cardNoParam ? parseInt(cardNoParam, 10) : null;
@@ -61,7 +62,7 @@ export function LoginPage() {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <div className="fixed inset-0 z-10 flex items-center justify-center bg-transparent backdrop-blur-[6px] pointer-events-none">
+            <div className="pointer-events-none fixed inset-0 z-10 flex items-center justify-center bg-transparent backdrop-blur-[6px]">
               <div className="inline-flex items-center gap-4 rounded-2xl bg-transparent shadow-none">
                 <div className="relative flex h-5 w-5 items-center justify-center">
                   <Spinner />

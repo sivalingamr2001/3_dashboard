@@ -1,9 +1,6 @@
 import { useAuth } from "@/context/AuthContext";
-import {
-  AS_ON_DATE,
-  getCurrentFinancialYear,
-  getPreviousFinancialYear,
-} from "@/lib/utils";
+import { useSales } from "@/context/SalesContext";
+import { getCurrentFinancialYear, getPreviousFinancialYear } from "@/lib/utils";
 import { Button } from "@/shared/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
@@ -20,6 +17,7 @@ export const DashboardHeader = ({
   const previousFY = getPreviousFinancialYear();
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const { asOnDate } = useSales();
 
   const handleLogout = () => {
     logout();
@@ -38,7 +36,7 @@ export const DashboardHeader = ({
           Financial Year Comparison: FY {currentFY} vs FY {previousFY}
         </p>
         <p className="mt-1 text-sm text-slate-400">
-          * As on date: {AS_ON_DATE} | All values in Indian Rupees (₹ Crores)
+          * As on date: {asOnDate} | All values in Indian Rupees (₹ Crores)
         </p>
       </div>
       <div

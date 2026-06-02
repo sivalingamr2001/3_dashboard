@@ -14,18 +14,32 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const loadSavedAuth = (): AuthData | null => {
-  const savedMessage = localStorage.getItem("auth_message");
-  const savedIsAuthenticated = localStorage.getItem("auth_isAuthenticated");
+const EXPIRATION_TIME_MS = 1800000;
 
-  if (savedMessage && savedIsAuthenticated === "true") {
-    return {
-      message: savedMessage,
-      isAuthenticated: true,
-    };
+const loadSavedAuth = (): AuthData | null => {
+  const savedMessage = sessionStorage.getItem("auth_message");
+  const savedIsAuthenticated = sessionStorage.getItem("auth_isAuthenticated");
+  const loginTimestamp = sessionStorage.getItem("auth_timestamp");
+
+  if (!savedMessage || savedIsAuthenticated !== "true" || !loginTimestamp) {
+    return null;
   }
 
-  return null;
+  const now = Date.now();
+  const timeElapsed = now - parseInt(loginTimestamp, 10);
+
+  if (timeElapsed > EXPIRATION_TIME_MS) {
+    sessionStorage.removeItem("auth_message");
+    sessionStorage.removeItem("auth_isAuthenticated");
+    sessionStorage.removeItem("auth_timestamp");
+    sessionStorage.removeItem("token");
+    return null;
+  }
+
+  return {
+    message: savedMessage,
+    isAuthenticated: true,
+  };
 };
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -36,9 +50,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const apiData: AuthData = await loginApi(cardNo);
       setAuth(apiData);
 
-      localStorage.setItem("auth_message", apiData.message);
-      localStorage.setItem("auth_isAuthenticated", String(apiData.isAuthenticated));
-
+      sessionStorage.setItem("auth_message", apiData.message);
+      sessionStorage.setItem("auth_isAuthenticated", String(apiData.isAuthenticated));
+      sessionStorage.setItem("auth_timestamp", String(Date.now()));
     } catch (error) {
       console.error("Login failed:", error);
       throw error;
@@ -47,9 +61,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = () => {
     setAuth(null);
-    localStorage.removeItem("auth_message");
-    localStorage.removeItem("auth_isAuthenticated");
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("auth_message");
+    sessionStorage.removeItem("auth_isAuthenticated");
+    sessionStorage.removeItem("auth_timestamp");
+    sessionStorage.removeItem("token");
   };
 
   return (

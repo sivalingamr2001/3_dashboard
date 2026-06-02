@@ -1,7 +1,8 @@
 import { Card } from "@/shared/components/ui/card";
 import { IndianRupee, Package, Warehouse, TrendingUp, TrendingDown } from "lucide-react";
 import type { TotalsRow } from "@/features/dashboard/types/dashboard.types";
-import { AS_ON_DATE, getCurrentFinancialYear } from "@/lib/utils";
+import { getCurrentFinancialYear } from "@/lib/utils";
+import { useSales } from "@/context/SalesContext";
 
 type Props = {
   totals: TotalsRow;
@@ -38,6 +39,7 @@ const getTrendBadge = (trend: string) => {
 
 export const KpiCards = ({ totals }: Props) => {
   const currentFY = getCurrentFinancialYear();
+  const { asOnDate } = useSales();
   const trendBadge = getTrendBadge(totals.trend);
   return (
     <div className="mb-8 grid gap-6 md:grid-cols-3">
@@ -50,7 +52,7 @@ export const KpiCards = ({ totals }: Props) => {
             </div>
             <div>
               <h3 className="text-base font-bold text-slate-800">Group Turnover *</h3>
-              <p className="text-xs font-medium text-slate-400">As on {AS_ON_DATE}</p>
+              <p className="text-xs font-medium text-slate-400">As on {asOnDate}</p>
             </div>
           </div>
           <div className="mt-5 grid grid-cols-2 gap-4">
@@ -91,7 +93,7 @@ export const KpiCards = ({ totals }: Props) => {
           </div>
           <div>
             <h3 className="text-base font-bold text-slate-800">Pending Orders *</h3>
-            <p className="text-xs font-medium text-slate-400">{AS_ON_DATE}</p>
+            <p className="text-xs font-medium text-slate-400">{asOnDate}</p>
           </div>
         </div>
         <div className="flex h-[130px] flex-col items-center justify-center rounded-xl border border-amber-200/70 bg-[#fff9f2] p-5 text-center">
@@ -111,7 +113,7 @@ export const KpiCards = ({ totals }: Props) => {
           </div>
           <div>
             <h3 className="text-base font-bold text-slate-800">Inventory Value *</h3>
-            <p className="text-xs font-medium text-slate-400">{AS_ON_DATE}</p>
+            <p className="text-xs font-medium text-slate-400">{asOnDate}</p>
           </div>
         </div>
         <div className="flex h-[130px] flex-col items-center justify-center rounded-xl border border-emerald-200/70 bg-[#f3fbf6] p-5 text-center">

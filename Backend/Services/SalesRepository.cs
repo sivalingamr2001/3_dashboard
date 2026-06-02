@@ -123,7 +123,9 @@ public class OuSalesRepository(IOracleService oracleService, IConfiguration conf
                 PendingOrdersYtd = RowHasProperty(row, "CURR_FY_PEND_AS_ON") ? ToDecimal(row.CURR_FY_PEND_AS_ON) : 0m,
                 PendingThisMonth = RowHasProperty(row, "CURR_FY_PEND_CURRNT_MNTH") ? ToDecimal(row.CURR_FY_PEND_CURRNT_MNTH) : 0m
             },
-            InventoryAssetValue = ToDecimal(row.INV_AMT)
+            InventoryAssetValue = ToDecimal(row.INV_AMT),
+            MigratedAt = RowHasProperty(row, "MigratedAt") ? row.MigratedAt : DateTime.Now,
+            SortByOrder = RowHasProperty(row, "sortbyorder") ? row.sortbyorder : null
         });
     }
 
@@ -140,9 +142,12 @@ public class OuSalesRepository(IOracleService oracleService, IConfiguration conf
                 LAST_YEAR_PENDING_THIS_MONTH,
                 THIS_YEAR_PENDING_ORDERS_YTD,
                 THIS_YEAR_PENDING_THIS_MONTH,
-                INVENTORY_ASSET_VALUE
+                INVENTORY_ASSET_VALUE,
+                MigratedAt,
+                sortbyorder
             FROM Jan_MIS_SalesData
-            WHERE STK_TFR_FLG = @StkTfrFlg";
+            WHERE STK_TFR_FLG = @StkTfrFlg
+            ORDER BY ISNULL(sortbyorder, 999), OPERATING_UNIT";
 
         using var connection = new SqlConnection(_sqlServerConnectionString);
         var flatRows = await connection.QueryAsync<dynamic>(sqlQuery, new { StkTfrFlg = flagValue });
@@ -164,7 +169,11 @@ public class OuSalesRepository(IOracleService oracleService, IConfiguration conf
                 PendingOrdersYtd = ToDecimal(row.THIS_YEAR_PENDING_ORDERS_YTD),
                 PendingThisMonth = ToDecimal(row.THIS_YEAR_PENDING_THIS_MONTH)
             },
-            InventoryAssetValue = ToDecimal(row.INVENTORY_ASSET_VALUE)
+            InventoryAssetValue = ToDecimal(row.INVENTORY_ASSET_VALUE),
+            MigratedAt = row.MigratedAt,
+            SortByOrder = RowHasProperty(row, "sortbyorder") && row.sortbyorder != null
+                ? Convert.ToInt32(row.sortbyorder)
+                : null
         });
     }
 

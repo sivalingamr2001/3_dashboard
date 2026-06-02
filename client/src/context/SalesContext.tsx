@@ -17,6 +17,8 @@ export interface SalesItem {
   lastYear: YearData;
   thisYear: YearData;
   inventoryAssetValue: number;
+  migratedAt?: string;
+  sortbyorder?: number | null;
 }
 
 const EMPTY_TOTALS: TotalsRow = {
@@ -47,6 +49,7 @@ interface SalesContextType {
   inclIntraSales: boolean;
   fetchSales: () => Promise<void>;
   toggleIntraSales: () => void;
+  asOnDate: string;
 
   // KPI DATA
   totalTurnoverCurrentFy: number;
@@ -67,6 +70,21 @@ export const SalesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | undefined>(undefined);
   const [inclIntraSales, setInclIntraSales] = useState(true);
+  const [asOnDate, setAsOnDate] = useState<string>("");
+
+  // Extract date from migratedAt (format: YYYY-MM-DD from ISO datetime)
+  const formatMigratedDate = (migratedAt: string | undefined): string => {
+    if (!migratedAt) return "";
+    try {
+      const date = new Date(migratedAt);
+      const yyyy = date.getFullYear();
+      const mm = String(date.getMonth() + 1).padStart(2, "0");
+      const dd = String(date.getDate()).padStart(2, "0");
+      return `${yyyy}-${mm}-${dd}`;
+    } catch {
+      return "";
+    }
+  };
 
   const fetchSales = async () => {
     try {
@@ -77,6 +95,13 @@ export const SalesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const data = await getOuSalesPerformanceApi(stkTfrFlg);
 
       setSales(data);
+
+      // Extract migratedAt from the first non-total record
+      if (data && data.length > 0) {
+        const firstRecord = data.find((x: SalesItem) => x.migratedAt) || data[0];
+        const date = formatMigratedDate(firstRecord?.migratedAt);
+        setAsOnDate(date);
+      }
     } catch (error) {
       const salesError = error instanceof Error ? error : new Error(String(error));
       setError(salesError);
@@ -170,8 +195,17 @@ export const SalesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       po_date: formatMoney(item.thisYear.pendingOrdersYtd),
       po_month: formatMoney(item.thisYear.pendingThisMonth),
       inv: formatMoney(item.inventoryAssetValue),
+      sortbyorder: item.sortbyorder,
     }))
-    .sort((left, right) => left.unit.localeCompare(right.unit));
+    .sort((left, right) => {
+      const leftOrder = left.sortbyorder ?? 999;
+      const rightOrder = right.sortbyorder ?? 999;
+      if (leftOrder !== rightOrder) {
+        return leftOrder - rightOrder;
+      }
+      return left.unit.localeCompare(right.unit);
+    })
+    .map(({ sortbyorder, ...rest }) => rest);
 
   const totals: TotalsRow = totalRow
     ? {
@@ -195,6 +229,7 @@ export const SalesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         error,
         inclIntraSales,
         toggleIntraSales,
+        asOnDate,
 
         totalTurnoverCurrentFy,
         totalTurnoverPreviousFy,

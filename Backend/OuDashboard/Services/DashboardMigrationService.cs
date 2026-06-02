@@ -128,6 +128,7 @@ public class DashboardMigrationService : IMigrationService
                 CurrFyPendAsOn = SafeDecimal(reader, "CURR_FY_PEND_AS_ON"),
                 CurrFyPendCurrntMnth = SafeDecimal(reader, "CURR_FY_PEND_CURRNT_MNTH"),
                 InvAmt = SafeDecimal(reader, "INV_AMT"),
+                sortbyorder = SafeInt(reader, "SORT_BY"),
                 StockTransferFlag = flag, // Set dynamically to match the current target dataset segment
                 MigratedAt = executionTime,
                 SnapshotDate = snapshotDate
@@ -186,6 +187,7 @@ public class DashboardMigrationService : IMigrationService
         bulk.ColumnMappings.Add(nameof(OuDashboardRecord.CurrFyPendAsOn), "THIS_YEAR_PENDING_ORDERS_YTD");
         bulk.ColumnMappings.Add(nameof(OuDashboardRecord.CurrFyPendCurrntMnth), "THIS_YEAR_PENDING_THIS_MONTH");
         bulk.ColumnMappings.Add(nameof(OuDashboardRecord.InvAmt), "INVENTORY_ASSET_VALUE");
+        bulk.ColumnMappings.Add(nameof(OuDashboardRecord.sortbyorder), "SortByOrder");
         bulk.ColumnMappings.Add(nameof(OuDashboardRecord.StockTransferFlag), "STK_TFR_FLG");
 
         // Audit Columns
@@ -213,6 +215,7 @@ public class DashboardMigrationService : IMigrationService
         dt.Columns.Add(nameof(OuDashboardRecord.CurrFyPendAsOn), typeof(decimal));
         dt.Columns.Add(nameof(OuDashboardRecord.CurrFyPendCurrntMnth), typeof(decimal));
         dt.Columns.Add(nameof(OuDashboardRecord.InvAmt), typeof(decimal));
+        dt.Columns.Add(nameof(OuDashboardRecord.sortbyorder), typeof(int));
         dt.Columns.Add(nameof(OuDashboardRecord.StockTransferFlag), typeof(string));
         dt.Columns.Add(nameof(OuDashboardRecord.MigratedAt), typeof(DateTime));
         dt.Columns.Add(nameof(OuDashboardRecord.SnapshotDate), typeof(DateTime));
@@ -230,6 +233,7 @@ public class DashboardMigrationService : IMigrationService
                 r.CurrFyPendAsOn,
                 r.CurrFyPendCurrntMnth,
                 r.InvAmt,
+                r.sortbyorder,
                 r.StockTransferFlag,
                 r.MigratedAt,
                 r.SnapshotDate
@@ -252,5 +256,11 @@ public class DashboardMigrationService : IMigrationService
     {
         int idx = r.GetOrdinal(col);
         return r.IsDBNull(idx) ? 0m : r.GetDecimal(idx);
+    }
+
+    private static int? SafeInt(IDataReader r, string col)
+    {
+        int idx = r.GetOrdinal(col);
+        return r.IsDBNull(idx) ? null : r.GetInt32(idx);
     }
 }

@@ -59,6 +59,7 @@ export interface DataGridProps<
   // Styling
   className?: string;
   gridHeight?: string | number;
+  rowHeight?: number;
   compact?: boolean;
   theme?: "light" | "dark" | "system";
 

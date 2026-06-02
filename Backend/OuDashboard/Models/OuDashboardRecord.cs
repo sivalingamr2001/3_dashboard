@@ -29,6 +29,9 @@ public class OuDashboardRecord
     // ── Inventory ────────────────────────────────────────────────────────────
     public decimal InvAmt                { get; set; }   // INV_AMT
 
+    // ── Sorting ───────────────────────────────────────────────────────────────
+    public int? sortbyorder { get; set; }   // SORT_BY
+
     // ── Set by .NET before insert ────────────────────────────────────────────
     public string  StockTransferFlag     { get; set; } = "Y";
     public DateTime MigratedAt           { get; set; } = DateTime.Now;

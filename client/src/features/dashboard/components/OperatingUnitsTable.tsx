@@ -229,7 +229,8 @@ export const OperatingUnitsTable: React.FC<OperatingUnitsTableProps> = ({
         gridId="ou-performance-grid"
         rowData={rows}
         columnDefs={columns}
-        defaultColDef={defaultColDef} /* Passed defaultColDef to your wrapper instance */
+        defaultColDef={defaultColDef}
+        rowHeight={40}
         onSelectionChanged={(selectedRows) =>
           onSelectionTotalsChange?.(buildSelectionTotals(selectedRows as OperatingUnit[]))
         }

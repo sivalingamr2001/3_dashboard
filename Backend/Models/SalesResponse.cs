@@ -15,6 +15,12 @@ public class OuSalesPerformanceDto
 
     [JsonPropertyName("inventoryAssetValue")]
     public decimal InventoryAssetValue { get; set; }
+
+    [JsonPropertyName("migratedAt")]
+    public DateTime MigratedAt { get; set; }
+
+    [JsonPropertyName("sortbyorder")]
+    public int? SortByOrder { get; set; }
 }
 
 public class FinancialYearData

@@ -124,6 +124,7 @@ function DataGridInner<TData extends Record<string, unknown>>(
     theme = "system",
     defaultColDef: defaultColDefProp,
     fallbackTotals,
+    rowHeight: propRowHeight,
   } = props;
   const { theme: appTheme } = useTheme();
 
@@ -227,9 +228,9 @@ function DataGridInner<TData extends Record<string, unknown>>(
       {
         headerName: "",
         pinned: "left",
-        width: 50,
-        minWidth: 50,
-        maxWidth: 50,
+        width: 30,
+        minWidth: 30,
+        maxWidth: 30,
         checkboxSelection: true,
         headerCheckboxSelection: true,
         headerClass: "header-cell-ou align-checkbox-center",
@@ -244,7 +245,6 @@ function DataGridInner<TData extends Record<string, unknown>>(
       {
         headerName: "Operating Unit",
         field: "unit",
-        pinned: "left",
         width: 340,
         minWidth: 280,
         headerClass: "header-cell-ou",
@@ -410,18 +410,16 @@ function DataGridInner<TData extends Record<string, unknown>>(
         ],
       },
       {
-        headerName: "Inventory * (₹ Cr)",
+        headerName: "Inventory \n (₹ Cr)",
         field: "inv",
         valueFormatter: currencyFormatter,
-        headerClass: "header-cell-inventory",
+        headerClass: "header-cell-inventory multi-line-header",
         minWidth: 80,
         cellStyle: (params) => ({
           color: "#15803d",
           fontWeight: "600",
           backgroundColor: params.node.rowPinned === "bottom" ? "#dbeafe" : "#f0fdf4",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          textAlign: "center",
         }),
       },
     ],
@@ -442,7 +440,7 @@ function DataGridInner<TData extends Record<string, unknown>>(
       groupHeaderHeight: 38,
       headerHeight: 34,
       suppressScrollOnNewData: true, // Prevents layout flickering when swapping dynamic arrays
-      ...(compact ? { rowHeight: 38 } : {}),
+      ...((propRowHeight ?? (compact ? 38 : undefined)) ? { rowHeight: propRowHeight ?? (compact ? 38 : undefined) } : {}),
     }),
     [
       animateRows,
@@ -539,55 +537,7 @@ function DataGridInner<TData extends Record<string, unknown>>(
         text-align: center !important;
       }
 
-      .align-checkbox-center .ag-header-select-all {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: 100% !important;
-      }
-
-      .ag-checkbox-input-wrapper {
-        width: 18px !important;
-        height: 18px !important;
-        border: 2px solid #dc2626 !important;
-        border-radius: 4px !important;
-        background: #fef2f2 !important;
-        position: relative !important;
-        box-shadow: none !important;
-      }
-
-      .ag-checkbox-input-wrapper::after {
-        content: "x";
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #dc2626;
-        font-size: 11px;
-        font-weight: 800;
-        line-height: 1;
-        text-transform: uppercase;
-      }
-
-      .ag-checkbox-input-wrapper.ag-checked,
-      .ag-checkbox-input-wrapper.ag-indeterminate {
-        border-color: #16a34a !important;
-        background: #dcfce7 !important;
-      }
-
-      .ag-checkbox-input-wrapper.ag-checked::after {
-        content: "✓";
-        color: #15803d;
-        font-size: 12px;
-      }
-
-      .ag-checkbox-input-wrapper.ag-indeterminate::after {
-        content: "−";
-        color: #15803d;
-        font-size: 14px;
-      }
-
+      
       .header-group-level1 {
         background-color: #0b1426 !important;
         color: #ffffff !important;
@@ -630,13 +580,24 @@ function DataGridInner<TData extends Record<string, unknown>>(
         font-size: 11px !important;
       }
 
+      .multi-line-header .ag-header-cell-label {
+        white-space: pre-line !important; 
+        line-height: 1.4 !important;
+        text-align: center !important;
+      }
+
+      /* Ensure the top-level row has enough vertical space to display two lines */
+      .ag-header-row {
+        height: auto !important;
+        min-height: 48px !important;
+      }
+
       .header-cell-ou,
       .header-cell-inventory {
         background-color: #0b1426 !important;
         color: #ffffff !important;
         font-weight: 700 !important;
         font-size: 13.5px !important;
-        justify-content: center !important;
       }
 
       .ag-row-pinned-bottom {
