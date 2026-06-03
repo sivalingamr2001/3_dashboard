@@ -45,7 +45,6 @@ export function LoginPage() {
 
     try {
       await login(cardNumber);
-      navigate(from, { replace: true });
     } catch (err) {
       setError("Invalid credentials or server connection error.");
     } finally {

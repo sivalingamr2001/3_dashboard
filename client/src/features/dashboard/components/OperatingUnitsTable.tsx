@@ -213,6 +213,7 @@ export const OperatingUnitsTable: React.FC<OperatingUnitsTableProps> = ({
       {
         headerName: "Inventory * (₹ cr)",
         field: "inv",
+        minWidth: 120,
         valueFormatter: currencyFormatter,
         cellStyle: { color: "#2b8a3e", fontWeight: "500" },
       },

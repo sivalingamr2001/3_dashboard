@@ -137,14 +137,7 @@ function DataGridInner<TData extends Record<string, unknown>>(
     [defaultColDefProp],
   );
 
-  const rowSelectionConfig = useMemo(
-    () => ({
-      mode: "multiRow" as const,
-      checkboxes: false,
-      headerCheckbox: false,
-    }),
-    [],
-  );
+  const rowSelectionConfig = useMemo(() => "multiple" as const, []);
 
   // ─── Pre-select All Rows Automatically On Load ───
   const onGridReady = useCallback(
@@ -254,8 +247,9 @@ function DataGridInner<TData extends Record<string, unknown>>(
           backgroundColor: params.node.rowPinned === "bottom" ? "#dbeafe" : "#ffffff",
           display: "flex",
           alignItems: "center",
-          justifyContent: "flex-start",
-          paddingLeft: "16px",
+          justifyContent: "center",
+          textAlign: "center",
+          paddingLeft: 0,
         }),
       },
       {
@@ -414,11 +408,16 @@ function DataGridInner<TData extends Record<string, unknown>>(
         field: "inv",
         valueFormatter: currencyFormatter,
         headerClass: "header-cell-inventory multi-line-header",
-        minWidth: 80,
+        width: 120,
+        minWidth: 110,
+        maxWidth: 140,
         cellStyle: (params) => ({
           color: "#15803d",
           fontWeight: "600",
           backgroundColor: params.node.rowPinned === "bottom" ? "#dbeafe" : "#f0fdf4",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           textAlign: "center",
         }),
       },
@@ -429,17 +428,18 @@ function DataGridInner<TData extends Record<string, unknown>>(
   const gridOptions = useMemo<GridOptions<TData>>(
     () => ({
       pagination: false,
-      domLayout: "autoHeight", // 🌟 Key fix: Instructs AG Grid to auto-adjust height to accommodate all data rows edge-to-edge
+      domLayout: "autoHeight",
       animateRows,
       enableCellTextSelection: true,
       suppressMovableColumns: false,
       rowSelection: rowSelectionConfig,
+      suppressRowClickSelection: true,
       defaultColDef: resolvedDefaultColDef,
       loadingOverlayComponent: () => <LoadingOverlay message={loadingMessage} />,
       noRowsOverlayComponent: () => <NoRowsOverlay message={noRowsMessage} />,
       groupHeaderHeight: 38,
       headerHeight: 34,
-      suppressScrollOnNewData: true, // Prevents layout flickering when swapping dynamic arrays
+      suppressScrollOnNewData: true,
       ...((propRowHeight ?? (compact ? 38 : undefined)) ? { rowHeight: propRowHeight ?? (compact ? 38 : undefined) } : {}),
     }),
     [
@@ -465,10 +465,8 @@ function DataGridInner<TData extends Record<string, unknown>>(
   const finalRowData =
     (state as any).rows ?? (state as any).filteredRowData ?? rawRowData;
 
-  // ─── Auto-select All Rows When Data Changes ──────────────────────────────
   useEffect(() => {
     if (gridApiRef.current && finalRowData && finalRowData.length > 0) {
-      // Small delay to ensure grid is ready after data update
       const timer = setTimeout(() => {
         gridApiRef.current?.selectAll();
       }, 50);
@@ -480,29 +478,6 @@ function DataGridInner<TData extends Record<string, unknown>>(
     <>
       <style>{`
       @import url('https://googleapis.com');
-      
-      .datagrid-scroll-shell {
-        width: 100%;
-        overflow-x: auto;
-      }
-      .datagrid-scroll-inner {
-        width: 100%;
-        min-width: 100%;
-      }
-
-      .ag-root-wrapper,
-      .ag-root-wrapper .ag-root,
-      .ag-root-wrapper-viewport {
-        width: 100% !important;
-        min-width: 100% !important;
-      }
-
-      /* Clean scrollbar overrides to remove unnecessary rendering space completely */
-      .ag-body-viewport,
-      .ag-body-horizontal-scroll-viewport {
-        overflow-y: hidden !important; 
-      }
-
       .ag-root-wrapper {
         border: none !important;
         background-color: transparent !important;
@@ -518,12 +493,8 @@ function DataGridInner<TData extends Record<string, unknown>>(
 
       .ag-header-group-cell, 
       .ag-header-cell {
-        padding: 0 !important;
         border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
         border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
       }
 
       .ag-header-cell-comp-wrapper,
@@ -537,6 +508,24 @@ function DataGridInner<TData extends Record<string, unknown>>(
         text-align: center !important;
       }
 
+      .align-checkbox-center,
+      .align-checkbox-center .ag-header-cell-label,
+      .align-checkbox-center .ag-header-select-all {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border: none !important;
+        }
+        
+      .ag-selection-checkbox,
+      .ag-checkbox-input-wrapper,
+      .ag-header-select-all {
+        margin: 10 auto !important;
+        margin-left: 3.5px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
       
       .header-group-level1 {
         background-color: #0b1426 !important;
@@ -586,7 +575,6 @@ function DataGridInner<TData extends Record<string, unknown>>(
         text-align: center !important;
       }
 
-      /* Ensure the top-level row has enough vertical space to display two lines */
       .ag-header-row {
         height: auto !important;
         min-height: 48px !important;
@@ -599,28 +587,12 @@ function DataGridInner<TData extends Record<string, unknown>>(
         font-weight: 700 !important;
         font-size: 13.5px !important;
       }
-
-      .ag-row-pinned-bottom {
-        border-top: 3px solid #1e293b !important;
-      }
-      .ag-row-pinned-bottom .ag-cell {
-        font-weight: 800 !important;
-        font-size: 13.5px !important;
-        border-right: 1px solid rgba(255, 255, 255, 0.25) !important;
-        color: #ffffff !important;
-        display: flex;
-        align-items: center;
-      }
-      .ag-row-pinned-bottom .ag-cell[col-id="unit"] {
-        color: #1e3a8a !important;
-      }
       `}</style>
 
       <div
         style={{
           fontFamily: "'Figtree', system-ui, sans-serif",
           background: "var(--color-background-primary)",
-          border: "1px solid var(--color-border-tertiary)",
           borderRadius: 0,
           overflow: "hidden",
           width: "100%",
@@ -634,7 +606,6 @@ function DataGridInner<TData extends Record<string, unknown>>(
 
         <div className="datagrid-scroll-shell">
           <div className="datagrid-scroll-inner">
-            {/* 🌟 Removed the fixed height styling constraint from this container wrapper to allow row data expansion */}
             <div style={{ width: "100%", position: "relative" }}>
               <AgGridReact<TData>
                 rowData={finalRowData}

@@ -77,6 +77,10 @@ export const SalesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (!migratedAt) return "";
     try {
       const date = new Date(migratedAt);
+
+      // Subtract 1 day safely (handles month/year rollovers)
+      date.setDate(date.getDate() - 1);
+
       const yyyy = date.getFullYear();
       const mm = String(date.getMonth() + 1).padStart(2, "0");
       const dd = String(date.getDate()).padStart(2, "0");
@@ -133,12 +137,12 @@ export const SalesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const turnoverGrowthPercentage =
     totalTurnoverPreviousFy > 0
       ? Number(
-          (
-            ((totalTurnoverCurrentFy - totalTurnoverPreviousFy) /
-              totalTurnoverPreviousFy) *
-            100
-          ).toFixed(2),
-        )
+        (
+          ((totalTurnoverCurrentFy - totalTurnoverPreviousFy) /
+            totalTurnoverPreviousFy) *
+          100
+        ).toFixed(2),
+      )
       : 0;
 
   // TABLE DATA
@@ -151,11 +155,11 @@ export const SalesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const trend =
         previousYearSales > 0
           ? Number(
-              (
-                ((currentYearSales - previousYearSales) / previousYearSales) *
-                100
-              ).toFixed(2),
-            )
+            (
+              ((currentYearSales - previousYearSales) / previousYearSales) *
+              100
+            ).toFixed(2),
+          )
           : 0;
 
       return {
@@ -209,15 +213,15 @@ export const SalesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const totals: TotalsRow = totalRow
     ? {
-        to_fy27_date: formatMoney(totalRow.thisYear.salesYtd),
-        to_fy27_month: formatMoney(totalRow.thisYear.salesThisMonth),
-        to_fy26_date: formatMoney(totalRow.lastYear.salesYtd),
-        to_fy26_month: formatMoney(totalRow.lastYear.salesThisMonth),
-        trend: formatTrend(totalRow.thisYear.salesYtd, totalRow.lastYear.salesYtd),
-        po_date: formatMoney(totalRow.thisYear.pendingOrdersYtd),
-        po_month: formatMoney(totalRow.thisYear.pendingThisMonth),
-        inv: formatMoney(totalRow.inventoryAssetValue || 0),
-      }
+      to_fy27_date: formatMoney(totalRow.thisYear.salesYtd),
+      to_fy27_month: formatMoney(totalRow.thisYear.salesThisMonth),
+      to_fy26_date: formatMoney(totalRow.lastYear.salesYtd),
+      to_fy26_month: formatMoney(totalRow.lastYear.salesThisMonth),
+      trend: formatTrend(totalRow.thisYear.salesYtd, totalRow.lastYear.salesYtd),
+      po_date: formatMoney(totalRow.thisYear.pendingOrdersYtd),
+      po_month: formatMoney(totalRow.thisYear.pendingThisMonth),
+      inv: formatMoney(totalRow.inventoryAssetValue || 0),
+    }
     : EMPTY_TOTALS;
 
   return (

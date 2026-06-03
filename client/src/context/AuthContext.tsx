@@ -14,12 +14,39 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const EXPIRATION_TIME_MS = 1800000;
+const EXPIRATION_TIME_MS = 24 * 60 * 60 * 1000;
+
+const getStorage = () => {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  return window.localStorage;
+};
+
+const getStoredValue = (key: string) => {
+  const storage = getStorage();
+  if (!storage) return null;
+
+  return storage.getItem(key) ?? sessionStorage.getItem(key);
+};
+
+const removeStoredValues = () => {
+  if (typeof window === "undefined") return;
+
+  sessionStorage.removeItem("auth_message");
+  sessionStorage.removeItem("auth_isAuthenticated");
+  sessionStorage.removeItem("auth_timestamp");
+
+  localStorage.removeItem("auth_message");
+  localStorage.removeItem("auth_isAuthenticated");
+  localStorage.removeItem("auth_timestamp");
+};
 
 const loadSavedAuth = (): AuthData | null => {
-  const savedMessage = sessionStorage.getItem("auth_message");
-  const savedIsAuthenticated = sessionStorage.getItem("auth_isAuthenticated");
-  const loginTimestamp = sessionStorage.getItem("auth_timestamp");
+  const savedMessage = getStoredValue("auth_message");
+  const savedIsAuthenticated = getStoredValue("auth_isAuthenticated");
+  const loginTimestamp = getStoredValue("auth_timestamp");
 
   if (!savedMessage || savedIsAuthenticated !== "true" || !loginTimestamp) {
     return null;
@@ -29,10 +56,7 @@ const loadSavedAuth = (): AuthData | null => {
   const timeElapsed = now - parseInt(loginTimestamp, 10);
 
   if (timeElapsed > EXPIRATION_TIME_MS) {
-    sessionStorage.removeItem("auth_message");
-    sessionStorage.removeItem("auth_isAuthenticated");
-    sessionStorage.removeItem("auth_timestamp");
-    sessionStorage.removeItem("token");
+    removeStoredValues();
     return null;
   }
 
@@ -50,9 +74,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const apiData: AuthData = await loginApi(cardNo);
       setAuth(apiData);
 
-      sessionStorage.setItem("auth_message", apiData.message);
-      sessionStorage.setItem("auth_isAuthenticated", String(apiData.isAuthenticated));
-      sessionStorage.setItem("auth_timestamp", String(Date.now()));
+      const storage = getStorage();
+      if (!storage) {
+        throw new Error("Browser storage is unavailable.");
+      }
+
+      storage.setItem("auth_message", apiData.message);
+      storage.setItem("auth_isAuthenticated", String(apiData.isAuthenticated));
+      storage.setItem("auth_timestamp", String(Date.now()));
     } catch (error) {
       console.error("Login failed:", error);
       throw error;
@@ -61,10 +90,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = () => {
     setAuth(null);
-    sessionStorage.removeItem("auth_message");
-    sessionStorage.removeItem("auth_isAuthenticated");
-    sessionStorage.removeItem("auth_timestamp");
-    sessionStorage.removeItem("token");
+    removeStoredValues();
   };
 
   return (

@@ -1,6 +1,6 @@
-import { AS_ON_DATE } from "@/lib/utils";
 import React from "react";
 import type { DataGridState } from "../../types/DataGrid.types";
+import { useSales } from "@/context/SalesContext";
 
 // ─── Shared button component ─────────────────────────────────────────────────
 
@@ -49,6 +49,7 @@ export interface GridToolbarProps {
 }
 
 export const GridToolbar: React.FC<GridToolbarProps> = ({ title, toolbarRight }) => {
+  const { asOnDate } = useSales();
   return (
     <div role="toolbar" aria-label={`${title} toolbar`}>
       {/* ── main toolbar container matching image style ── */}
@@ -64,7 +65,7 @@ export const GridToolbar: React.FC<GridToolbarProps> = ({ title, toolbarRight })
             Operating Units Performance Comparison
           </h1>
           <p className="mt-1 text-xs text-slate-400">
-            * As on date: {AS_ON_DATE} | All values in Indian Rupees (₹ Crores)
+            * As on date: {asOnDate} | All values in Indian Rupees (₹ Crores)
           </p>
         </div>
 
