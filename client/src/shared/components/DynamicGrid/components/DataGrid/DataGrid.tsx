@@ -440,7 +440,9 @@ function DataGridInner<TData extends Record<string, unknown>>(
       groupHeaderHeight: 38,
       headerHeight: 34,
       suppressScrollOnNewData: true,
-      ...((propRowHeight ?? (compact ? 38 : undefined)) ? { rowHeight: propRowHeight ?? (compact ? 38 : undefined) } : {}),
+      ...((propRowHeight ?? (compact ? 38 : undefined))
+        ? { rowHeight: propRowHeight ?? (compact ? 38 : undefined) }
+        : {}),
     }),
     [
       animateRows,

@@ -120,9 +120,12 @@ export const OperatingUnitsTable: React.FC<OperatingUnitsTableProps> = ({
   rows,
   onSelectionTotalsChange,
 }) => {
-  const defaultColDef = useMemo<ColDef>(() => ({
-    resizable: false,
-  }), []);
+  const defaultColDef = useMemo<ColDef>(
+    () => ({
+      resizable: false,
+    }),
+    [],
+  );
 
   const columns = useMemo<ColDef[]>(
     () => [

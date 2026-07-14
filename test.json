@@ -1,0 +1,1658 @@
+{
+    "orders": [
+        {
+            "yrmn": "2025-04",
+            "mnyr": "APR-25",
+            "ordeR_VALUE": 425.57,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "2025-04",
+            "mnyr": "APR-25",
+            "ordeR_VALUE": 7.39,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "2025-04",
+            "mnyr": "APR-25",
+            "ordeR_VALUE": 3.64,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "2025-04",
+            "mnyr": "APR-25",
+            "ordeR_VALUE": 1.77,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "2025-04",
+            "mnyr": "APR-25",
+            "ordeR_VALUE": 38.68,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "2025-04",
+            "mnyr": "APR-25",
+            "ordeR_VALUE": 1.74,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "2025-04",
+            "mnyr": "APR-25",
+            "ordeR_VALUE": 2.39,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "2025-05",
+            "mnyr": "MAY-25",
+            "ordeR_VALUE": 4.49,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "2025-05",
+            "mnyr": "MAY-25",
+            "ordeR_VALUE": 3.71,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "2025-05",
+            "mnyr": "MAY-25",
+            "ordeR_VALUE": 136.55,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "2025-05",
+            "mnyr": "MAY-25",
+            "ordeR_VALUE": 1.93,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "2025-05",
+            "mnyr": "MAY-25",
+            "ordeR_VALUE": 5.57,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "2025-05",
+            "mnyr": "MAY-25",
+            "ordeR_VALUE": 15.28,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "2025-05",
+            "mnyr": "MAY-25",
+            "ordeR_VALUE": 427.35,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "2025-06",
+            "mnyr": "JUN-25",
+            "ordeR_VALUE": 763.39,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "2025-06",
+            "mnyr": "JUN-25",
+            "ordeR_VALUE": 6.88,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "2025-06",
+            "mnyr": "JUN-25",
+            "ordeR_VALUE": 21.73,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "2025-06",
+            "mnyr": "JUN-25",
+            "ordeR_VALUE": 12.39,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "2025-06",
+            "mnyr": "JUN-25",
+            "ordeR_VALUE": 25.98,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "2025-06",
+            "mnyr": "JUN-25",
+            "ordeR_VALUE": 9.42,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "2025-06",
+            "mnyr": "JUN-25",
+            "ordeR_VALUE": 1.39,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "2025-07",
+            "mnyr": "JUL-25",
+            "ordeR_VALUE": 20.94,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "2025-07",
+            "mnyr": "JUL-25",
+            "ordeR_VALUE": 3.02,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "2025-07",
+            "mnyr": "JUL-25",
+            "ordeR_VALUE": 26.19,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "2025-07",
+            "mnyr": "JUL-25",
+            "ordeR_VALUE": 2.27,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "2025-07",
+            "mnyr": "JUL-25",
+            "ordeR_VALUE": 21.53,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "2025-07",
+            "mnyr": "JUL-25",
+            "ordeR_VALUE": 11.65,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "2025-07",
+            "mnyr": "JUL-25",
+            "ordeR_VALUE": 479.42,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "2025-08",
+            "mnyr": "AUG-25",
+            "ordeR_VALUE": 372.67,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "2025-08",
+            "mnyr": "AUG-25",
+            "ordeR_VALUE": 6.93,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "2025-08",
+            "mnyr": "AUG-25",
+            "ordeR_VALUE": 246.83,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "2025-08",
+            "mnyr": "AUG-25",
+            "ordeR_VALUE": 1.98,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "2025-08",
+            "mnyr": "AUG-25",
+            "ordeR_VALUE": 24.86,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "2025-08",
+            "mnyr": "AUG-25",
+            "ordeR_VALUE": 8.74,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "2025-08",
+            "mnyr": "AUG-25",
+            "ordeR_VALUE": 2.59,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "2025-09",
+            "mnyr": "SEP-25",
+            "ordeR_VALUE": 1.9,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "2025-09",
+            "mnyr": "SEP-25",
+            "ordeR_VALUE": 7.2,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "2025-09",
+            "mnyr": "SEP-25",
+            "ordeR_VALUE": 21.72,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "2025-09",
+            "mnyr": "SEP-25",
+            "ordeR_VALUE": 2.02,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "2025-09",
+            "mnyr": "SEP-25",
+            "ordeR_VALUE": 108.63,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "2025-09",
+            "mnyr": "SEP-25",
+            "ordeR_VALUE": 12.97,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "2025-09",
+            "mnyr": "SEP-25",
+            "ordeR_VALUE": 386.82,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "2025-10",
+            "mnyr": "OCT-25",
+            "ordeR_VALUE": 330.09,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "2025-10",
+            "mnyr": "OCT-25",
+            "ordeR_VALUE": 13.34,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "2025-10",
+            "mnyr": "OCT-25",
+            "ordeR_VALUE": 5.75,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "2025-10",
+            "mnyr": "OCT-25",
+            "ordeR_VALUE": 7.64,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "2025-10",
+            "mnyr": "OCT-25",
+            "ordeR_VALUE": 29.64,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "2025-10",
+            "mnyr": "OCT-25",
+            "ordeR_VALUE": 3.49,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "2025-10",
+            "mnyr": "OCT-25",
+            "ordeR_VALUE": 1.58,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "2025-11",
+            "mnyr": "NOV-25",
+            "ordeR_VALUE": 2.93,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "2025-11",
+            "mnyr": "NOV-25",
+            "ordeR_VALUE": 2.54,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "2025-11",
+            "mnyr": "NOV-25",
+            "ordeR_VALUE": 36.18,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "2025-11",
+            "mnyr": "NOV-25",
+            "ordeR_VALUE": 6.59,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "2025-11",
+            "mnyr": "NOV-25",
+            "ordeR_VALUE": 108.99,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "2025-11",
+            "mnyr": "NOV-25",
+            "ordeR_VALUE": 9.52,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "2025-11",
+            "mnyr": "NOV-25",
+            "ordeR_VALUE": 396.05,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "2025-12",
+            "mnyr": "DEC-25",
+            "ordeR_VALUE": 469.84,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "2025-12",
+            "mnyr": "DEC-25",
+            "ordeR_VALUE": 11.66,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "2025-12",
+            "mnyr": "DEC-25",
+            "ordeR_VALUE": 550.77,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "2025-12",
+            "mnyr": "DEC-25",
+            "ordeR_VALUE": 7.86,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "2025-12",
+            "mnyr": "DEC-25",
+            "ordeR_VALUE": 23.03,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "2025-12",
+            "mnyr": "DEC-25",
+            "ordeR_VALUE": 7.86,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "2025-12",
+            "mnyr": "DEC-25",
+            "ordeR_VALUE": 3.73,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "2026-01",
+            "mnyr": "JAN-26",
+            "ordeR_VALUE": 2.36,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "2026-01",
+            "mnyr": "JAN-26",
+            "ordeR_VALUE": 0.71,
+            "oU_NAME": "Janatics Global USA Operating Unit",
+            "orG_ID": 1344
+        },
+        {
+            "yrmn": "2026-01",
+            "mnyr": "JAN-26",
+            "ordeR_VALUE": 30.39,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "2026-01",
+            "mnyr": "JAN-26",
+            "ordeR_VALUE": 134.35,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "2026-01",
+            "mnyr": "JAN-26",
+            "ordeR_VALUE": 8.25,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "2026-01",
+            "mnyr": "JAN-26",
+            "ordeR_VALUE": 14.68,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "2026-01",
+            "mnyr": "JAN-26",
+            "ordeR_VALUE": 8.79,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "2026-01",
+            "mnyr": "JAN-26",
+            "ordeR_VALUE": 553.8,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "2026-02",
+            "mnyr": "FEB-26",
+            "ordeR_VALUE": 465.64,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "2026-02",
+            "mnyr": "FEB-26",
+            "ordeR_VALUE": 6.2,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "2026-02",
+            "mnyr": "FEB-26",
+            "ordeR_VALUE": 54.41,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "2026-02",
+            "mnyr": "FEB-26",
+            "ordeR_VALUE": 3.71,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "2026-02",
+            "mnyr": "FEB-26",
+            "ordeR_VALUE": 16.76,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "2026-02",
+            "mnyr": "FEB-26",
+            "ordeR_VALUE": 35.01,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "2026-02",
+            "mnyr": "FEB-26",
+            "ordeR_VALUE": 3.2,
+            "oU_NAME": "Janatics Global USA Operating Unit",
+            "orG_ID": 1344
+        },
+        {
+            "yrmn": "2026-02",
+            "mnyr": "FEB-26",
+            "ordeR_VALUE": 0.63,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "2026-03",
+            "mnyr": "MAR-26",
+            "ordeR_VALUE": 7.81,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "2026-03",
+            "mnyr": "MAR-26",
+            "ordeR_VALUE": 1.69,
+            "oU_NAME": "Janatics Global USA Operating Unit",
+            "orG_ID": 1344
+        },
+        {
+            "yrmn": "2026-03",
+            "mnyr": "MAR-26",
+            "ordeR_VALUE": 21.71,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "2026-03",
+            "mnyr": "MAR-26",
+            "ordeR_VALUE": 20.39,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "2026-03",
+            "mnyr": "MAR-26",
+            "ordeR_VALUE": 9.69,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "2026-03",
+            "mnyr": "MAR-26",
+            "ordeR_VALUE": 32.37,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "2026-03",
+            "mnyr": "MAR-26",
+            "ordeR_VALUE": 16.39,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "2026-03",
+            "mnyr": "MAR-26",
+            "ordeR_VALUE": 589.38,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "2026-04",
+            "mnyr": "APR-26",
+            "ordeR_VALUE": 755.75,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "2026-04",
+            "mnyr": "APR-26",
+            "ordeR_VALUE": 5.44,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "2026-04",
+            "mnyr": "APR-26",
+            "ordeR_VALUE": 9.73,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "2026-04",
+            "mnyr": "APR-26",
+            "ordeR_VALUE": 7.82,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "2026-04",
+            "mnyr": "APR-26",
+            "ordeR_VALUE": 45.14,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "2026-04",
+            "mnyr": "APR-26",
+            "ordeR_VALUE": 48.57,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "2026-04",
+            "mnyr": "APR-26",
+            "ordeR_VALUE": 1.47,
+            "oU_NAME": "Janatics Global USA Operating Unit",
+            "orG_ID": 1344
+        },
+        {
+            "yrmn": "2026-04",
+            "mnyr": "APR-26",
+            "ordeR_VALUE": 0.27,
+            "oU_NAME": "Vietnam Operating Unit",
+            "orG_ID": 1385
+        },
+        {
+            "yrmn": "2026-04",
+            "mnyr": "APR-26",
+            "ordeR_VALUE": 0.11,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "2026-05",
+            "mnyr": "MAY-26",
+            "ordeR_VALUE": 1.39,
+            "oU_NAME": "Vietnam Operating Unit",
+            "orG_ID": 1385
+        },
+        {
+            "yrmn": "2026-05",
+            "mnyr": "MAY-26",
+            "ordeR_VALUE": 21.14,
+            "oU_NAME": "Janatics Global USA Operating Unit",
+            "orG_ID": 1344
+        },
+        {
+            "yrmn": "2026-05",
+            "mnyr": "MAY-26",
+            "ordeR_VALUE": 47.09,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "2026-05",
+            "mnyr": "MAY-26",
+            "ordeR_VALUE": 53.8,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "2026-05",
+            "mnyr": "MAY-26",
+            "ordeR_VALUE": 11.52,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "2026-05",
+            "mnyr": "MAY-26",
+            "ordeR_VALUE": 24.38,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "2026-05",
+            "mnyr": "MAY-26",
+            "ordeR_VALUE": 14.1,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "2026-05",
+            "mnyr": "MAY-26",
+            "ordeR_VALUE": 393.75,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "2026-06",
+            "mnyr": "JUN-26",
+            "ordeR_VALUE": 391.68,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "2026-06",
+            "mnyr": "JUN-26",
+            "ordeR_VALUE": 19.85,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "2026-06",
+            "mnyr": "JUN-26",
+            "ordeR_VALUE": 17.66,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "2026-06",
+            "mnyr": "JUN-26",
+            "ordeR_VALUE": 5.38,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "2026-06",
+            "mnyr": "JUN-26",
+            "ordeR_VALUE": 33.21,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "2026-06",
+            "mnyr": "JUN-26",
+            "ordeR_VALUE": 41.83,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "2026-06",
+            "mnyr": "JUN-26",
+            "ordeR_VALUE": 5.11,
+            "oU_NAME": "Janatics Global USA Operating Unit",
+            "orG_ID": 1344
+        },
+        {
+            "yrmn": "2026-06",
+            "mnyr": "JUN-26",
+            "ordeR_VALUE": 0.41,
+            "oU_NAME": "Vietnam Operating Unit",
+            "orG_ID": 1385
+        },
+        {
+            "yrmn": "2026-07",
+            "mnyr": "JUL-26",
+            "ordeR_VALUE": 0.05,
+            "oU_NAME": "Vietnam Operating Unit",
+            "orG_ID": 1385
+        },
+        {
+            "yrmn": "2026-07",
+            "mnyr": "JUL-26",
+            "ordeR_VALUE": 5.39,
+            "oU_NAME": "Janatics Global USA Operating Unit",
+            "orG_ID": 1344
+        },
+        {
+            "yrmn": "2026-07",
+            "mnyr": "JUL-26",
+            "ordeR_VALUE": 35.96,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "2026-07",
+            "mnyr": "JUL-26",
+            "ordeR_VALUE": 19.94,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "2026-07",
+            "mnyr": "JUL-26",
+            "ordeR_VALUE": 0.62,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "2026-07",
+            "mnyr": "JUL-26",
+            "ordeR_VALUE": 2.27,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "2026-07",
+            "mnyr": "JUL-26",
+            "ordeR_VALUE": 19.16,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "2026-07",
+            "mnyr": "JUL-26",
+            "ordeR_VALUE": 251,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        }
+    ],
+    "sales": [
+        {
+            "yrmn": "202504",
+            "mnyr": "APR-25",
+            "saleS_VALUE": 372.5,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "202504",
+            "mnyr": "APR-25",
+            "saleS_VALUE": 12.81,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "202504",
+            "mnyr": "APR-25",
+            "saleS_VALUE": 2.6,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "202504",
+            "mnyr": "APR-25",
+            "saleS_VALUE": 15.69,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "202504",
+            "mnyr": "APR-25",
+            "saleS_VALUE": 2.11,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "202504",
+            "mnyr": "APR-25",
+            "saleS_VALUE": 30.54,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "202504",
+            "mnyr": "APR-25",
+            "saleS_VALUE": 2.09,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "202505",
+            "mnyr": "MAY-25",
+            "saleS_VALUE": 393.49,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "202505",
+            "mnyr": "MAY-25",
+            "saleS_VALUE": 13.35,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "202505",
+            "mnyr": "MAY-25",
+            "saleS_VALUE": 3.66,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "202505",
+            "mnyr": "MAY-25",
+            "saleS_VALUE": 34.16,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "202505",
+            "mnyr": "MAY-25",
+            "saleS_VALUE": 7.43,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "202505",
+            "mnyr": "MAY-25",
+            "saleS_VALUE": 32.14,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "202505",
+            "mnyr": "MAY-25",
+            "saleS_VALUE": 2.12,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "202506",
+            "mnyr": "JUN-25",
+            "saleS_VALUE": 469.92,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "202506",
+            "mnyr": "JUN-25",
+            "saleS_VALUE": 9.4,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "202506",
+            "mnyr": "JUN-25",
+            "saleS_VALUE": 1.59,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "202506",
+            "mnyr": "JUN-25",
+            "saleS_VALUE": 101.78,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "202506",
+            "mnyr": "JUN-25",
+            "saleS_VALUE": 2.21,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "202506",
+            "mnyr": "JUN-25",
+            "saleS_VALUE": 48.7,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "202506",
+            "mnyr": "JUN-25",
+            "saleS_VALUE": 13.5,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "202507",
+            "mnyr": "JUL-25",
+            "saleS_VALUE": 449.76,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "202507",
+            "mnyr": "JUL-25",
+            "saleS_VALUE": 10.07,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "202507",
+            "mnyr": "JUL-25",
+            "saleS_VALUE": 2.85,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "202507",
+            "mnyr": "JUL-25",
+            "saleS_VALUE": 12.59,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "202507",
+            "mnyr": "JUL-25",
+            "saleS_VALUE": 11.05,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "202507",
+            "mnyr": "JUL-25",
+            "saleS_VALUE": 53.45,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "202507",
+            "mnyr": "JUL-25",
+            "saleS_VALUE": 7.73,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "202508",
+            "mnyr": "AUG-25",
+            "saleS_VALUE": 460.11,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "202508",
+            "mnyr": "AUG-25",
+            "saleS_VALUE": 12.01,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "202508",
+            "mnyr": "AUG-25",
+            "saleS_VALUE": 3.61,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "202508",
+            "mnyr": "AUG-25",
+            "saleS_VALUE": 28.93,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "202508",
+            "mnyr": "AUG-25",
+            "saleS_VALUE": 0.67,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "202508",
+            "mnyr": "AUG-25",
+            "saleS_VALUE": 43.78,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "202508",
+            "mnyr": "AUG-25",
+            "saleS_VALUE": 2.61,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "202509",
+            "mnyr": "SEP-25",
+            "saleS_VALUE": 498.82,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "202509",
+            "mnyr": "SEP-25",
+            "saleS_VALUE": 11.44,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "202509",
+            "mnyr": "SEP-25",
+            "saleS_VALUE": 7.15,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "202509",
+            "mnyr": "SEP-25",
+            "saleS_VALUE": 26.67,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "202509",
+            "mnyr": "SEP-25",
+            "saleS_VALUE": 3.07,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "202509",
+            "mnyr": "SEP-25",
+            "saleS_VALUE": 49.59,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "202509",
+            "mnyr": "SEP-25",
+            "saleS_VALUE": 11.38,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "202510",
+            "mnyr": "OCT-25",
+            "saleS_VALUE": 369.75,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "202510",
+            "mnyr": "OCT-25",
+            "saleS_VALUE": 11.44,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "202510",
+            "mnyr": "OCT-25",
+            "saleS_VALUE": 15.38,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "202510",
+            "mnyr": "OCT-25",
+            "saleS_VALUE": 32.21,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "202510",
+            "mnyr": "OCT-25",
+            "saleS_VALUE": 4.76,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "202510",
+            "mnyr": "OCT-25",
+            "saleS_VALUE": 33.22,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "202510",
+            "mnyr": "OCT-25",
+            "saleS_VALUE": 11.79,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "202511",
+            "mnyr": "NOV-25",
+            "saleS_VALUE": 460.42,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "202511",
+            "mnyr": "NOV-25",
+            "saleS_VALUE": 9.58,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "202511",
+            "mnyr": "NOV-25",
+            "saleS_VALUE": 3.59,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "202511",
+            "mnyr": "NOV-25",
+            "saleS_VALUE": 62.11,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "202511",
+            "mnyr": "NOV-25",
+            "saleS_VALUE": 3.4,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "202511",
+            "mnyr": "NOV-25",
+            "saleS_VALUE": 31.61,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "202511",
+            "mnyr": "NOV-25",
+            "saleS_VALUE": 4.77,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "202512",
+            "mnyr": "DEC-25",
+            "saleS_VALUE": 496.02,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "202512",
+            "mnyr": "DEC-25",
+            "saleS_VALUE": 5.32,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "202512",
+            "mnyr": "DEC-25",
+            "saleS_VALUE": 0.73,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "202512",
+            "mnyr": "DEC-25",
+            "saleS_VALUE": 14.34,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "202512",
+            "mnyr": "DEC-25",
+            "saleS_VALUE": 5.61,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "202512",
+            "mnyr": "DEC-25",
+            "saleS_VALUE": 47.85,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "202512",
+            "mnyr": "DEC-25",
+            "saleS_VALUE": 7.29,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "202601",
+            "mnyr": "JAN-26",
+            "saleS_VALUE": 432.41,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "202601",
+            "mnyr": "JAN-26",
+            "saleS_VALUE": 13.08,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "202601",
+            "mnyr": "JAN-26",
+            "saleS_VALUE": 4.71,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "202601",
+            "mnyr": "JAN-26",
+            "saleS_VALUE": 29.38,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "202601",
+            "mnyr": "JAN-26",
+            "saleS_VALUE": 3.06,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "202601",
+            "mnyr": "JAN-26",
+            "saleS_VALUE": 48.43,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "202601",
+            "mnyr": "JAN-26",
+            "saleS_VALUE": 16.22,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "202602",
+            "mnyr": "FEB-26",
+            "saleS_VALUE": 431.99,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "202602",
+            "mnyr": "FEB-26",
+            "saleS_VALUE": 10.84,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "202602",
+            "mnyr": "FEB-26",
+            "saleS_VALUE": 1.81,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "202602",
+            "mnyr": "FEB-26",
+            "saleS_VALUE": 45.3,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "202602",
+            "mnyr": "FEB-26",
+            "saleS_VALUE": 10.29,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "202602",
+            "mnyr": "FEB-26",
+            "saleS_VALUE": 53,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "202602",
+            "mnyr": "FEB-26",
+            "saleS_VALUE": 7.75,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "202603",
+            "mnyr": "MAR-26",
+            "saleS_VALUE": 502.19,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "202603",
+            "mnyr": "MAR-26",
+            "saleS_VALUE": 11.75,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "202603",
+            "mnyr": "MAR-26",
+            "saleS_VALUE": 2.98,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "202603",
+            "mnyr": "MAR-26",
+            "saleS_VALUE": 93.53,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "202603",
+            "mnyr": "MAR-26",
+            "saleS_VALUE": 1.84,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "202603",
+            "mnyr": "MAR-26",
+            "saleS_VALUE": 51.05,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "202603",
+            "mnyr": "MAR-26",
+            "saleS_VALUE": 36.39,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "202603",
+            "mnyr": "MAR-26",
+            "saleS_VALUE": 1.25,
+            "oU_NAME": "Janatics Global USA Operating Unit",
+            "orG_ID": 1344
+        },
+        {
+            "yrmn": "202604",
+            "mnyr": "APR-26",
+            "saleS_VALUE": 391.92,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "202604",
+            "mnyr": "APR-26",
+            "saleS_VALUE": 13.05,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "202604",
+            "mnyr": "APR-26",
+            "saleS_VALUE": 2.47,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "202604",
+            "mnyr": "APR-26",
+            "saleS_VALUE": 10.2,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "202604",
+            "mnyr": "APR-26",
+            "saleS_VALUE": 3.67,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "202604",
+            "mnyr": "APR-26",
+            "saleS_VALUE": 34.59,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "202604",
+            "mnyr": "APR-26",
+            "saleS_VALUE": 5.82,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "202604",
+            "mnyr": "APR-26",
+            "saleS_VALUE": 1.06,
+            "oU_NAME": "Janatics Global USA Operating Unit",
+            "orG_ID": 1344
+        },
+        {
+            "yrmn": "202605",
+            "mnyr": "MAY-26",
+            "saleS_VALUE": 458.59,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "202605",
+            "mnyr": "MAY-26",
+            "saleS_VALUE": 15.24,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "202605",
+            "mnyr": "MAY-26",
+            "saleS_VALUE": 3.1,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "202605",
+            "mnyr": "MAY-26",
+            "saleS_VALUE": 53.74,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "202605",
+            "mnyr": "MAY-26",
+            "saleS_VALUE": 3.87,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "202605",
+            "mnyr": "MAY-26",
+            "saleS_VALUE": 33.22,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "202605",
+            "mnyr": "MAY-26",
+            "saleS_VALUE": 2.9,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "202605",
+            "mnyr": "MAY-26",
+            "saleS_VALUE": 3.36,
+            "oU_NAME": "Janatics Global USA Operating Unit",
+            "orG_ID": 1344
+        },
+        {
+            "yrmn": "202606",
+            "mnyr": "JUN-26",
+            "saleS_VALUE": 519,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "202606",
+            "mnyr": "JUN-26",
+            "saleS_VALUE": 15.23,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "202606",
+            "mnyr": "JUN-26",
+            "saleS_VALUE": 4.71,
+            "oU_NAME": "Janatics USA Operating Unit",
+            "orG_ID": 405
+        },
+        {
+            "yrmn": "202606",
+            "mnyr": "JUN-26",
+            "saleS_VALUE": 23.6,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "202606",
+            "mnyr": "JUN-26",
+            "saleS_VALUE": 19.22,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "202606",
+            "mnyr": "JUN-26",
+            "saleS_VALUE": 52.45,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "202606",
+            "mnyr": "JUN-26",
+            "saleS_VALUE": 7.79,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "202606",
+            "mnyr": "JUN-26",
+            "saleS_VALUE": 3.15,
+            "oU_NAME": "Janatics Global USA Operating Unit",
+            "orG_ID": 1344
+        },
+        {
+            "yrmn": "202607",
+            "mnyr": "JUL-26",
+            "saleS_VALUE": 127.92,
+            "oU_NAME": "Janatics Operating Unit",
+            "orG_ID": 103
+        },
+        {
+            "yrmn": "202607",
+            "mnyr": "JUL-26",
+            "saleS_VALUE": 6.9,
+            "oU_NAME": "Skyfast Operating Unit",
+            "orG_ID": 204
+        },
+        {
+            "yrmn": "202607",
+            "mnyr": "JUL-26",
+            "saleS_VALUE": 3.86,
+            "oU_NAME": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+            "orG_ID": 584
+        },
+        {
+            "yrmn": "202607",
+            "mnyr": "JUL-26",
+            "saleS_VALUE": 0.13,
+            "oU_NAME": "Dubai Operating Unit",
+            "orG_ID": 684
+        },
+        {
+            "yrmn": "202607",
+            "mnyr": "JUL-26",
+            "saleS_VALUE": 7.57,
+            "oU_NAME": "Polymer Operating Unit",
+            "orG_ID": 704
+        },
+        {
+            "yrmn": "202607",
+            "mnyr": "JUL-26",
+            "saleS_VALUE": 4.75,
+            "oU_NAME": "Global Operating Unit",
+            "orG_ID": 844
+        },
+        {
+            "yrmn": "202607",
+            "mnyr": "JUL-26",
+            "saleS_VALUE": 4.27,
+            "oU_NAME": "Janatics Global USA Operating Unit",
+            "orG_ID": 1344
+        }
+    ]
+}

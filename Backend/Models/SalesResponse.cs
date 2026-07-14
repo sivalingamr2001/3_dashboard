@@ -37,3 +37,27 @@ public class FinancialYearData
     [JsonPropertyName("pendingThisMonth")]
     public decimal PendingThisMonth { get; set; }
 }
+
+public class OrderItemDto
+{
+    public required string YRMN { get; init; }
+    public required string MNYR { get; init; }
+    public required decimal ORDER_VALUE { get; init; }
+    public required string OU_NAME { get; init; }
+    public required int ORG_ID { get; init; }
+}
+
+public class SalesItemDto
+{
+    public required string YRMN { get; init; }
+    public required string MNYR { get; init; }
+    public required decimal SALES_VALUE { get; init; }
+    public required string OU_NAME { get; init; }
+    public required int ORG_ID { get; init; }
+}
+
+// Modern C# 12 Primary Constructor Record Component 
+public record DashboardPayloadDto(
+    IEnumerable<OrderItemDto> Orders,
+    IEnumerable<SalesItemDto> Sales
+);

@@ -1,0 +1,3906 @@
+OrderSales
+
+
+GET
+/api/OrderSales/orders-trend
+
+Parameters
+Cancel
+Name	Description
+orgId
+integer($int32)
+(query)
+orgId
+Execute
+Clear
+Responses
+Curl
+
+curl -X 'GET' \
+  'https://localhost:7090/api/OrderSales/orders-trend' \
+  -H 'accept: text/plain'
+Request URL
+https://localhost:7090/api/OrderSales/orders-trend
+Server response
+Code	Details
+200	
+Response body
+Download
+[
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "orderValue": 42.55,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "orderValue": 0.74,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "orderValue": 0.24,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "orderValue": 0.36,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "orderValue": 0.18,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "orderValue": 3.87,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "orderValue": 0.17,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "orderValue": 42.74,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "orderValue": 1.53,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "orderValue": 0.45,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "orderValue": 0.56,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "orderValue": 0.19,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "orderValue": 13.66,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "orderValue": 0.37,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "orderValue": 76.34,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "orderValue": 0.69,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "orderValue": 0.14,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "orderValue": 2.17,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "orderValue": 1.24,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "orderValue": 2.6,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "orderValue": 0.94,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "orderValue": 47.94,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "orderValue": 1.17,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "orderValue": 2.09,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "orderValue": 2.15,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "orderValue": 0.23,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "orderValue": 2.62,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "orderValue": 0.3,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202508",
+    "mnyr": "AUG-25",
+    "orderValue": 37.27,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202508",
+    "mnyr": "AUG-25",
+    "orderValue": 0.69,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202508",
+    "mnyr": "AUG-25",
+    "orderValue": 0.26,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202508",
+    "mnyr": "AUG-25",
+    "orderValue": 24.69,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202508",
+    "mnyr": "AUG-25",
+    "orderValue": 0.2,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202508",
+    "mnyr": "AUG-25",
+    "orderValue": 2.49,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202508",
+    "mnyr": "AUG-25",
+    "orderValue": 0.87,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202509",
+    "mnyr": "SEP-25",
+    "orderValue": 38.68,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202509",
+    "mnyr": "SEP-25",
+    "orderValue": 1.3,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202509",
+    "mnyr": "SEP-25",
+    "orderValue": 0.19,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202509",
+    "mnyr": "SEP-25",
+    "orderValue": 10.88,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202509",
+    "mnyr": "SEP-25",
+    "orderValue": 0.2,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202509",
+    "mnyr": "SEP-25",
+    "orderValue": 2.17,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202509",
+    "mnyr": "SEP-25",
+    "orderValue": 0.72,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202510",
+    "mnyr": "OCT-25",
+    "orderValue": 33.01,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202510",
+    "mnyr": "OCT-25",
+    "orderValue": 1.33,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202510",
+    "mnyr": "OCT-25",
+    "orderValue": 0.16,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202510",
+    "mnyr": "OCT-25",
+    "orderValue": 0.58,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202510",
+    "mnyr": "OCT-25",
+    "orderValue": 0.76,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202510",
+    "mnyr": "OCT-25",
+    "orderValue": 2.96,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202510",
+    "mnyr": "OCT-25",
+    "orderValue": 0.35,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202511",
+    "mnyr": "NOV-25",
+    "orderValue": 39.6,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202511",
+    "mnyr": "NOV-25",
+    "orderValue": 0.95,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202511",
+    "mnyr": "NOV-25",
+    "orderValue": 0.29,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202511",
+    "mnyr": "NOV-25",
+    "orderValue": 11,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202511",
+    "mnyr": "NOV-25",
+    "orderValue": 0.66,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202511",
+    "mnyr": "NOV-25",
+    "orderValue": 3.62,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202511",
+    "mnyr": "NOV-25",
+    "orderValue": 0.25,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202512",
+    "mnyr": "DEC-25",
+    "orderValue": 46.98,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202512",
+    "mnyr": "DEC-25",
+    "orderValue": 1.17,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202512",
+    "mnyr": "DEC-25",
+    "orderValue": 0.37,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202512",
+    "mnyr": "DEC-25",
+    "orderValue": 55.1,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202512",
+    "mnyr": "DEC-25",
+    "orderValue": 0.79,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202512",
+    "mnyr": "DEC-25",
+    "orderValue": 2.3,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202512",
+    "mnyr": "DEC-25",
+    "orderValue": 0.79,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202601",
+    "mnyr": "JAN-26",
+    "orderValue": 55.37,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202601",
+    "mnyr": "JAN-26",
+    "orderValue": 0.88,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202601",
+    "mnyr": "JAN-26",
+    "orderValue": 0.24,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202601",
+    "mnyr": "JAN-26",
+    "orderValue": 1.48,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202601",
+    "mnyr": "JAN-26",
+    "orderValue": 0.82,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202601",
+    "mnyr": "JAN-26",
+    "orderValue": 13.44,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202601",
+    "mnyr": "JAN-26",
+    "orderValue": 3.04,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202601",
+    "mnyr": "JAN-26",
+    "orderValue": 0.07,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202602",
+    "mnyr": "FEB-26",
+    "orderValue": 46.57,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202602",
+    "mnyr": "FEB-26",
+    "orderValue": 0.62,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202602",
+    "mnyr": "FEB-26",
+    "orderValue": 0.06,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202602",
+    "mnyr": "FEB-26",
+    "orderValue": 5.44,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202602",
+    "mnyr": "FEB-26",
+    "orderValue": 0.37,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202602",
+    "mnyr": "FEB-26",
+    "orderValue": 1.68,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202602",
+    "mnyr": "FEB-26",
+    "orderValue": 3.5,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202602",
+    "mnyr": "FEB-26",
+    "orderValue": 0.32,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202603",
+    "mnyr": "MAR-26",
+    "orderValue": 58.93,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202603",
+    "mnyr": "MAR-26",
+    "orderValue": 1.64,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202603",
+    "mnyr": "MAR-26",
+    "orderValue": 0.78,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202603",
+    "mnyr": "MAR-26",
+    "orderValue": 3.24,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202603",
+    "mnyr": "MAR-26",
+    "orderValue": 0.97,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202603",
+    "mnyr": "MAR-26",
+    "orderValue": 2.04,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202603",
+    "mnyr": "MAR-26",
+    "orderValue": 2.17,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202603",
+    "mnyr": "MAR-26",
+    "orderValue": 0.17,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "orderValue": 75.55,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "orderValue": 0.54,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "orderValue": 0.01,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "orderValue": 0.97,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "orderValue": 0.78,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "orderValue": 4.51,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "orderValue": 4.86,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "orderValue": 0.15,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1385,
+    "ouName": "Vietnam Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "orderValue": 0.03,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "orderValue": 39.37,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "orderValue": 1.41,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "orderValue": 2.44,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "orderValue": 1.15,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "orderValue": 5.38,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "orderValue": 4.71,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "orderValue": 2.11,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1385,
+    "ouName": "Vietnam Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "orderValue": 0.14,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "orderValue": 39.16,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "orderValue": 1.99,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "orderValue": 1.77,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "orderValue": 0.54,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "orderValue": 3.32,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "orderValue": 4.14,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "orderValue": 0.51,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1385,
+    "ouName": "Vietnam Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "orderValue": 0.04,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "orderValue": 26.69,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "orderValue": 2.02,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "orderValue": 0.33,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "orderValue": 0.12,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "orderValue": 2.02,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "orderValue": 7.47,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "orderValue": 0.54,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1385,
+    "ouName": "Vietnam Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "orderValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  }
+]
+Response headers
+ content-type: application/json; charset=utf-8 
+ date: Tue,14 Jul 2026 03:03:09 GMT 
+ server: Kestrel 
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+text/plain
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "orgId": 0,
+    "ouName": "string",
+    "fiscalYearPeriod": "string",
+    "yrmn": "string",
+    "mnyr": "string",
+    "orderValue": 0,
+    "migratedAt": "2026-07-14T03:03:23.204Z"
+  }
+]
+No links
+
+GET
+/api/OrderSales/sales-trend
+
+Parameters
+Cancel
+Name	Description
+orgId
+integer($int32)
+(query)
+orgId
+Execute
+Clear
+Responses
+Curl
+
+curl -X 'GET' \
+  'https://localhost:7090/api/OrderSales/sales-trend' \
+  -H 'accept: text/plain'
+Request URL
+https://localhost:7090/api/OrderSales/sales-trend
+Server response
+Code	Details
+200	
+Response body
+Download
+[
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "salesValue": 37.25,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "salesValue": 1.28,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "salesValue": 0.26,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "salesValue": 1.57,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "salesValue": 0.21,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "salesValue": 3.05,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "salesValue": 0.21,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "salesValue": 39.35,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "salesValue": 1.33,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "salesValue": 0.37,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "salesValue": 3.42,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "salesValue": 0.74,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "salesValue": 3.21,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "salesValue": 0.21,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "salesValue": 46.99,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "salesValue": 0.94,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "salesValue": 0.16,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "salesValue": 10.24,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "salesValue": 0.22,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "salesValue": 4.87,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "salesValue": 1.35,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "salesValue": 44.98,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "salesValue": 1.01,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "salesValue": 0.28,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "salesValue": 2.67,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "salesValue": 1.1,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "salesValue": 5.35,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "salesValue": 0.77,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202508",
+    "mnyr": "AUG-25",
+    "salesValue": 46.01,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202508",
+    "mnyr": "AUG-25",
+    "salesValue": 1.2,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202508",
+    "mnyr": "AUG-25",
+    "salesValue": 0.36,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202508",
+    "mnyr": "AUG-25",
+    "salesValue": 2.91,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202508",
+    "mnyr": "AUG-25",
+    "salesValue": 0.07,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202508",
+    "mnyr": "AUG-25",
+    "salesValue": 4.38,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202508",
+    "mnyr": "AUG-25",
+    "salesValue": 0.26,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202509",
+    "mnyr": "SEP-25",
+    "salesValue": 49.88,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202509",
+    "mnyr": "SEP-25",
+    "salesValue": 1.14,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202509",
+    "mnyr": "SEP-25",
+    "salesValue": 0.71,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202509",
+    "mnyr": "SEP-25",
+    "salesValue": 2.69,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202509",
+    "mnyr": "SEP-25",
+    "salesValue": 0.31,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202509",
+    "mnyr": "SEP-25",
+    "salesValue": 4.96,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202509",
+    "mnyr": "SEP-25",
+    "salesValue": 1.14,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202510",
+    "mnyr": "OCT-25",
+    "salesValue": 36.97,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202510",
+    "mnyr": "OCT-25",
+    "salesValue": 1.14,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202510",
+    "mnyr": "OCT-25",
+    "salesValue": 1.54,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202510",
+    "mnyr": "OCT-25",
+    "salesValue": 3.23,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202510",
+    "mnyr": "OCT-25",
+    "salesValue": 0.48,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202510",
+    "mnyr": "OCT-25",
+    "salesValue": 3.32,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202510",
+    "mnyr": "OCT-25",
+    "salesValue": 1.18,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202511",
+    "mnyr": "NOV-25",
+    "salesValue": 46.04,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202511",
+    "mnyr": "NOV-25",
+    "salesValue": 0.96,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202511",
+    "mnyr": "NOV-25",
+    "salesValue": 0.36,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202511",
+    "mnyr": "NOV-25",
+    "salesValue": 6.31,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202511",
+    "mnyr": "NOV-25",
+    "salesValue": 0.34,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202511",
+    "mnyr": "NOV-25",
+    "salesValue": 3.16,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202511",
+    "mnyr": "NOV-25",
+    "salesValue": 0.48,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202512",
+    "mnyr": "DEC-25",
+    "salesValue": 49.6,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202512",
+    "mnyr": "DEC-25",
+    "salesValue": 0.53,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202512",
+    "mnyr": "DEC-25",
+    "salesValue": 0.07,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202512",
+    "mnyr": "DEC-25",
+    "salesValue": 1.47,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202512",
+    "mnyr": "DEC-25",
+    "salesValue": 0.56,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202512",
+    "mnyr": "DEC-25",
+    "salesValue": 4.79,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202512",
+    "mnyr": "DEC-25",
+    "salesValue": 0.73,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202601",
+    "mnyr": "JAN-26",
+    "salesValue": 43.24,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202601",
+    "mnyr": "JAN-26",
+    "salesValue": 1.31,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202601",
+    "mnyr": "JAN-26",
+    "salesValue": 0.47,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202601",
+    "mnyr": "JAN-26",
+    "salesValue": 2.98,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202601",
+    "mnyr": "JAN-26",
+    "salesValue": 0.31,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202601",
+    "mnyr": "JAN-26",
+    "salesValue": 4.84,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202601",
+    "mnyr": "JAN-26",
+    "salesValue": 1.62,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202602",
+    "mnyr": "FEB-26",
+    "salesValue": 43.2,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202602",
+    "mnyr": "FEB-26",
+    "salesValue": 1.08,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202602",
+    "mnyr": "FEB-26",
+    "salesValue": 0.18,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202602",
+    "mnyr": "FEB-26",
+    "salesValue": 5.05,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202602",
+    "mnyr": "FEB-26",
+    "salesValue": 1.03,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202602",
+    "mnyr": "FEB-26",
+    "salesValue": 5.3,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202602",
+    "mnyr": "FEB-26",
+    "salesValue": 0.77,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202603",
+    "mnyr": "MAR-26",
+    "salesValue": 50.22,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202603",
+    "mnyr": "MAR-26",
+    "salesValue": 1.18,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202603",
+    "mnyr": "MAR-26",
+    "salesValue": 0.3,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202603",
+    "mnyr": "MAR-26",
+    "salesValue": 9.35,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202603",
+    "mnyr": "MAR-26",
+    "salesValue": 0.18,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202603",
+    "mnyr": "MAR-26",
+    "salesValue": 5.11,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202603",
+    "mnyr": "MAR-26",
+    "salesValue": 3.64,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202603",
+    "mnyr": "MAR-26",
+    "salesValue": 0.12,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "salesValue": 39.19,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "salesValue": 1.3,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "salesValue": 0.25,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "salesValue": 1.02,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "salesValue": 0.37,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "salesValue": 3.46,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "salesValue": 0.58,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "salesValue": 0.11,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "salesValue": 45.86,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "salesValue": 1.52,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "salesValue": 0.31,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "salesValue": 5.37,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "salesValue": 0.39,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "salesValue": 3.32,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "salesValue": 0.29,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "salesValue": 0.34,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "salesValue": 51.9,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "salesValue": 1.52,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "salesValue": 0.47,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "salesValue": 2.36,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "salesValue": 1.92,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "salesValue": 5.25,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "salesValue": 0.78,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "salesValue": 0.32,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "salesValue": 16.47,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "salesValue": 0.89,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "salesValue": 0.41,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "salesValue": 0.02,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "salesValue": 1.02,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "salesValue": 0.49,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "salesValue": 0.49,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  }
+]
+Response headers
+ content-type: application/json; charset=utf-8 
+ date: Tue,14 Jul 2026 03:03:06 GMT 
+ server: Kestrel 
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+text/plain
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "orgId": 0,
+    "ouName": "string",
+    "fiscalYearPeriod": "string",
+    "yrmn": "string",
+    "mnyr": "string",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T03:03:23.246Z"
+  }
+]
+No links
+
+GET
+/api/OrderSales/rolling-10d
+
+Parameters
+Cancel
+Name	Description
+orgId
+integer($int32)
+(query)
+orgId
+Execute
+Clear
+Responses
+Curl
+
+curl -X 'GET' \
+  'https://localhost:7090/api/OrderSales/rolling-10d' \
+  -H 'accept: text/plain'
+Request URL
+https://localhost:7090/api/OrderSales/rolling-10d
+Server response
+Code	Details
+200	
+Response body
+Download
+[
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "04 Jul",
+    "orderDate": "2025-07-04T00:00:00",
+    "salesValue": 1.27,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "04 Jul",
+    "orderDate": "2025-07-04T00:00:00",
+    "salesValue": 0.03,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "04 Jul",
+    "orderDate": "2025-07-04T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "04 Jul",
+    "orderDate": "2025-07-04T00:00:00",
+    "salesValue": 0.03,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "04 Jul",
+    "orderDate": "2025-07-04T00:00:00",
+    "salesValue": 0.17,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "04 Jul",
+    "orderDate": "2025-07-04T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "05 Jul",
+    "orderDate": "2025-07-05T00:00:00",
+    "salesValue": 0.9,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "05 Jul",
+    "orderDate": "2025-07-05T00:00:00",
+    "salesValue": 0.04,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "05 Jul",
+    "orderDate": "2025-07-05T00:00:00",
+    "salesValue": 0.04,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "05 Jul",
+    "orderDate": "2025-07-05T00:00:00",
+    "salesValue": 0.05,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "05 Jul",
+    "orderDate": "2025-07-05T00:00:00",
+    "salesValue": 0.08,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "07 Jul",
+    "orderDate": "2025-07-07T00:00:00",
+    "salesValue": 1.97,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "07 Jul",
+    "orderDate": "2025-07-07T00:00:00",
+    "salesValue": 0.05,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "07 Jul",
+    "orderDate": "2025-07-07T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "07 Jul",
+    "orderDate": "2025-07-07T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "07 Jul",
+    "orderDate": "2025-07-07T00:00:00",
+    "salesValue": 0.2,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "07 Jul",
+    "orderDate": "2025-07-07T00:00:00",
+    "salesValue": 0.6,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "08 Jul",
+    "orderDate": "2025-07-08T00:00:00",
+    "salesValue": 1.66,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "08 Jul",
+    "orderDate": "2025-07-08T00:00:00",
+    "salesValue": 0.05,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "08 Jul",
+    "orderDate": "2025-07-08T00:00:00",
+    "salesValue": 0.01,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "08 Jul",
+    "orderDate": "2025-07-08T00:00:00",
+    "salesValue": 0.25,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "08 Jul",
+    "orderDate": "2025-07-08T00:00:00",
+    "salesValue": 0.03,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "09 Jul",
+    "orderDate": "2025-07-09T00:00:00",
+    "salesValue": 1.58,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "09 Jul",
+    "orderDate": "2025-07-09T00:00:00",
+    "salesValue": 0.05,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "09 Jul",
+    "orderDate": "2025-07-09T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "09 Jul",
+    "orderDate": "2025-07-09T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "09 Jul",
+    "orderDate": "2025-07-09T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "09 Jul",
+    "orderDate": "2025-07-09T00:00:00",
+    "salesValue": 0.26,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "09 Jul",
+    "orderDate": "2025-07-09T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "10 Jul",
+    "orderDate": "2025-07-10T00:00:00",
+    "salesValue": 1.59,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "10 Jul",
+    "orderDate": "2025-07-10T00:00:00",
+    "salesValue": 0.05,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "10 Jul",
+    "orderDate": "2025-07-10T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "10 Jul",
+    "orderDate": "2025-07-10T00:00:00",
+    "salesValue": 0.29,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "10 Jul",
+    "orderDate": "2025-07-10T00:00:00",
+    "salesValue": 0.38,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "10 Jul",
+    "orderDate": "2025-07-10T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "11 Jul",
+    "orderDate": "2025-07-11T00:00:00",
+    "salesValue": 1.54,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "11 Jul",
+    "orderDate": "2025-07-11T00:00:00",
+    "salesValue": 0.04,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "11 Jul",
+    "orderDate": "2025-07-11T00:00:00",
+    "salesValue": 0.01,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "11 Jul",
+    "orderDate": "2025-07-11T00:00:00",
+    "salesValue": 0.01,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "11 Jul",
+    "orderDate": "2025-07-11T00:00:00",
+    "salesValue": 0.15,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "11 Jul",
+    "orderDate": "2025-07-11T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "12 Jul",
+    "orderDate": "2025-07-12T00:00:00",
+    "salesValue": 1.54,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "12 Jul",
+    "orderDate": "2025-07-12T00:00:00",
+    "salesValue": 0.03,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "12 Jul",
+    "orderDate": "2025-07-12T00:00:00",
+    "salesValue": 0.01,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "12 Jul",
+    "orderDate": "2025-07-12T00:00:00",
+    "salesValue": 0.08,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "12 Jul",
+    "orderDate": "2025-07-12T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "12 Jul",
+    "orderDate": "2025-07-12T00:00:00",
+    "salesValue": 0.14,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "12 Jul",
+    "orderDate": "2025-07-12T00:00:00",
+    "salesValue": 0.02,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "14 Jul",
+    "orderDate": "2025-07-14T00:00:00",
+    "salesValue": 1.67,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "14 Jul",
+    "orderDate": "2025-07-14T00:00:00",
+    "salesValue": 0.03,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "14 Jul",
+    "orderDate": "2025-07-14T00:00:00",
+    "salesValue": 0.07,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "14 Jul",
+    "orderDate": "2025-07-14T00:00:00",
+    "salesValue": 0.3,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "dynamicPeriod": "Previous Year (Same Window)",
+    "dayLabel": "14 Jul",
+    "orderDate": "2025-07-14T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "04 Jul",
+    "orderDate": "2026-07-04T00:00:00",
+    "salesValue": 0.83,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "04 Jul",
+    "orderDate": "2026-07-04T00:00:00",
+    "salesValue": 0.36,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "04 Jul",
+    "orderDate": "2026-07-04T00:00:00",
+    "salesValue": 0.02,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "04 Jul",
+    "orderDate": "2026-07-04T00:00:00",
+    "salesValue": 0.07,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "04 Jul",
+    "orderDate": "2026-07-04T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "06 Jul",
+    "orderDate": "2026-07-06T00:00:00",
+    "salesValue": 2.05,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "06 Jul",
+    "orderDate": "2026-07-06T00:00:00",
+    "salesValue": 0.05,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "06 Jul",
+    "orderDate": "2026-07-06T00:00:00",
+    "salesValue": 0.06,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "06 Jul",
+    "orderDate": "2026-07-06T00:00:00",
+    "salesValue": 0.14,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "06 Jul",
+    "orderDate": "2026-07-06T00:00:00",
+    "salesValue": 0.01,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "07 Jul",
+    "orderDate": "2026-07-07T00:00:00",
+    "salesValue": 1.81,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "07 Jul",
+    "orderDate": "2026-07-07T00:00:00",
+    "salesValue": 0.06,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "07 Jul",
+    "orderDate": "2026-07-07T00:00:00",
+    "salesValue": 0.09,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "07 Jul",
+    "orderDate": "2026-07-07T00:00:00",
+    "salesValue": 0.02,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "07 Jul",
+    "orderDate": "2026-07-07T00:00:00",
+    "salesValue": 0.43,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "08 Jul",
+    "orderDate": "2026-07-08T00:00:00",
+    "salesValue": 1.88,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "08 Jul",
+    "orderDate": "2026-07-08T00:00:00",
+    "salesValue": 0.05,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "08 Jul",
+    "orderDate": "2026-07-08T00:00:00",
+    "salesValue": 0.01,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "08 Jul",
+    "orderDate": "2026-07-08T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "08 Jul",
+    "orderDate": "2026-07-08T00:00:00",
+    "salesValue": 0.07,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "08 Jul",
+    "orderDate": "2026-07-08T00:00:00",
+    "salesValue": 0.02,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "09 Jul",
+    "orderDate": "2026-07-09T00:00:00",
+    "salesValue": 1.98,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "09 Jul",
+    "orderDate": "2026-07-09T00:00:00",
+    "salesValue": 0.06,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "09 Jul",
+    "orderDate": "2026-07-09T00:00:00",
+    "salesValue": 0.01,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "09 Jul",
+    "orderDate": "2026-07-09T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "09 Jul",
+    "orderDate": "2026-07-09T00:00:00",
+    "salesValue": 0.16,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "09 Jul",
+    "orderDate": "2026-07-09T00:00:00",
+    "salesValue": 0.21,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "10 Jul",
+    "orderDate": "2026-07-10T00:00:00",
+    "salesValue": 1.48,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "10 Jul",
+    "orderDate": "2026-07-10T00:00:00",
+    "salesValue": 0.07,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "10 Jul",
+    "orderDate": "2026-07-10T00:00:00",
+    "salesValue": 0.07,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "10 Jul",
+    "orderDate": "2026-07-10T00:00:00",
+    "salesValue": 0.1,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "10 Jul",
+    "orderDate": "2026-07-10T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "10 Jul",
+    "orderDate": "2026-07-10T00:00:00",
+    "salesValue": 0.21,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "11 Jul",
+    "orderDate": "2026-07-11T00:00:00",
+    "salesValue": 1.52,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "11 Jul",
+    "orderDate": "2026-07-11T00:00:00",
+    "salesValue": 0.1,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "11 Jul",
+    "orderDate": "2026-07-11T00:00:00",
+    "salesValue": 0.02,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "11 Jul",
+    "orderDate": "2026-07-11T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "11 Jul",
+    "orderDate": "2026-07-11T00:00:00",
+    "salesValue": 0.18,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "11 Jul",
+    "orderDate": "2026-07-11T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "13 Jul",
+    "orderDate": "2026-07-13T00:00:00",
+    "salesValue": 2.16,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "13 Jul",
+    "orderDate": "2026-07-13T00:00:00",
+    "salesValue": 0.1,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "13 Jul",
+    "orderDate": "2026-07-13T00:00:00",
+    "salesValue": 0.01,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "13 Jul",
+    "orderDate": "2026-07-13T00:00:00",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "13 Jul",
+    "orderDate": "2026-07-13T00:00:00",
+    "salesValue": 0.08,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "13 Jul",
+    "orderDate": "2026-07-13T00:00:00",
+    "salesValue": 0.01,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "dynamicPeriod": "Current Year (Last 10 Days)",
+    "dayLabel": "13 Jul",
+    "orderDate": "2026-07-13T00:00:00",
+    "salesValue": 0.07,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  }
+]
+Response headers
+ content-type: application/json; charset=utf-8 
+ date: Tue,14 Jul 2026 03:03:02 GMT 
+ server: Kestrel 
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+text/plain
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "orgId": 0,
+    "ouName": "string",
+    "dynamicPeriod": "string",
+    "dayLabel": "string",
+    "orderDate": "2026-07-14T03:03:23.278Z",
+    "salesValue": 0,
+    "migratedAt": "2026-07-14T03:03:23.278Z"
+  }
+]
+No links
+
+GET
+/api/OrderSales/ytd-cumulative
+
+Parameters
+Cancel
+Name	Description
+orgId
+integer($int32)
+(query)
+orgId
+Execute
+Clear
+Responses
+Curl
+
+curl -X 'GET' \
+  'https://localhost:7090/api/OrderSales/ytd-cumulative' \
+  -H 'accept: text/plain'
+Request URL
+https://localhost:7090/api/OrderSales/ytd-cumulative
+Server response
+Code	Details
+200	
+Response body
+Download
+[
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "monthlySales": 37.25,
+    "cumulativeYtd": 37.25,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "monthlySales": 39.35,
+    "cumulativeYtd": 76.6,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "monthlySales": 46.99,
+    "cumulativeYtd": 123.59,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "monthlySales": 16.64,
+    "cumulativeYtd": 140.23,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "monthlySales": 39.19,
+    "cumulativeYtd": 39.19,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "monthlySales": 45.86,
+    "cumulativeYtd": 85.05,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "monthlySales": 51.9,
+    "cumulativeYtd": 136.95,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "monthlySales": 16.47,
+    "cumulativeYtd": 153.42,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "monthlySales": 1.28,
+    "cumulativeYtd": 1.28,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "monthlySales": 1.33,
+    "cumulativeYtd": 2.62,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "monthlySales": 0.94,
+    "cumulativeYtd": 3.56,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "monthlySales": 0.5,
+    "cumulativeYtd": 4.05,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "monthlySales": 1.3,
+    "cumulativeYtd": 1.3,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "monthlySales": 1.52,
+    "cumulativeYtd": 2.83,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "monthlySales": 1.52,
+    "cumulativeYtd": 4.35,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "monthlySales": 0.89,
+    "cumulativeYtd": 5.24,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "monthlySales": 0.26,
+    "cumulativeYtd": 0.26,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "monthlySales": 0.37,
+    "cumulativeYtd": 0.63,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "monthlySales": 0.16,
+    "cumulativeYtd": 0.78,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "monthlySales": 0.02,
+    "cumulativeYtd": 0.81,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "monthlySales": 0.25,
+    "cumulativeYtd": 0.25,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "monthlySales": 0.31,
+    "cumulativeYtd": 0.56,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "monthlySales": 0.47,
+    "cumulativeYtd": 1.03,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "monthlySales": 1.57,
+    "cumulativeYtd": 1.57,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "monthlySales": 3.42,
+    "cumulativeYtd": 4.99,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "monthlySales": 10.24,
+    "cumulativeYtd": 15.23,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "monthlySales": 0.51,
+    "cumulativeYtd": 15.74,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "monthlySales": 1.02,
+    "cumulativeYtd": 1.02,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "monthlySales": 5.37,
+    "cumulativeYtd": 6.39,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "monthlySales": 2.36,
+    "cumulativeYtd": 8.75,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "monthlySales": 0.41,
+    "cumulativeYtd": 9.16,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "monthlySales": 0.21,
+    "cumulativeYtd": 0.21,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "monthlySales": 0.74,
+    "cumulativeYtd": 0.95,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "monthlySales": 0.22,
+    "cumulativeYtd": 1.18,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "monthlySales": 0.1,
+    "cumulativeYtd": 1.27,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "monthlySales": 0.37,
+    "cumulativeYtd": 0.37,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "monthlySales": 0.39,
+    "cumulativeYtd": 0.75,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "monthlySales": 1.92,
+    "cumulativeYtd": 2.68,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "monthlySales": 0.02,
+    "cumulativeYtd": 2.69,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "monthlySales": 3.05,
+    "cumulativeYtd": 3.05,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "monthlySales": 3.21,
+    "cumulativeYtd": 6.27,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "monthlySales": 4.87,
+    "cumulativeYtd": 11.14,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "monthlySales": 2.16,
+    "cumulativeYtd": 13.3,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "monthlySales": 3.46,
+    "cumulativeYtd": 3.46,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "monthlySales": 3.32,
+    "cumulativeYtd": 6.78,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "monthlySales": 5.25,
+    "cumulativeYtd": 12.03,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "monthlySales": 1.02,
+    "cumulativeYtd": 13.04,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202504",
+    "mnyr": "APR-25",
+    "monthlySales": 0.21,
+    "cumulativeYtd": 0.21,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202505",
+    "mnyr": "MAY-25",
+    "monthlySales": 0.21,
+    "cumulativeYtd": 0.42,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202506",
+    "mnyr": "JUN-25",
+    "monthlySales": 1.35,
+    "cumulativeYtd": 1.77,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Previous FY",
+    "yrmn": "202507",
+    "mnyr": "JUL-25",
+    "monthlySales": 0.67,
+    "cumulativeYtd": 2.44,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "monthlySales": 0.58,
+    "cumulativeYtd": 0.58,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "monthlySales": 0.29,
+    "cumulativeYtd": 0.87,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "monthlySales": 0.78,
+    "cumulativeYtd": 1.65,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "monthlySales": 0.49,
+    "cumulativeYtd": 2.14,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202604",
+    "mnyr": "APR-26",
+    "monthlySales": 0.11,
+    "cumulativeYtd": 0.11,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202605",
+    "mnyr": "MAY-26",
+    "monthlySales": 0.34,
+    "cumulativeYtd": 0.44,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202606",
+    "mnyr": "JUN-26",
+    "monthlySales": 0.32,
+    "cumulativeYtd": 0.76,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit",
+    "fiscalYearPeriod": "Current FY",
+    "yrmn": "202607",
+    "mnyr": "JUL-26",
+    "monthlySales": 0.49,
+    "cumulativeYtd": 1.25,
+    "migratedAt": "2026-07-14T08:13:48.1609553"
+  }
+]
+Response headers
+ content-type: application/json; charset=utf-8 
+ date: Tue,14 Jul 2026 03:02:32 GMT 
+ server: Kestrel 
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+text/plain
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "orgId": 0,
+    "ouName": "string",
+    "fiscalYearPeriod": "string",
+    "yrmn": "string",
+    "mnyr": "string",
+    "monthlySales": 0,
+    "cumulativeYtd": 0,
+    "migratedAt": "2026-07-14T03:03:23.306Z"
+  }
+]
+No links
+
+GET
+/api/OrderSales/operating-units
+
+Parameters
+Cancel
+No parameters
+
+Execute
+Clear
+Responses
+Curl
+
+curl -X 'GET' \
+  'https://localhost:7090/api/OrderSales/operating-units' \
+  -H 'accept: text/plain'
+Request URL
+https://localhost:7090/api/OrderSales/operating-units
+Server response
+Code	Details
+200	
+Response body
+Download
+[
+  {
+    "orgId": 103,
+    "ouName": "Janatics Operating Unit"
+  },
+  {
+    "orgId": 204,
+    "ouName": "Skyfast Operating Unit"
+  },
+  {
+    "orgId": 405,
+    "ouName": "Janatics USA Operating Unit"
+  },
+  {
+    "orgId": 584,
+    "ouName": "Janatics Industrial Automation Pvt Ltd Operating Unit"
+  },
+  {
+    "orgId": 684,
+    "ouName": "Dubai Operating Unit"
+  },
+  {
+    "orgId": 704,
+    "ouName": "Polymer Operating Unit"
+  },
+  {
+    "orgId": 844,
+    "ouName": "Global Operating Unit"
+  },
+  {
+    "orgId": 1344,
+    "ouName": "Janatics Global USA Operating Unit"
+  }
+]
+Response headers
+ content-type: application/json; charset=utf-8 
+ date: Tue,14 Jul 2026 03:03:22 GMT 
+ server: Kestrel 
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+text/plain
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "orgId": 0,
+    "ouName": "string"
+  }
+]

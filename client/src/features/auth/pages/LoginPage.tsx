@@ -1,5 +1,4 @@
-﻿import { useAuth } from "@/context/AuthContext";
-import { cn } from "@/lib/utils";
+﻿import { Button } from "@/shared/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,8 +6,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
-import { Spinner } from "@/shared/components/ui/Spinner";
-import { useEffect, useState, useRef } from "react";
+import { Field, FieldGroup, FieldLabel } from "@/shared/components/ui/field";
+import { Input } from "@/shared/components/ui/input";
+import { cn } from "@/lib/utils";
+import { useAuth } from "@/context/AuthContext";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export function LoginPage() {
@@ -17,14 +19,8 @@ export function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
-
-  const hasAttemptedLogin = useRef(false);
-
   const from =
     (location.state as { from?: { pathname: string } })?.from?.pathname || "/dashboard";
-  const searchParams = new URLSearchParams(location.search);
-  const cardNoParam = searchParams.get("cardno");
-  const cardNo = cardNoParam ? parseInt(cardNoParam, 10) : null;
 
   useEffect(() => {
     if (auth?.isAuthenticated) {
@@ -32,19 +28,18 @@ export function LoginPage() {
     }
   }, [auth, from, navigate]);
 
-  useEffect(() => {
-    if (cardNo !== null && !hasAttemptedLogin.current && !auth?.isAuthenticated) {
-      hasAttemptedLogin.current = true;
-      handleSubmit(cardNo);
-    }
-  }, [cardNo, auth]);
-
-  const handleSubmit = async (cardNumber: number) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setError(null);
     setLoading(true);
 
+    const formData = new FormData(event.currentTarget);
+    const username = formData.get("username") as string;
+    const password = formData.get("password") as string;
+
     try {
-      await login(cardNumber);
+      await login(username, password);
+      navigate(from, { replace: true });
     } catch (err) {
       setError("Invalid credentials or server connection error.");
     } finally {
@@ -60,19 +55,38 @@ export function LoginPage() {
           <CardDescription>Login with your account</CardDescription>
         </CardHeader>
         <CardContent>
-          {loading ? (
-            <div className="pointer-events-none fixed inset-0 z-10 flex items-center justify-center bg-transparent backdrop-blur-[6px]">
-              <div className="inline-flex items-center gap-4 rounded-2xl bg-transparent shadow-none">
-                <div className="relative flex h-5 w-5 items-center justify-center">
-                  <Spinner />
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <FieldGroup>
+              <Field>
+                <FieldLabel htmlFor="username">Username</FieldLabel>
+                <Input
+                  id="username"
+                  name="username"
+                  type="text"
+                  placeholder="Username"
+                  required
+                />
+              </Field>
+              <Field>
+                <div className="flex items-center">
+                  <FieldLabel htmlFor="password">Password</FieldLabel>
                 </div>
-              </div>
-            </div>
-          ) : error ? (
-            <p className="text-center text-sm text-red-500">{error}</p>
-          ) : (
-            <p className="text-center text-sm text-slate-500">Processing login...</p>
-          )}
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  placeholder="Password"
+                />
+              </Field>
+            </FieldGroup>
+
+            {error && <p className="text-sm font-medium text-red-500">{error}</p>}
+
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Signing in..." : "Sign in"}
+            </Button>
+          </form>
         </CardContent>
       </Card>
     </div>

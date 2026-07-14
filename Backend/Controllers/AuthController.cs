@@ -1,42 +1,38 @@
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 
-namespace Backend.Controllers;
-
-[ApiController]
-[Route("api/[controller]")]
-public class AuthController(IConfiguration configuration) : ControllerBase
+namespace backend.Controllers
 {
-    private readonly string _connectionString = configuration.GetConnectionString("SqlServerConnection")
-        ?? configuration.GetConnectionString("SqlServer")
-        ?? "";
-
-    [HttpGet("validate-card")]
-    public async Task<IActionResult> ValidateCard([FromQuery] string cardNo)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class AuthController : ControllerBase
     {
-        if (string.IsNullOrWhiteSpace(cardNo))
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] LoginRequest loginRequest)
         {
-            return BadRequest(new { message = "Card number is required." });
-        }
-
-        string query = "SELECT COUNT(*) FROM jan_staff_master WHERE card_no = @CardNo";
-
-        using (SqlConnection connection = new SqlConnection(_connectionString))
-        {
-            using (SqlCommand command = new SqlCommand(query, connection))
+            if (loginRequest == null)
             {
-                command.Parameters.AddWithValue("@CardNo", cardNo);
-
-                await connection.OpenAsync();
-                int userCount = (int)await command.ExecuteScalarAsync();
-
-                if (userCount > 0)
-                {
-                    return Ok(new { isAuthenticated = true, message = "Access granted." });
-                }
+                return BadRequest("Invalid client request");
             }
-        }
 
-        return Unauthorized(new { isAuthenticated = false, message = "Invalid user number." });
+            if (loginRequest.Email == "janatics" && loginRequest.Password == "jan@1977")
+            {
+                var successResponse = new
+                {
+                    Message = "Login successful",
+                    IsAuthenticated = true,
+                };
+
+                return Ok(successResponse);
+            }
+
+            var failResponse = new
+            {
+                Message = "Invalid credentials",
+                IsAuthenticated = false,
+            };
+
+            return Unauthorized(failResponse);
+        }
     }
 }

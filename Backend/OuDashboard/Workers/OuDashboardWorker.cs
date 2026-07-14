@@ -41,10 +41,16 @@ public class OuDashboardWorker : BackgroundService
             }
             catch (OperationCanceledException)
             {
-                _log.LogInformation("Worker cancelled during wait. Stopping.");
-                break;
+                _log.LogWarning("Worker wait interrupted. Forcing retry execution before looping.");
+
+                // Pass None so the retry method isn't immediately aborted by the shutdown signal
+                await RunWithRetryAsync(CancellationToken.None);
+
+                // Go back to the top of the loop to re-calculate the next daily run
+                continue;
             }
 
+            // Normal scheduled run
             await RunWithRetryAsync(stoppingToken);
         }
 

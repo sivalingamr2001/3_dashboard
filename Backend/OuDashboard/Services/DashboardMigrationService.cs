@@ -9,14 +9,14 @@ using System.Data;
 
 namespace Backend.OuDashboard.Services;
 
-public class DashboardMigrationService : IMigrationService
+public class DashboardMigrationServiceV2 : IMigrationService
 {
     private readonly OracleConnectionFactory    _oracle;
     private readonly SqlServerConnectionFactory _sql;
     private readonly MigrationSettings          _cfg;
     private readonly ILogger<DashboardMigrationService> _log;
 
-    public DashboardMigrationService(
+    public DashboardMigrationServiceV2(
         OracleConnectionFactory              oracle,
         SqlServerConnectionFactory           sql,
         IOptions<MigrationSettings>          opts,

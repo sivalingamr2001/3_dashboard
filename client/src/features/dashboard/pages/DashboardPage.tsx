@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { DashboardHeader } from "../components/DashboardHeader";
 import { KpiCards } from "../components/KpiCards";
 import { OperatingUnitsTable } from "../components/OperatingUnitsTable";
+import SalesOrdersDashboard from "./SalesOrdersDashboard";
+import DayWiseSalesDashboard from "./DayWiseSalesDashboard/index";
 
 export const DashboardPage = () => {
   const { rows, totals, loading, sales, inclIntraSales, toggleIntraSales } = useSales();
@@ -49,6 +51,8 @@ export const DashboardPage = () => {
         />
         <KpiCards totals={displayedTotals} />
         <OperatingUnitsTable rows={rows} onSelectionTotalsChange={setSelectedTotals} />
+        <SalesOrdersDashboard />
+        <DayWiseSalesDashboard />
       </div>
 
       {isOverlayLoading ? (

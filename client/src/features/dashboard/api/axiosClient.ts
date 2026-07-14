@@ -9,8 +9,8 @@ export const axiosClient = axios.create({
   },
 });
 
-export const loginApi = async (cardNo: number) => {
-  const response = await axiosClient.get(`/Auth/validate-card?cardNo=${cardNo}`);
+export const loginApi = async (loginData: { email: string; password: string }) => {
+  const response = await axiosClient.post("/Auth/login", loginData);
   return response.data;
 };
 
@@ -32,3 +32,17 @@ export const getLogs = async () => {
   const response = await axiosClient.get("/Migration/logs");
   return response.data;
 };
+
+export const getOrderData = async (orgId?: number) => {
+  const res = await axiosClient.get("/", {
+    params: { orgId }
+  });
+  return res;
+}
+
+export const getSalesData = async (orgId?: number) => {
+  const res = await axiosClient.get("/", {
+    params: { orgId }
+  });
+  return res;
+}
