@@ -7,8 +7,8 @@ namespace Backend.OuDashboard.Workers;
 
 public class OuDashboardWorker : BackgroundService
 {
-    private readonly IServiceScopeFactory              _scope;
-    private readonly MigrationSettings                 _cfg;
+    private readonly IServiceScopeFactory _scope;
+    private readonly MigrationSettings _cfg;
     private readonly ILogger<OuDashboardWorker> _log;
 
     public OuDashboardWorker(
@@ -17,8 +17,8 @@ public class OuDashboardWorker : BackgroundService
         ILogger<OuDashboardWorker> log)
     {
         _scope = scopeFactory;
-        _cfg   = opts.Value;
-        _log   = log;
+        _cfg = opts.Value;
+        _log = log;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -41,10 +41,16 @@ public class OuDashboardWorker : BackgroundService
             }
             catch (OperationCanceledException)
             {
-                _log.LogInformation("Worker cancelled during wait. Stopping.");
-                break;
+                _log.LogWarning("Worker wait interrupted. Forcing retry execution before looping.");
+
+                // Pass None so the retry method isn't immediately aborted by the shutdown signal
+                await RunWithRetryAsync(CancellationToken.None);
+
+                // Go back to the top of the loop to re-calculate the next daily run
+                continue;
             }
 
+            // Normal scheduled run
             await RunWithRetryAsync(stoppingToken);
         }
 
@@ -54,7 +60,7 @@ public class OuDashboardWorker : BackgroundService
     // ── Next 6:00:00 AM ──────────────────────────────────────────────────────
     private TimeSpan GetDelayUntilNextRun()
     {
-        var now     = DateTime.Now;
+        var now = DateTime.Now;
         var nextRun = new DateTime(
             now.Year, now.Month, now.Day,
             _cfg.ScheduleHour, _cfg.ScheduleMinute, 0);

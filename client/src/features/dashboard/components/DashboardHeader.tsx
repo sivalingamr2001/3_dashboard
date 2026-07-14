@@ -2,6 +2,9 @@ import { useAuth } from "@/context/AuthContext";
 import { useSales } from "@/context/SalesContext";
 import { getCurrentFinancialYear, getPreviousFinancialYear } from "@/lib/utils";
 import { Button } from "@/shared/components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/components/ui/tooltip";
+import { LogOutIcon } from "lucide-react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 type DashboardHeaderProps = {
@@ -43,19 +46,28 @@ export const DashboardHeader = ({
         className={`flex gap-2 ${isMobile ? "w-full justify-between" : "justify-center"}`}
       >
         <Button
+          size="lg"
           onClick={onToggleIntraSales}
           variant={inclIntraSales ? "default" : "outline"}
-          className="h-10 border-slate-300 px-4 text-sm font-semibold whitespace-nowrap text-slate-700 shadow-sm"
+          className="rounded-[8px] border-slate-300 px-4 text-sm font-semibold whitespace-nowrap text-slate-700 shadow-sm"
         >
           {inclIntraSales ? "✓ " : ""}Incl Intra Sales
         </Button>
-        <Button
-          variant="destructive"
-          className="h-10 px-4 whitespace-nowrap"
-          onClick={handleLogout}
-        >
-          Logout
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="destructive"
+              size="lg"
+              className="rounded-[8px] px-4 whitespace-nowrap"
+              onClick={handleLogout}
+            >
+              <LogOutIcon className="h-4 w-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side="bottom" align="center">
+            <p className="text-xs">Log out</p>
+          </TooltipContent>
+        </Tooltip>
       </div>
     </div>
   );

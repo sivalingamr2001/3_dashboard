@@ -44,6 +44,7 @@ namespace Backend
 
             // Register the domain repository service
             builder.Services.AddScoped<IOuSalesRepository, OuSalesRepository>();
+            builder.Services.AddScoped<IOrderSalesRepository, OrderSalesRepository>();
 
             // ── OU Dashboard Migration Configuration
             builder.Services.Configure<MigrationSettings>(

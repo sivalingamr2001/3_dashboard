@@ -32,3 +32,29 @@ export const getLogs = async () => {
   const response = await axiosClient.get("/Migration/logs");
   return response.data;
 };
+
+export const getSalesDataByDayWise = async (orgId: number | null) => {
+  const response = await axiosClient.get("OrderSales/rolling-10d", {
+    params: { orgId: orgId ?? undefined },
+  });
+  return response.data;
+}
+
+export const getSalesDataByMonthWise = async (orgId: number | null) => {
+  const response = await axiosClient.get("OrderSales/sales-trend", {
+    params: { orgId: orgId ?? undefined },
+  });
+  return response.data;
+}
+
+export const getOrderData = async (orgId: number | null) => {
+  const response = await axiosClient.get("OrderSales/orders-trend", {
+    params: { orgId: orgId ?? undefined },
+  });
+  return response.data;
+}
+
+export const getTags = async () => {
+  const response = await axiosClient.get("OrderSales/operating-units");
+  return response.data;
+}
