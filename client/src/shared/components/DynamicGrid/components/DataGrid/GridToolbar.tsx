@@ -47,14 +47,12 @@ export interface GridToolbarProps {
   state: DataGridState;
   toolbarRight?: React.ReactNode;
   gridApiRef?: React.MutableRefObject<any>;
-  rowData?: any[];
 }
 
 export const GridToolbar: React.FC<GridToolbarProps> = ({
   title,
   toolbarRight,
-  gridApiRef,
-  rowData = []
+  gridApiRef
 }) => {
   const { asOnDate } = useSales();
   const [selectedUnit, setSelectedUnit] = useState<string>("All Units");

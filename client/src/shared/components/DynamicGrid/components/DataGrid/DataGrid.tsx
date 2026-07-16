@@ -600,7 +600,7 @@ function DataGridInner<TData extends Record<string, unknown>>(
         }}
         role="region"
       >
-        <GridToolbar title={title} state={state} gridApiRef={gridApiRef} rowData={finalRowData} />
+        <GridToolbar title={title} state={state} gridApiRef={gridApiRef} />
 
         <Separator className="m-0 p-0" />
 

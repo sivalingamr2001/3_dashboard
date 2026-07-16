@@ -17,13 +17,12 @@ public class DashboardMigrationService : IMigrationService
     private readonly ILogger<DashboardMigrationService> _log;
     private readonly string? _oracleSchema;
 
-    // Table names for the 4 summary tables
+    // Table names for the 3 summary tables
     private static readonly string[] SummaryTables = new[]
     {
         "JAN_ALL_OU_ORD",
         "JAN_ALL_OU_SALES",
-        "JAN_ALL_OU_SALES_DAY",
-        "JAN_ALL_OU_SALES_YR_TO_DATE"
+        "JAN_ALL_OU_SALES_DAY"
     };
 
     public DashboardMigrationService(
@@ -72,8 +71,8 @@ public class DashboardMigrationService : IMigrationService
             _log.LogInformation("--- STEP 0: Ensuring SSMS tables exist ---");
             await EnsureTablesExistAsync(ct);
 
-            // PHASE 1: Migrate 4 summary tables (TRUNCATE + INSERT daily)
-            _log.LogInformation("--- PHASE 1: Migrating 4 summary tables (TRUNCATE + INSERT) ---");
+            // PHASE 1: Migrate 3 summary tables (TRUNCATE + INSERT daily)
+            _log.LogInformation("--- PHASE 1: Migrating 3 summary tables (TRUNCATE + INSERT) ---");
             var summaryMigrated = await MigrateSummaryTablesAsync(timestamp, ct);
             totalMigrated += summaryMigrated;
 
@@ -162,7 +161,7 @@ public class DashboardMigrationService : IMigrationService
                     calendar_day DATE,
                     CY_SALES     DECIMAL(18, 2),
                     PY_SALES     DECIMAL(18, 2),
-                    MigratedAt          DATETIME2 DEFAULT GETDATE()
+                    MigratedAt   DATETIME2 DEFAULT GETDATE()
                 );
                 PRINT 'Created table: JAN_ALL_OU_SALES_DAY';
             END
@@ -173,51 +172,27 @@ public class DashboardMigrationService : IMigrationService
                     ALTER TABLE JAN_ALL_OU_SALES_DAY ADD MigratedAt DATETIME2 DEFAULT GETDATE();
                     PRINT 'Added MigratedAt column to JAN_ALL_OU_SALES_DAY';
                 END
-            END
-
-            -- Table 4: JAN_ALL_OU_SALES_YR_TO_DATE (YTD Cumulative from p_ytd_cumulative_cv)
-            IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'JAN_ALL_OU_SALES_YR_TO_DATE')
-            BEGIN
-                CREATE TABLE JAN_ALL_OU_SALES_YR_TO_DATE (
-                    ORG_ID                  INT,
-                    OU_NAME                 NVARCHAR(100),
-                    FISCAL_YEAR_PERIOD      NVARCHAR(20),
-                    YRMN                    CHAR(6),
-                    MNYR                    NVARCHAR(10),
-                    MONTHLY_SALES           DECIMAL(18,2),
-                    CUMULATIVE_YTD          DECIMAL(18,2),
-                    MigratedAt              DATETIME2 DEFAULT GETDATE()
-                );
-                PRINT 'Created table: JAN_ALL_OU_SALES_YR_TO_DATE';
-            END
-            ELSE
-            BEGIN
-                IF NOT EXISTS (SELECT * FROM sys.columns WHERE name = 'MigratedAt' AND object_id = OBJECT_ID('JAN_ALL_OU_SALES_YR_TO_DATE'))
-                BEGIN
-                    ALTER TABLE JAN_ALL_OU_SALES_YR_TO_DATE ADD MigratedAt DATETIME2 DEFAULT GETDATE();
-                    PRINT 'Added MigratedAt column to JAN_ALL_OU_SALES_YR_TO_DATE';
-                END
             END";
 
         await using var cmd = new SqlCommand(createTableSql, conn);
         await cmd.ExecuteNonQueryAsync(ct);
-        _log.LogInformation("SSMS table verification completed. All 4 summary tables ensured.");
+        _log.LogInformation("SSMS table verification completed. All 3 summary tables ensured.");
     }
 
     // ═════════════════════════════════════════════════════════════════════════
-    // PHASE 1: Migrate 4 Summary Tables from proc_get_dynamic_sales_summary
+    // PHASE 1: Migrate 3 Summary Tables from proc_get_dynamic_sales_summary
     // ═════════════════════════════════════════════════════════════════════════
     private async Task<int> MigrateSummaryTablesAsync(DateTime executionTime, CancellationToken ct)
     {
         var totalRows = 0;
-        var procName = GetQualifiedProcName("GET_OU_ORDER_AND_SALES_PERFORMANCE_DATA");
+        var procName = GetQualifiedProcName("GET_OU_ORDER_AND_SALES_DATA");
 
         _log.LogInformation("Calling Oracle procedure: {ProcName}", procName);
 
         await using var conn = _oracle.Create();
         await conn.OpenAsync(ct);
 
-        await ValidateProcedureExistsAsync(conn, "GET_OU_ORDER_AND_SALES_PERFORMANCE_DATA", ct);
+        await ValidateProcedureExistsAsync(conn, "GET_OU_ORDER_AND_SALES_DATA", ct);
 
         await using var cmd = conn.CreateCommand();
         cmd.CommandText = procName;
@@ -253,10 +228,7 @@ public class DashboardMigrationService : IMigrationService
 
         // ── Table 1: JAN_ALL_OU_ORD ──────────────────────────────────────
         _log.LogInformation("Fetching Order Trend (p_order_trend_cv)...");
-        var orderTrendDt = new DataTable();
-        await using (var reader = ((OracleRefCursor)cmd.Parameters["p_order_trend_cv"].Value).GetDataReader())
-            orderTrendDt.Load(reader);
-
+        var orderTrendDt = await ReadOrderTrendAsync(cmd, ct);
         orderTrendDt.Columns.Add("MigratedAt", typeof(DateTime));
         foreach (DataRow row in orderTrendDt.Rows) row["MigratedAt"] = executionTime;
 
@@ -266,10 +238,7 @@ public class DashboardMigrationService : IMigrationService
 
         // ── Table 2: JAN_ALL_OU_SALES ─────────────────────────────────────
         _log.LogInformation("Fetching Sales Trend (p_sales_trend_cv)...");
-        var salesTrendDt = new DataTable();
-        await using (var reader = ((OracleRefCursor)cmd.Parameters["p_sales_trend_cv"].Value).GetDataReader())
-            salesTrendDt.Load(reader);
-
+        var salesTrendDt = await ReadSalesTrendAsync(cmd, ct);
         salesTrendDt.Columns.Add("MigratedAt", typeof(DateTime));
         foreach (DataRow row in salesTrendDt.Rows) row["MigratedAt"] = executionTime;
 
@@ -279,10 +248,7 @@ public class DashboardMigrationService : IMigrationService
 
         // ── Table 3: JAN_ALL_OU_SALES_DAY ────────────────────────────────
         _log.LogInformation("Fetching Rolling 10D (p_rolling_10d_cv)...");
-        var rollingDt = new DataTable();
-        await using (var reader = ((OracleRefCursor)cmd.Parameters["p_rolling_10d_cv"].Value).GetDataReader())
-            rollingDt.Load(reader);
-
+        var rollingDt = await ReadRolling10dAsync(cmd, ct);
         rollingDt.Columns.Add("MigratedAt", typeof(DateTime));
         foreach (DataRow row in rollingDt.Rows) row["MigratedAt"] = executionTime;
 
@@ -290,20 +256,80 @@ public class DashboardMigrationService : IMigrationService
         totalRows += rollingDt.Rows.Count;
         _log.LogInformation("JAN_ALL_OU_SALES_DAY: {Count} rows migrated", rollingDt.Rows.Count);
 
-        // ── Table 4: JAN_ALL_OU_SALES_YR_TO_DATE ─────────────────────────
-        _log.LogInformation("Fetching YTD Cumulative (p_ytd_cumulative_cv)...");
-        var ytdDt = new DataTable();
-        await using (var reader = ((OracleRefCursor)cmd.Parameters["p_ytd_cumulative_cv"].Value).GetDataReader())
-            ytdDt.Load(reader);
-
-        ytdDt.Columns.Add("MigratedAt", typeof(DateTime));
-        foreach (DataRow row in ytdDt.Rows) row["MigratedAt"] = executionTime;
-
-        await TruncateAndBulkInsertAsync("JAN_ALL_OU_SALES_YR_TO_DATE", ytdDt, ct);
-        totalRows += ytdDt.Rows.Count;
-        _log.LogInformation("JAN_ALL_OU_SALES_YR_TO_DATE: {Count} rows migrated", ytdDt.Rows.Count);
-
         return totalRows;
+    }
+
+    private async Task<DataTable> ReadOrderTrendAsync(OracleCommand cmd, CancellationToken ct)
+    {
+        var dt = new DataTable();
+        dt.Columns.Add("ORG_ID", typeof(int));
+        dt.Columns.Add("OU_NAME", typeof(string));
+        dt.Columns.Add("FISCAL_YEAR_PERIOD", typeof(string));
+        dt.Columns.Add("YRMN", typeof(string));
+        dt.Columns.Add("MNYR", typeof(string));
+        dt.Columns.Add("ORDER_VALUE", typeof(decimal));
+
+        await using var reader = ((OracleRefCursor)cmd.Parameters["p_order_trend_cv"].Value).GetDataReader();
+        while (await reader.ReadAsync(ct))
+        {
+            dt.Rows.Add(
+                reader.IsDBNull(0) ? 0 : reader.GetInt32(0),
+                reader.IsDBNull(1) ? "" : reader.GetString(1),
+                reader.IsDBNull(2) ? "" : reader.GetString(2),
+                reader.IsDBNull(3) ? "" : reader.GetString(3),
+                reader.IsDBNull(4) ? "" : reader.GetString(4),
+                reader.IsDBNull(5) ? 0m : reader.GetDecimal(5)
+            );
+        }
+        return dt;
+    }
+
+    private async Task<DataTable> ReadSalesTrendAsync(OracleCommand cmd, CancellationToken ct)
+    {
+        var dt = new DataTable();
+        dt.Columns.Add("ORG_ID", typeof(int));
+        dt.Columns.Add("OU_NAME", typeof(string));
+        dt.Columns.Add("FISCAL_YEAR_PERIOD", typeof(string));
+        dt.Columns.Add("YRMN", typeof(string));
+        dt.Columns.Add("MNYR", typeof(string));
+        dt.Columns.Add("SALES_VALUE", typeof(decimal));
+
+        await using var reader = ((OracleRefCursor)cmd.Parameters["p_sales_trend_cv"].Value).GetDataReader();
+        while (await reader.ReadAsync(ct))
+        {
+            dt.Rows.Add(
+                reader.IsDBNull(0) ? 0 : reader.GetInt32(0),
+                reader.IsDBNull(1) ? "" : reader.GetString(1),
+                reader.IsDBNull(2) ? "" : reader.GetString(2),
+                reader.IsDBNull(3) ? "" : reader.GetString(3),
+                reader.IsDBNull(4) ? "" : reader.GetString(4),
+                reader.IsDBNull(5) ? 0m : reader.GetDecimal(5)
+            );
+        }
+        return dt;
+    }
+
+    private async Task<DataTable> ReadRolling10dAsync(OracleCommand cmd, CancellationToken ct)
+    {
+        var dt = new DataTable();
+        dt.Columns.Add("org_id", typeof(int));
+        dt.Columns.Add("ou_name", typeof(string));
+        dt.Columns.Add("calendar_day", typeof(string));
+        dt.Columns.Add("CY_SALES", typeof(decimal));
+        dt.Columns.Add("PY_SALES", typeof(decimal));
+
+        await using var reader = ((OracleRefCursor)cmd.Parameters["p_rolling_10d_cv"].Value).GetDataReader();
+        while (await reader.ReadAsync(ct))
+        {
+            dt.Rows.Add(
+                reader.IsDBNull(0) ? 0 : reader.GetInt32(0),
+                reader.IsDBNull(1) ? "" : reader.GetString(1),
+                reader.IsDBNull(2) ? "" : reader.GetString(2),
+                reader.IsDBNull(3) ? 0m : reader.GetDecimal(3),
+                reader.IsDBNull(4) ? 0m : reader.GetDecimal(4)
+            );
+        }
+        return dt;
     }
 
     // ═════════════════════════════════════════════════════════════════════════
@@ -317,34 +343,7 @@ public class DashboardMigrationService : IMigrationService
             return;
         }
 
-        // ═══════════════════════════════════════════════════════════════
-        // FIX: Map Oracle column aliases to SQL Server column names
-        // ═══════════════════════════════════════════════════════════════
-        var columnMappings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-        {
-            // JAN_ALL_OU_ORD
-            ["ORDER_VALUE_CRORES"] = "ORDER_VALUE",
-            ["ORDER_VALUE"] = "ORDER_VALUE",
-
-            // JAN_ALL_OU_SALES  
-            ["SALES_VALUE_CRORES"] = "SALES_VALUE",
-            ["SALES_VALUE"] = "SALES_VALUE",
-
-            // JAN_ALL_OU_SALES_YR_TO_DATE
-            ["MONTHLY_SALES_CRORES"] = "MONTHLY_SALES",
-            ["CUMULATIVE_YTD_CRORES"] = "CUMULATIVE_YTD",
-        };
-
-        // Rename DataTable columns to match SQL Server schema
-        foreach (DataColumn col in data.Columns)
-        {
-            if (columnMappings.TryGetValue(col.ColumnName, out var sqlServerName))
-            {
-                col.ColumnName = sqlServerName;
-            }
-        }
-
-        // Ensure MigratedAt exists (your existing logic)
+        // Ensure MigratedAt exists
         if (!data.Columns.Contains("MigratedAt"))
         {
             data.Columns.Add("MigratedAt", typeof(DateTime));

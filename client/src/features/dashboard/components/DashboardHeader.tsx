@@ -4,7 +4,6 @@ import { getCurrentFinancialYear, getPreviousFinancialYear } from "@/lib/utils";
 import { Button } from "@/shared/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/components/ui/tooltip";
 import { LogOutIcon } from "lucide-react";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 type DashboardHeaderProps = {

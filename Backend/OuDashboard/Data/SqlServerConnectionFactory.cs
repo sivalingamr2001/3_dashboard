@@ -9,5 +9,26 @@ public class SqlServerConnectionFactory(IConfiguration configuration)
     private readonly string _cs = configuration.GetConnectionString("SqlServerConnection")
                                   ?? configuration.GetConnectionString("SqlServer")
                                   ?? throw new InvalidOperationException("SQL Server connection string is missing in configuration.");
-    public SqlConnection Create() => new(_cs);
+
+    public SqlConnection Create()
+    {
+        var builder = new SqlConnectionStringBuilder(_cs);
+
+        if (builder.ConnectRetryCount < 3)
+        {
+            builder.ConnectRetryCount = 3;
+        }
+
+        if (builder.ConnectRetryInterval < 5)
+        {
+            builder.ConnectRetryInterval = 5;
+        }
+
+        if (builder.ConnectTimeout < 60)
+        {
+            builder.ConnectTimeout = 60;
+        }
+
+        return new SqlConnection(builder.ConnectionString);
+    }
 }
