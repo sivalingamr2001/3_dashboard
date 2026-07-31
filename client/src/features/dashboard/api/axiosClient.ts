@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = import.meta.env.VITE_API_BASE_URL ?? "/mobile_dashboard/api";
+const baseURL = import.meta.env.DEV ? import.meta.env.VITE_API_BASE_URL : "/mobile_dashboard/api";
 
 export const axiosClient = axios.create({
   baseURL,
@@ -33,23 +33,23 @@ export const getLogs = async () => {
   return response.data;
 };
 
-export const getSalesDataByDayWise = async (orgId: number | null) => {
+export const getSalesDataByDayWise = async (orgId: number | null, stkTfrFlg: string) => {
   const response = await axiosClient.get("OrderSales/rolling-10d", {
-    params: { orgId: orgId ?? undefined },
+    params: { orgId: orgId ?? undefined, stkTfrFlg: stkTfrFlg ?? 'Y' },
   });
   return response.data;
 }
 
-export const getSalesDataByMonthWise = async (orgId: number | null) => {
+export const getSalesDataByMonthWise = async (orgId: number | null, stkTfrFlg: string) => {
   const response = await axiosClient.get("OrderSales/sales-trend", {
-    params: { orgId: orgId ?? undefined },
+    params: { orgId: orgId ?? undefined, stkTfrFlg: stkTfrFlg ?? 'Y' },
   });
   return response.data;
 }
 
-export const getOrderData = async (orgId: number | null) => {
+export const getOrderData = async (orgId: number | null, stkTfrFlg: string) => {
   const response = await axiosClient.get("OrderSales/orders-trend", {
-    params: { orgId: orgId ?? undefined },
+    params: { orgId: orgId ?? undefined, stkTfrFlg: stkTfrFlg ?? 'Y' },
   });
   return response.data;
 }

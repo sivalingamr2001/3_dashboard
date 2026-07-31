@@ -1,15 +1,16 @@
 ﻿using Backend.Controllers;
 using Dapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 
 namespace Backend.Services;
 
 public interface IOrderSalesRepository
 {
-    Task<IEnumerable<OrderTrendDto>> GetOrdersTrendAsync(int? orgId, CancellationToken ct = default);
-    Task<IEnumerable<SalesTrendDto>> GetSalesTrendAsync(int? orgId, CancellationToken ct = default);
-    Task<IEnumerable<Rolling10dDto>> GetRolling10dAsync(int? orgId, CancellationToken ct = default);
-    Task<IEnumerable<YtdCumulativeDto>> GetYtdCumulativeAsync(int? orgId, CancellationToken ct = default);
+    Task<IEnumerable<OrderTrendDto>> GetOrdersTrendAsync(int? orgId, string? stkTfrFlg = "Y", CancellationToken ct = default);
+    Task<IEnumerable<SalesTrendDto>> GetSalesTrendAsync(int? orgId, string? stkTfrFlg = "Y", CancellationToken ct = default);
+    Task<IEnumerable<Rolling10dDto>> GetRolling10dAsync(int? orgId, string? stkTfrFlg = "Y", CancellationToken ct = default);
+    Task<IEnumerable<YtdCumulativeDto>> GetYtdCumulativeAsync(int? orgId, string? stkTfrFlg = "Y", CancellationToken ct = default);
     Task<IEnumerable<OperatingUnitDto>> GetOperatingUnitsAsync(CancellationToken ct = default);
 }
 
@@ -23,7 +24,7 @@ public class OrderSalesRepository : IOrderSalesRepository
             ?? throw new InvalidOperationException("SqlServerConnection string not configured.");
     }
 
-    public async Task<IEnumerable<OrderTrendDto>> GetOrdersTrendAsync(int? orgId, CancellationToken ct = default)
+    public async Task<IEnumerable<OrderTrendDto>> GetOrdersTrendAsync(int? orgId, string? stkTfrFlg = "Y", CancellationToken ct = default)
     {
         const string sql = @"
             SELECT 
@@ -35,14 +36,14 @@ public class OrderSalesRepository : IOrderSalesRepository
                 ORDER_VALUE     AS OrderValue,
                 MigratedAt
             FROM JAN_ALL_OU_ORD
-            WHERE (@orgId IS NULL OR ORG_ID = @orgId)
+            WHERE (@orgId IS NULL OR ORG_ID = @orgId) AND STK_TFR_FLG = @stkTfrFlg
             ORDER BY YRMN ASC, ORG_ID ASC";
 
         await using var conn = new SqlConnection(_connectionString);
-        return await conn.QueryAsync<OrderTrendDto>(new CommandDefinition(sql, new { orgId }, cancellationToken: ct));
+        return await conn.QueryAsync<OrderTrendDto>(new CommandDefinition(sql, new { orgId, stkTfrFlg }, cancellationToken: ct));
     }
 
-    public async Task<IEnumerable<SalesTrendDto>> GetSalesTrendAsync(int? orgId, CancellationToken ct = default)
+    public async Task<IEnumerable<SalesTrendDto>> GetSalesTrendAsync(int? orgId, string? stkTfrFlg = "Y", CancellationToken ct = default)
     {
         const string sql = @"
             SELECT 
@@ -54,14 +55,14 @@ public class OrderSalesRepository : IOrderSalesRepository
                 SALES_VALUE     AS SalesValue,
                 MigratedAt
             FROM JAN_ALL_OU_SALES
-            WHERE (@orgId IS NULL OR ORG_ID = @orgId)
+            WHERE (@orgId IS NULL OR ORG_ID = @orgId) AND STK_TFR_FLG = @stkTfrFlg
             ORDER BY YRMN ASC, ORG_ID ASC";
 
         await using var conn = new SqlConnection(_connectionString);
-        return await conn.QueryAsync<SalesTrendDto>(new CommandDefinition(sql, new { orgId }, cancellationToken: ct));
+        return await conn.QueryAsync<SalesTrendDto>(new CommandDefinition(sql, new { orgId, stkTfrFlg }, cancellationToken: ct));
     }
 
-    public async Task<IEnumerable<Rolling10dDto>> GetRolling10dAsync(int? orgId, CancellationToken ct = default)
+    public async Task<IEnumerable<Rolling10dDto>> GetRolling10dAsync(int? orgId, string? stkTfrFlg = "Y", CancellationToken ct = default)
     {
         const string sql = @"
             SELECT 
@@ -72,13 +73,13 @@ public class OrderSalesRepository : IOrderSalesRepository
                 PY_SALES        AS PySales,
                 MigratedAt
             FROM JAN_ALL_OU_SALES_DAY
-            WHERE (@orgId IS NULL OR ORG_ID = @orgId)";
+            WHERE (@orgId IS NULL OR ORG_ID = @orgId) AND STK_TFR_FLG = @stkTfrFlg";
 
         await using var conn = new SqlConnection(_connectionString);
-        return await conn.QueryAsync<Rolling10dDto>(new CommandDefinition(sql, new { orgId }, cancellationToken: ct));
+        return await conn.QueryAsync<Rolling10dDto>(new CommandDefinition(sql, new { orgId, stkTfrFlg }, cancellationToken: ct));
     }
 
-    public async Task<IEnumerable<YtdCumulativeDto>> GetYtdCumulativeAsync(int? orgId, CancellationToken ct = default)
+    public async Task<IEnumerable<YtdCumulativeDto>> GetYtdCumulativeAsync(int? orgId, string? stkTfrFlg = "Y", CancellationToken ct = default)
     {
         const string sql = @"
             SELECT 
@@ -91,11 +92,11 @@ public class OrderSalesRepository : IOrderSalesRepository
                 CUMULATIVE_YTD  AS CumulativeYtd,
                 MigratedAt
             FROM JAN_ALL_OU_SALES_YR_TO_DATE
-            WHERE (@orgId IS NULL OR ORG_ID = @orgId)
+            WHERE (@orgId IS NULL OR ORG_ID = @orgId) AND STK_TFR_FLG = @stkTfrFlg
             ORDER BY ORG_ID ASC, FISCAL_YEAR_PERIOD DESC, YRMN ASC";
 
         await using var conn = new SqlConnection(_connectionString);
-        return await conn.QueryAsync<YtdCumulativeDto>(new CommandDefinition(sql, new { orgId }, cancellationToken: ct));
+        return await conn.QueryAsync<YtdCumulativeDto>(new CommandDefinition(sql, new { orgId, stkTfrFlg }, cancellationToken: ct));
     }
 
     public async Task<IEnumerable<OperatingUnitDto>> GetOperatingUnitsAsync(CancellationToken ct = default)

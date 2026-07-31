@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo } from 'react'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, ReferenceLine } from "recharts";
-import { ArrowUpRight } from "lucide-react";
-import { getOrderData, getTags } from '../api/axiosClient';
 import { PageLoader } from '@/shared/components/LoadingSpinner/LoadingSpinner';
+import { ArrowUpRight, CheckIcon, X } from "lucide-react";
+import React, { useEffect, useMemo } from 'react';
+import { Bar, BarChart, CartesianGrid, Cell, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { getOrderData, getTags } from '../api/axiosClient';
 
 export interface OrderDataByMonthData {
     orgId: number;
@@ -52,6 +52,7 @@ export const OrderDashboard = () => {
     const [orderData, setOrderData] = React.useState<OrderDataByMonthData[]>([]);
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState<string | null>(null);
+    const [inclIntraSales, setInclIntraSales] = React.useState(true);
 
     const monthConfig = useMemo(() => deriveMonthConfig(orderData), [orderData]);
     const { monthsDisplay, prevFyMonths, currFyMonths } = monthConfig;
@@ -62,7 +63,7 @@ export const OrderDashboard = () => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const data = await getOrderData(null);
+                const data = await getOrderData(null, 'Y');
                 setOrderData(data);
                 setError(null);
             } catch (err: any) {
@@ -75,6 +76,18 @@ export const OrderDashboard = () => {
 
         fetchData();
     }, []);
+
+
+    const toggleIntraSales = async () => {
+        setInclIntraSales((previous) => !previous);
+        if (inclIntraSales) {
+            const data = await getOrderData(selectedTag, "Y");
+            setOrderData(data);
+        } else {
+            const data = await getOrderData(selectedTag, "N");
+            setOrderData(data);
+        }
+    };
 
     const fetchTagsData = async () => {
         try {
@@ -261,25 +274,39 @@ export const OrderDashboard = () => {
                             </div>
                             <p className="mt-0.5 text-xs text-indigo-200/60">FY 2026-27 vs FY 2025-26 • ₹ Crores</p>
                         </div>
-                        <div className="scrollbar-hide flex items-center gap-2 overflow-x-auto pb-1 mt-3">
-                            {tags.map((tag, index) => (
-                                <React.Fragment key={tag.ouName}>
-                                    <button
-                                        onClick={() => setSelectedTag(tag.orgId)}
-                                        className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-xs font-medium transition-all ${selectedTag === tag.orgId
-                                            ? "bg-white text-indigo-700 shadow-sm"
-                                            : index <= 1
-                                                ? "border border-indigo-400/40 text-indigo-100/80 hover:bg-white/10"
-                                                : "border-none bg-white/10 text-indigo-100/80 hover:bg-white/20"
-                                            }`}
-                                    >
-                                        {tag.ouName}
-                                    </button>
-                                    {index === 1 && (
-                                        <span className="flex select-none items-center px-1 text-sm font-bold text-white/60">·</span>
-                                    )}
-                                </React.Fragment>
-                            ))}
+                        <div className="flex justify-between">
+                            <div className="scrollbar-hide flex items-center gap-2 overflow-x-auto pb-1 mt-3">
+                                {tags.map((tag, index) => (
+                                    <React.Fragment key={tag.ouName}>
+                                        <button
+                                            onClick={() => setSelectedTag(tag.orgId)}
+                                            className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-xs font-medium transition-all ${selectedTag === tag.orgId
+                                                ? "bg-white text-indigo-700 shadow-sm"
+                                                : index <= 1
+                                                    ? "border border-indigo-400/40 text-indigo-100/80 hover:bg-white/10"
+                                                    : "border-none bg-white/10 text-indigo-100/80 hover:bg-white/20"
+                                                }`}
+                                        >
+                                            {tag.ouName}
+                                        </button>
+                                        {index === 1 && (
+                                            <span className="flex select-none items-center px-1 text-sm font-bold text-white/60">·</span>
+                                        )}
+                                    </React.Fragment>
+                                ))}
+                            </div>
+                            <div className="scrollbar-hide flex items-center gap-2 overflow-x-auto pb-1 mt-3">
+                                <button
+                                    onClick={toggleIntraSales}
+                                    className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-medium transition-all duration-200 ${inclIntraSales
+                                        ? "bg-slate-50 text-slate-600 hover:bg-slate-100 hover:border-green-600 border border-slate-200"
+                                        : "bg-red-50 text-slate-600 hover:bg-red-100 hover:border-red-600 border border-red-200"
+                                        }`}
+                                >
+                                    {inclIntraSales ? <CheckIcon size={14} className="stroke-[2.5]" /> : <X size={14} className="stroke-[2.5]" />}
+                                    <span>Incl Intra Sales</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 

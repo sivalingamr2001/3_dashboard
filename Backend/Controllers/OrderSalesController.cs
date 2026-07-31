@@ -1,5 +1,6 @@
 ﻿using Backend.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 
 namespace Backend.Controllers;
 
@@ -8,30 +9,33 @@ namespace Backend.Controllers;
 public class OrderSalesController(IOrderSalesRepository repository) : ControllerBase
 {
     [HttpGet("orders-trend")]
-    public async Task<ActionResult<IEnumerable<OrderTrendDto>>> GetOrdersTrend([FromQuery] int? orgId, CancellationToken ct)
+    public async Task<ActionResult<IEnumerable<OrderTrendDto>>> GetOrdersTrend(
+    [FromQuery] int? orgId,
+    [FromQuery][DefaultValue("Y")] string? stkTfrFlg,
+    CancellationToken ct)
     {
-        var data = await repository.GetOrdersTrendAsync(orgId, ct);
+        var data = await repository.GetOrdersTrendAsync(orgId, stkTfrFlg, ct);
         return Ok(data);
     }
 
     [HttpGet("sales-trend")]
-    public async Task<ActionResult<IEnumerable<SalesTrendDto>>> GetSalesTrend([FromQuery] int? orgId, CancellationToken ct)
+    public async Task<ActionResult<IEnumerable<SalesTrendDto>>> GetSalesTrend([FromQuery] int? orgId, [FromQuery][DefaultValue("Y")] string? stkTfrFlg, CancellationToken ct)
     {
-        var data = await repository.GetSalesTrendAsync(orgId, ct);
+        var data = await repository.GetSalesTrendAsync(orgId, stkTfrFlg, ct);
         return Ok(data);
     }
 
     [HttpGet("rolling-10d")]
-    public async Task<ActionResult<IEnumerable<Rolling10dDto>>> GetRolling10d([FromQuery] int? orgId, CancellationToken ct)
+    public async Task<ActionResult<IEnumerable<Rolling10dDto>>> GetRolling10d([FromQuery] int? orgId, [FromQuery][DefaultValue("Y")] string? stkTfrFlg, CancellationToken ct)
     {
-        var data = await repository.GetRolling10dAsync(orgId, ct);
+        var data = await repository.GetRolling10dAsync(orgId, stkTfrFlg, ct);
         return Ok(data);
     }
 
     [HttpGet("ytd-cumulative")]
-    public async Task<ActionResult<IEnumerable<YtdCumulativeDto>>> GetYtdCumulative([FromQuery] int? orgId, CancellationToken ct)
+    public async Task<ActionResult<IEnumerable<YtdCumulativeDto>>> GetYtdCumulative([FromQuery] int? orgId, [FromQuery][DefaultValue("Y")] string? stkTfrFlg, CancellationToken ct)
     {
-        var data = await repository.GetYtdCumulativeAsync(orgId, ct);
+        var data = await repository.GetYtdCumulativeAsync(orgId, stkTfrFlg, ct);
         return Ok(data);
     }
 

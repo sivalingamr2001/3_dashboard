@@ -1,11 +1,19 @@
-import React, { useState, useMemo, useEffect } from "react";
-import {
-    BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
-    ResponsiveContainer, LineChart, Line, ReferenceLine, Cell
-} from "recharts";
-import { ArrowUpRight, TrendingUp, Calendar, Clock, BarChart3 } from "lucide-react";
-import { getTags, getSalesDataByDayWise, getSalesDataByMonthWise } from "../api/axiosClient";
 import { PageLoader } from "@/shared/components/LoadingSpinner/LoadingSpinner";
+import { ArrowUpRight, BarChart3, Calendar, CheckIcon, Clock, TrendingUp, X } from "lucide-react";
+import React, { useEffect, useMemo, useState } from "react";
+import {
+    Bar,
+    BarChart,
+    CartesianGrid,
+    Cell,
+    Line,
+    LineChart,
+    ReferenceLine,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis, YAxis
+} from "recharts";
+import { getSalesDataByDayWise, getSalesDataByMonthWise, getTags } from "../api/axiosClient";
 
 // ============================================
 // API INTERFACES (match your API response)
@@ -129,6 +137,7 @@ function SalesDashboard() {
     const [activeView, setActiveView] = useState("Day-wise");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [inclIntraSales, setInclIntraSales] = useState(true);
 
     // --- Derived Config (from API data) ---
     const monthConfig = useMemo(() => deriveMonthConfig(salesDataByMonth), [salesDataByMonth]);
@@ -142,6 +151,27 @@ function SalesDashboard() {
         setTags([{ orgId: null, ouName: "All Units" }, ...tagsRes]);
     }
 
+    const toggleIntraSales = async () => {
+        setInclIntraSales((previous) => !previous);
+        if (activeView === 'Day-wise') {
+            if (inclIntraSales) {
+                const data = await getSalesDataByDayWise(selectedTag, "Y");
+                setDayWiseSales(data);
+            } else {
+                const data = await getSalesDataByDayWise(selectedTag, "N");
+                setDayWiseSales(data);
+            }
+        } else if (activeView === 'Month-wise' || activeView === 'Year-to-Date') {
+            if (inclIntraSales) {
+                const data = await getSalesDataByMonthWise(selectedTag, "Y");
+                setSalesDataByMonth(data);
+            } else {
+                const data = await getSalesDataByMonthWise(selectedTag, "N");
+                setSalesDataByMonth(data);
+            }
+        }
+    };
+
     useEffect(() => {
         fetchTagsData();
     }, []);
@@ -153,8 +183,8 @@ function SalesDashboard() {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const dayRes = await getSalesDataByDayWise(null);
-                const monthRes = await getSalesDataByMonthWise(null);
+                const dayRes = await getSalesDataByDayWise(null, 'Y');
+                const monthRes = await getSalesDataByMonthWise(null, 'Y');
 
                 setDayWiseSales(dayRes);
                 setSalesDataByMonth(monthRes);
@@ -466,26 +496,40 @@ function SalesDashboard() {
                         </div>
                     </div>
 
-                    {/* Horizontal Scroll Pill Filter Wrapper */}
-                    <div className="scrollbar-hide flex items-center gap-2 overflow-x-auto pb-1 mt-4">
-                        {tags.map((tag, index) => (
-                            <React.Fragment key={tag.ouName}>
-                                <button
-                                    onClick={() => setSelectedTag(tag.orgId)}
-                                    className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-xs font-medium transition-all ${selectedTag === tag.orgId
-                                        ? "bg-white text-emerald-800 shadow-sm"
-                                        : index <= 1
-                                            ? "border border-emerald-400/40 text-emerald-100/80 hover:bg-white/10"
-                                            : "border-none bg-white/10 text-emerald-100/80 hover:bg-white/20"
-                                        }`}
-                                >
-                                    {tag.ouName}
-                                </button>
-                                {index === 1 && (
-                                    <span className="flex select-none items-center px-1 text-sm font-bold text-white/60">·</span>
-                                )}
-                            </React.Fragment>
-                        ))}
+                    <div className="flex justify-between">
+                        {/* Horizontal Scroll Pill Filter Wrapper */}
+                        <div className="scrollbar-hide flex items-center gap-2 overflow-x-auto pb-1 mt-4">
+                            {tags.map((tag, index) => (
+                                <React.Fragment key={tag.ouName}>
+                                    <button
+                                        onClick={() => setSelectedTag(tag.orgId)}
+                                        className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-xs font-medium transition-all ${selectedTag === tag.orgId
+                                            ? "bg-white text-emerald-800 shadow-sm"
+                                            : index <= 1
+                                                ? "border border-emerald-400/40 text-emerald-100/80 hover:bg-white/10"
+                                                : "border-none bg-white/10 text-emerald-100/80 hover:bg-white/20"
+                                            }`}
+                                    >
+                                        {tag.ouName}
+                                    </button>
+                                    {index === 1 && (
+                                        <span className="flex select-none items-center px-1 text-sm font-bold text-white/60">·</span>
+                                    )}
+                                </React.Fragment>
+                            ))}
+                        </div>
+                        <div className="scrollbar-hide flex items-center gap-2 overflow-x-auto pb-1 mt-3">
+                            <button
+                                onClick={toggleIntraSales}
+                                className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-medium transition-all duration-200 ${inclIntraSales
+                                    ? "bg-slate-50 text-slate-600 hover:bg-slate-100 hover:border-green-600 border border-slate-200"
+                                    : "bg-red-50 text-slate-600 hover:bg-red-100 hover:border-red-600 border border-red-200"
+                                    }`}
+                            >
+                                {inclIntraSales ? <CheckIcon size={14} className="stroke-[2.5]" /> : <X size={14} className="stroke-[2.5]" />}
+                                <span>Incl Intra Sales</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 

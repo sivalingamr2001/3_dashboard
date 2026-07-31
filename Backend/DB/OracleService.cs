@@ -17,7 +17,7 @@ public class OracleService : IOracleService
 
         // 1. Get connection string from DLL
         _oracleProvider = new Class1();
-        _connectionString = _oracleProvider.oracon_prod_new.ConnectionString;
+        _connectionString = _oracleProvider.oracon.ConnectionString;
 
         if (string.IsNullOrWhiteSpace(_connectionString))
         {
