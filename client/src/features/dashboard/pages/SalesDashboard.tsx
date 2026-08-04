@@ -14,6 +14,8 @@ import {
     XAxis, YAxis
 } from "recharts";
 import { getSalesDataByDayWise, getSalesDataByMonthWise, getTags } from "../api/axiosClient";
+import { useSales } from "@/context/SalesContext";
+import type { TotalsRow } from "../types/dashboard.types";
 
 // ============================================
 // API INTERFACES (match your API response)
@@ -125,10 +127,14 @@ function deriveDayConfig(dayData: DayWiseSalesData[]) {
     return { days, dayLabelMap };
 }
 
+type Props = {
+    totals: TotalsRow;
+};
+
 // ============================================
 // COMPONENT
 // ============================================
-function SalesDashboard() {
+function SalesDashboard({ totals }: Props) {
     // --- State ---
     const [tags, setTags] = useState<TagsData[]>([{ orgId: null, ouName: "All Units" }]);
     const [dayWiseSales, setDayWiseSales] = useState<DayWiseSalesData[]>([]);
@@ -207,7 +213,23 @@ function SalesDashboard() {
     // --- Day-wise Chart Data ---
     const getDayWiseData = () => {
         const filtered = filterByOrg(dayWiseSales, selectedTag);
-        const days = [...new Set(filtered.map(d => d.calenderDay))].sort();
+
+        // Helper function to turn "26-JUL" or "01-Aug" into a comparable timestamp
+        const parseFiscalDate = (dateStr: any) => {
+            const [day, monthStr] = dateStr.split('-');
+            const monthNames = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+            const monthIndex = monthNames.indexOf(monthStr.toLowerCase());
+
+            // Handle year boundary: if month is Jan-Mar, it belongs to the next calendar year (FY cycle)
+            const year = monthIndex <= 2 ? 2027 : 2026;
+            return new Date(year, monthIndex, parseInt(day, 10)).getTime();
+        };
+
+        // Extract unique days, then sort chronologically (Ascending order)
+        const days = [...new Set(filtered.map(d => d.calenderDay))].sort((b, a) => {
+            return parseFiscalDate(a) - parseFiscalDate(b);
+        });
+
         return days.map(day => {
             const dayItems = filtered.filter(d => d.calenderDay === day);
             const cy = dayItems.reduce((sum, d) => sum + d.cySales, 0);
@@ -217,7 +239,9 @@ function SalesDashboard() {
                 fy2526: Math.round(py * 100) / 100,
                 fy2627: cy > 0 ? Math.round(cy * 100) / 100 : null,
             };
-        }).filter(d => d.fy2526 > 0 || d.fy2627 !== null);
+        }).filter(d => d.fy2526 > 0 || d.fy2627 !== null)
+            .slice(-11)
+            .slice(0, 4); //:TODO: Need to add current month day wise sales only 
     };
 
     // --- Month-wise Chart Data ---
@@ -227,14 +251,22 @@ function SalesDashboard() {
         for (const s of filtered) {
             monthTotals[s.mnyr] = (monthTotals[s.mnyr] || 0) + s.salesValue;
         }
-        // Use the full 12-month cycle from prevFyMonths as reference
+
         const allMonths = prevFyMonths.length > 0 ? prevFyMonths : currFyMonths;
-        return allMonths.map((mnyr, i) => {
+
+        const today = new Date();
+        const currentMonthNum = today.getMonth();
+
+        const fiscalMonthIndex = currentMonthNum >= 3 ? currentMonthNum - 3 : currentMonthNum + 9;
+
+        const activeMonths = allMonths.slice(0, fiscalMonthIndex + 1);
+
+        return activeMonths.map((mnyr, i) => {
             const displayMonth = monthsDisplay[i] || mnyr;
-            // Find corresponding curr FY month (same index in currFyMonths)
             const currMnyr = currFyMonths[i];
             const prevVal = monthTotals[mnyr] || 0;
             const currVal = currMnyr ? (monthTotals[currMnyr] || 0) : 0;
+
             return {
                 label: displayMonth,
                 fy2526: Math.round(prevVal * 100) / 100,
@@ -242,6 +274,7 @@ function SalesDashboard() {
             };
         });
     };
+
 
     // --- YTD Chart Data (Line Chart) ---
     const getYtdData = () => {
@@ -327,14 +360,19 @@ function SalesDashboard() {
 
     // --- KPIs ---
     const kpis = useMemo(() => {
+        const parseTotalNumeric = (value: string | number) => {
+            if (typeof value === "number") return value;
+            return Number(String(value).replace(/,/g, "")) || 0;
+        };
+
         if (activeView === "Day-wise") {
             const data = getDayWiseData();
             const fy27 = data.reduce((sum, d) => sum + (d.fy2627 || 0), 0);
             const fy26 = data.reduce((sum, d) => sum + d.fy2526, 0);
             const growth = fy26 > 0 ? ((fy27 - fy26) / fy26) * 100 : 0;
             return {
-                title1: "10-DAY SALES FY 2026-27",
-                title2: "SAME PERIOD FY 2025-26",
+                title1: "DAY WISE SALES FY 2026-27 (7 days)",
+                title2: "SAME PERIOD FY 2025-26 (7 days)",
                 fy27YTD: fy27,
                 fy26Same: fy26,
                 growth,
@@ -342,13 +380,8 @@ function SalesDashboard() {
             };
         }
         if (activeView === "Year-to-Date") {
-            const data = getYtdData();
-            let lastCurrIdx = -1;
-            for (let i = 0; i < data.length; i++) {
-                if (data[i].fy2627 != null) lastCurrIdx = i;
-            }
-            const fy27 = lastCurrIdx >= 0 ? (data[lastCurrIdx].fy2627 || 0) : 0;
-            const fy26 = lastCurrIdx >= 0 ? (data[lastCurrIdx].fy2526 || 0) : 0;
+            const fy27 = parseTotalNumeric(totals.to_fy27_date);
+            const fy26 = parseTotalNumeric(totals.to_fy26_date);
             const growth = fy26 > 0 ? ((fy27 - fy26) / fy26) * 100 : 0;
             return {
                 title1: "CUMULATIVE YTD",
@@ -361,22 +394,24 @@ function SalesDashboard() {
         }
         // Month-wise
         const data = getMonthWiseData();
-        let fy27YTD = 0;
-        let fy26Same = 0;
-        for (const d of data) {
-            if (d.fy2627 != null) {
-                fy27YTD += d.fy2627;
-                fy26Same += d.fy2526;
-            }
-        }
-        const growth = fy26Same > 0 ? ((fy27YTD - fy26Same) / fy26Same) * 100 : 0;
+
+        // 1. Target only the current month (the last item in the array)
+        const currentMonthData = data.length > 0 ? data[data.length - 1] : null;
+
+        // 2. Extract values safely, defaulting to 0 if no data exists
+        const fy27CurrentMonth = currentMonthData && currentMonthData.fy2627 != null ? currentMonthData.fy2627 : 0;
+        const fy26SameMonth = currentMonthData ? currentMonthData.fy2526 : 0;
+
+        // 3. Compute growth percentage and variance
+        const growth = fy26SameMonth > 0 ? ((fy27CurrentMonth - fy26SameMonth) / fy26SameMonth) * 100 : 0;
+
         return {
-            title1: "YTD SALES FY 2026-27",
-            title2: "SAME PERIOD FY 2025-26",
-            fy27YTD,
-            fy26Same,
+            title1: "CURRENT MONTH SALES FY 2026-27 (Till Date)",
+            title2: "SAME MONTH FY 2025-26 (Full MONTH)",
+            fy27YTD: fy27CurrentMonth, // Keeps your object property keys identical so UI components don't break
+            fy26Same: fy26SameMonth,
             growth,
-            diff: fy27YTD - fy26Same
+            diff: fy27CurrentMonth - fy26SameMonth
         };
     }, [selectedTag, activeView, dayWiseSales, salesDataByMonth, monthConfig, dayConfig]);
 
@@ -469,7 +504,7 @@ function SalesDashboard() {
                         <div>
                             <div className="flex items-center gap-2">
                                 <span className="text-lg text-emerald-200">₹</span>
-                                <h1 className="text-lg font-bold tracking-tight text-white">Sales — Actual vs Prior Year</h1>
+                                <h1 className="text-lg font-bold tracking-tight text-white">Sales — Actual vs Prior Year (Trend Month Wise)</h1>
                             </div>
                             <p className="mt-0.5 text-xs text-emerald-200/60">FY 2026-27 vs FY 2025-26 • ₹ Crores</p>
                         </div>
@@ -518,7 +553,7 @@ function SalesDashboard() {
                                 </React.Fragment>
                             ))}
                         </div>
-                        <div className="scrollbar-hide flex items-center gap-2 overflow-x-auto pb-1 mt-3">
+                        {/* <div className="scrollbar-hide flex items-center gap-2 overflow-x-auto pb-1 mt-3">
                             <button
                                 onClick={toggleIntraSales}
                                 className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-medium transition-all duration-200 ${inclIntraSales
@@ -529,7 +564,7 @@ function SalesDashboard() {
                                 {inclIntraSales ? <CheckIcon size={14} className="stroke-[2.5]" /> : <X size={14} className="stroke-[2.5]" />}
                                 <span>Incl Intra Sales</span>
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
@@ -553,7 +588,7 @@ function SalesDashboard() {
                             <div className="h-full w-full rounded-full bg-slate-300" />
                         </div>
                     </div>
-                    <div className="px-6 py-5">
+                    {/* <div className="px-6 py-5">
                         <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-slate-400">GROWTH VS PREV FY</p>
                         <div className="flex items-center gap-1.5">
                             <ArrowUpRight className={`h-5 w-5 ${growthIsPositive ? "text-emerald-500" : "text-red-500"}`} strokeWidth={2.5} />
@@ -564,7 +599,7 @@ function SalesDashboard() {
                         <p className={`mt-1 text-xs font-medium ${growthIsPositive ? "text-emerald-600/80" : "text-red-600/80"}`}>
                             {growthIsPositive ? "+" : ""}₹{kpis.diff.toFixed(2)} Cr {growthIsPositive ? "surplus" : "deficit"}
                         </p>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Chart */}
@@ -631,18 +666,18 @@ function SalesDashboard() {
                     )}
                 </div>
                 <div className="flex flex-wrap items-center justify-center gap-5 px-6 pt-0 pb-6">
-                    <div className="flex items-center gap-1.5">
+                    {/* <div className="flex items-center gap-1.5">
                         <div className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
                         <span className="text-[10px] font-medium text-slate-400">FY 2026-27 actual</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
+                    </div> */}
+                    {/* <div className="flex items-center gap-1.5">
                         <div className="h-2.5 w-2.5 rounded-full bg-slate-400" />
                         <span className="text-[10px] font-medium text-slate-400">FY 2025-26 reference</span>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Footer note */}
-                <div className="px-6 pb-4 text-center">
+                {/* <div className="px-6 pb-4 text-center">
                     <p className="text-[10px] text-slate-400">
                         {activeView === "Year-to-Date"
                             ? "Cumulative YTD running total · FY 2026-27 vs FY 2025-26"
@@ -651,7 +686,7 @@ function SalesDashboard() {
                                 : "Full FY month-by-month · Current FY actual vs Previous FY reference"
                         }
                     </p>
-                </div>
+                </div> */}
             </div>
         </div>
     );

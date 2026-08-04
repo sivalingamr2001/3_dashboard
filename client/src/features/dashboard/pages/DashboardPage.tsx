@@ -52,7 +52,7 @@ export const DashboardPage = () => {
         <KpiCards totals={displayedTotals} />
         <OperatingUnitsTable rows={rows} onSelectionTotalsChange={setSelectedTotals} />
         <OrderDashboard />
-        <SalesDashboard />
+        <SalesDashboard totals={displayedTotals}/>
       </div>
 
       {isOverlayLoading ? (
